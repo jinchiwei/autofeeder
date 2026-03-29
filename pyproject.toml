@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "autofeeder"
+version = "0.1.0"
+description = "Automatically aggregate, sort by relevance, and summarize journal and news feeds. Then spoon feed you the good bits."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.12"
+dependencies = [
+    "feedparser>=6.0.0",
+    "python-dateutil>=2.9.0",
+    "python-dotenv>=1.0.0",
+    "anthropic[bedrock]>=0.40.0",
+    "boto3>=1.34.0",
+    "openai>=1.0.0",
+    "httpx>=0.27.0",
+    "aiohttp>=3.9.0",
+    "trafilatura>=1.8.0",
+]
+
+[project.scripts]
+autofeeder = "autofeeder:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

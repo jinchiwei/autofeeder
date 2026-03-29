@@ -1,0 +1,137 @@
+# Auto-generated profile for: Alzheimer's disease imaging MRI biomarkers genomics
+# Review and edit before using!
+# Some RSS URLs may need verification.
+
+name = "alzheimers"
+description = "Auto-discovered feeds for: Alzheimer's disease imaging MRI biomarkers genomics"
+
+[feeds]
+list = [
+    # === Core Neurology & Dementia Journals ===
+    "Alzheimer's & Dementia | https://alz-journals.onlinelibrary.wiley.com/feed/15525279/most-recent",
+    "Neurology | https://www.neurology.org/rss/current.xml",
+    "Brain | https://academic.oup.com/rss/site_5504/3369.xml",
+    "Annals of Neurology | https://onlinelibrary.wiley.com/feed/15318249/most-recent",
+    "JAMA Neurology | https://jamanetwork.com/rss/site_12/68.xml",
+    "Lancet Neurology | http://www.thelancet.com/rssfeed/laneur_current.xml",
+    "Neurobiology of Aging | https://rss.sciencedirect.com/publication/science/01974580",
+    "Alzheimer's Research & Therapy | https://alzres.biomedcentral.com/articles/most-recent/rss.xml",
+    
+    # === Neuroimaging Journals ===
+    "NeuroImage | https://rss.sciencedirect.com/publication/science/10538119",
+    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
+    "Human Brain Mapping | https://onlinelibrary.wiley.com/feed/10970193/most-recent",
+    "Radiology | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=radiology",
+    "AJNR - American Journal of Neuroradiology | http://www.ajnr.org/rss/current.xml",
+    
+    # === Genetics & Genomics ===
+    "Nature Genetics | https://www.nature.com/ng.rss",
+    "American Journal of Human Genetics | https://www.cell.com/ajhg/rss",
+    "Genome Research | https://genome.cshlp.org/rss/current.xml",
+    "PLOS Genetics | https://journals.plos.org/plosgenetics/feed/atom",
+    
+    # === High-Impact General Science ===
+    "Nature Neuroscience | https://www.nature.com/neuro.rss",
+    "Nature Medicine | https://www.nature.com/nm.rss",
+    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
+    "Cell | https://www.cell.com/cell/rss",
+    
+    # === Preprints ===
+    "bioRxiv Neuroscience | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
+    "medRxiv Neurology | http://connect.medrxiv.org/medrxiv_xml.php?subject=neurology",
+    "medRxiv Radiology & Imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
+    "medRxiv Genetic & Genomic Medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=genetic_and_genomic_medicine",
+    
+    # === News & Commentary ===
+    "Alzforum News | https://www.alzforum.org/rss-feeds/news.rss",
+    "STAT News | https://www.statnews.com/feed/",
+    
+    # === Wildcard / Cross-Disciplinary ===
+    "Nature Aging | https://www.nature.com/nataging.rss",
+    "Science Advances | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv",
+    "arXiv Quantitative Biology - Neurons & Cognition | https://rss.arxiv.org/rss/q-bio.NC",
+
+    # === AI / ML in Medicine ===
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "Radiology: AI | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=ai",
+    "Medical Image Analysis | https://rss.sciencedirect.com/publication/science/13618415",
+    "arXiv Image & Video Processing | https://rss.arxiv.org/rss/eess.IV",
+    "arXiv Machine Learning | https://rss.arxiv.org/rss/cs.LG",
+    "Frontiers in Aging Neuroscience | https://www.frontiersin.org/journals/aging-neuroscience/rss",
+]
+
+[interests]
+keywords = [
+    "Alzheimer's disease",
+    "amyloid PET",
+    "tau PET",
+    "MRI biomarkers",
+    "hippocampal volume",
+    "brain atrophy",
+    "neuroimaging",
+    "APOE",
+    "GWAS",
+    "polygenic risk score",
+    "mild cognitive impairment",
+    "dementia",
+    "beta-amyloid",
+    "neurofibrillary tangles",
+    "white matter hyperintensities",
+    "CSF biomarkers",
+    "plasma biomarkers",
+    "structural MRI",
+    "functional connectivity",
+    "ADNI",
+    "early detection",
+    "preclinical Alzheimer's",
+    "genetic risk factors",
+    "neurodegeneration",
+    "deep learning Alzheimer",
+    "machine learning dementia",
+    "brain age prediction",
+    "AI diagnosis",
+    "convolutional neural network brain",
+    "transformer medical imaging",
+    "graph neural network brain",
+    "classification MCI",
+    "image segmentation brain",
+    "explainable AI neuroimaging",
+    "radiomics",
+    "drug discovery Alzheimer",
+    "clinical trial AI",
+]
+
+narrative = """
+I am researching the intersection of neuroimaging and genomics in Alzheimer's disease. My primary interests include:
+
+1. **MRI biomarkers**: Structural and functional MRI findings that can serve as early indicators or progression markers for Alzheimer's, including hippocampal atrophy, cortical thinning, white matter changes, and resting-state connectivity alterations.
+
+2. **Molecular imaging**: PET imaging with amyloid and tau tracers, and how these relate to MRI-detectable changes and genetic risk.
+
+3. **Genomics and genetics**: GWAS findings, polygenic risk scores, APOE variants, and rare genetic mutations (APP, PSEN1, PSEN2) — particularly how genetic factors influence imaging phenotypes (imaging-genetics).
+
+4. **Fluid biomarkers**: CSF and blood-based biomarkers (Aβ42/40 ratio, p-tau, NfL) and their correlation with imaging findings.
+
+5. **Translational research**: Studies bridging basic science discoveries to clinical applications, including early detection strategies, clinical trial design using imaging endpoints, and precision medicine approaches.
+
+6. **AI and computational methods**: Deep learning, machine learning, and other AI approaches applied to Alzheimer's research — automated classification (AD vs MCI vs healthy), brain age prediction, radiomics, explainable AI for neuroimaging, graph neural networks for brain connectivity, and AI-driven drug discovery or clinical trial optimization.
+
+I want to stay current on both cutting-edge research and clinical developments, from large cohort studies (ADNI, UK Biobank) to novel computational methods for image analysis and genetic data integration. Papers applying novel AI/ML methods to AD data should be scored highly even if the primary contribution is methodological rather than clinical.
+"""
+
+paywalled_domains = [
+    "jamanetwork.com",
+    "thelancet.com",
+    "cell.com",
+    "nature.com",
+    "science.org",
+    "academic.oup.com",
+    "pubs.rsna.org",
+    "onlinelibrary.wiley.com",
+    "neurology.org",
+    "ajnr.org",
+    "sciencedirect.com",
+]
+
+[overrides]
+min_score = 0.55

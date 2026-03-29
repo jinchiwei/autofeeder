@@ -1,0 +1,106 @@
+# Auto-generated profile for: gaming video games pc games mice mechanical keyboards nintendo switch steam OLED monitors peripherals reviews news
+# Review and edit before using!
+# Some RSS URLs may need verification.
+
+name = "gaming"
+description = "Auto-discovered feeds for: gaming video games pc games mice mechanical keyboards nintendo switch steam OLED monitors peripherals reviews news"
+
+[feeds]
+list = [
+    # === Core Gaming News ===
+    "Ars Technica - Gaming | https://feeds.arstechnica.com/arstechnica/gaming",
+    "The Verge - Gaming | https://www.theverge.com/rss/games/index.xml",
+    "Eurogamer | https://www.eurogamer.net/feed",
+    "Rock Paper Shotgun | https://www.rockpapershotgun.com/feed",
+    "PC Gamer | https://www.pcgamer.com/rss/",
+    "Kotaku | https://kotaku.com/rss",
+    "IGN | https://feeds.feedburner.com/ign/all",
+    "Polygon | https://www.polygon.com/rss/index.xml",
+
+    # === Hardware / Peripherals / Reviews ===
+    "Tom's Hardware | https://www.tomshardware.com/feeds/all",
+    "AnandTech (archive) / Tom's Hardware GPUs | https://www.tomshardware.com/feeds/topic/gpu",
+    "TechPowerUp | https://www.techpowerup.com/rss/news",
+    "Rtings - Monitor Reviews | https://www.rtings.com/rss/monitor",
+    "Hardware Unboxed (YouTube RSS) | https://www.youtube.com/feeds/videos.xml?channel_id=UCI8iQa1hv7oV_Z8D35vVuSg",
+    "Gamers Nexus (YouTube RSS) | https://www.youtube.com/feeds/videos.xml?channel_id=UChIs72whgZI9w6d6FhwGGHA",
+
+    # === Nintendo / Switch Specific ===
+    "Nintendo Life | https://www.nintendolife.com/feeds/latest",
+    "Nintendo Everything | https://nintendoeverything.com/feed/",
+
+    # === Steam / PC Platform News ===
+    "Steam Blog (Official) | https://store.steampowered.com/feeds/news/",
+    "SteamDB - Free Game Promotions | https://steamdb.info/upcoming/free/rss/",
+    "GamingOnLinux | https://www.gamingonlinux.com/article_rss.php",
+
+    # === Mechanical Keyboards / Peripherals Niche ===
+    "Geekhack RSS (News) | https://geekhack.org/index.php?action=.xml;type=rss2",
+    "Deskthority Wiki Recent Changes | https://deskthority.net/wiki/Special:RecentChanges?feed=rss",
+
+    # === Wildcard / Cross-Disciplinary ===
+    "Hacker News Front Page | https://hnrss.org/frontpage",
+    "Ars Technica - Tech Policy | https://feeds.arstechnica.com/arstechnica/tech-policy",
+    "Digital Foundry (Eurogamer) | https://www.eurogamer.net/feed/digitalfoundry",
+]
+
+[interests]
+keywords = [
+    "gaming mouse",
+    "mechanical keyboard",
+    "Nintendo Switch",
+    "Switch 2",
+    "OLED monitor",
+    "Steam Deck",
+    "PC gaming",
+    "gaming peripherals",
+    "GPU review",
+    "monitor review",
+    "keyboard switches",
+    "Cherry MX",
+    "Gateron",
+    "gaming headset",
+    "refresh rate",
+    "response time",
+    "1440p",
+    "4K gaming",
+    "HDR monitor",
+    "Steam sale",
+    "game review",
+    "PC hardware",
+    "mouse sensor",
+    "polling rate",
+    "wireless mouse",
+    "display technology",
+    "mini LED",
+    "QD-OLED",
+    "WOLED",
+    "frame rate",
+    "game benchmark",
+    "controller",
+    "hot-swappable keyboard",
+    "custom keycaps",
+]
+
+narrative = """
+I want to stay on top of the gaming and PC hardware world broadly. This includes:
+
+**Video game news and reviews**: New game announcements, reviews, Steam sales and events, Nintendo Switch and Switch 2 news, indie game coverage, and major platform updates.
+
+**PC hardware and peripherals**: In-depth reviews and news about gaming mice (sensor technology, polling rates, wireless performance), mechanical keyboards (switch types, hot-swap boards, custom builds, keycap group buys), OLED and high-refresh-rate monitors (QD-OLED, WOLED, mini LED, response times, HDR), and other peripherals like headsets and controllers.
+
+**Display technology**: Particularly interested in OLED monitor developments, new panel technologies, and comparative reviews from outlets like Rtings and Hardware Unboxed.
+
+**Steam and PC platform ecosystem**: Steam Deck updates, Proton/Linux gaming compatibility, Epic/GOG news, and digital storefront developments.
+
+**Nintendo ecosystem**: Switch game releases, first-party Nintendo announcements, hardware revisions, and the next-gen Switch.
+
+I care about both enthusiast-level technical depth (like Gamers Nexus teardowns or Digital Foundry analysis) and broader consumer-facing news and reviews.
+"""
+
+paywalled_domains = [
+    "pcgamer.com",
+]
+
+[overrides]
+min_score = 0.50

@@ -1,0 +1,105 @@
+# Auto-generated profile for: Chinese geopolitical technical cultural and economic developments, China policy, US-China relations, Chinese technology, Chinese economy, Chinese culture
+# Review and edit before using!
+# Some RSS URLs may need verification.
+
+name = "china"
+description = "Auto-discovered feeds for: Chinese geopolitical technical cultural and economic developments, China policy, US-China relations, Chinese technology, Chinese economy, Chinese culture"
+
+[feeds]
+list = [
+    # --- Core Policy & Analysis ---
+    "ChinaFile | https://www.chinafile.com/feed",
+    "The China Project | https://thechinaproject.com/feed/",
+    "Brookings - China | https://www.brookings.edu/topic/china/feed/",
+    "CSIS China Power | https://chinapower.csis.org/feed/",
+    "Carnegie China | https://carnegieendowment.org/topics/china/rss",
+    "Council on Foreign Relations - China | https://www.cfr.org/china/rss",
+    "War on the Rocks | https://warontherocks.com/feed/",
+    "The Diplomat - China | https://thediplomat.com/topics/china/feed/",
+    "Lawfare Blog | https://www.lawfaremedia.org/feed",
+
+    # --- Technology & Industrial Policy ---
+    "MIT Technology Review - China | https://www.technologyreview.com/topic/china-tech/feed",
+    "TechNode | https://technode.com/feed/",
+    "DigiChina (Stanford) | https://digichina.stanford.edu/feed/",
+    "Protocol China (Rest of World) | https://restofworld.org/feed/latest/",
+    "Semiconductor Engineering | https://semiengineering.com/feed/",
+
+    # --- Economics & Trade ---
+    "Peterson Institute - China | https://www.piie.com/research/china/rss.xml",
+    "FT China | https://www.ft.com/stream/channelId/MQ==-R2VucmVz?format=rss",
+    "Caixin Global | https://www.caixinglobal.com/rss/",
+    "South China Morning Post | https://www.scmp.com/rss/91/feed",
+
+    # --- Security & Military ---
+    "RAND China | https://www.rand.org/topics/china/feed.xml",
+    "The Jamestown Foundation China Brief | https://jamestown.org/programs/cb/feed/",
+    "Asia Maritime Transparency Initiative | https://amti.csis.org/feed/",
+
+    # --- News & General ---
+    "BBC News Asia | http://feeds.bbci.co.uk/news/world/asia/rss.xml",
+    "Reuters China | https://www.reuters.com/arc/outboundfeeds/v4/section/china?outputType=xml",
+    "Nikkei Asia | https://asia.nikkei.com/rss",
+
+    # --- Wildcard / Cross-Disciplinary ---
+    "Noahpinion (Noah Smith) | https://www.noahpinion.blog/feed",
+    "Palladium Magazine | https://www.palladiummag.com/feed/",
+    "arXiv - Computers and Society | https://rss.arxiv.org/rss/cs.CY",
+]
+
+[interests]
+keywords = [
+    "US-China relations",
+    "China policy",
+    "Chinese economy",
+    "Chinese technology",
+    "Belt and Road Initiative",
+    "Taiwan Strait",
+    "semiconductor export controls",
+    "Chinese military modernization",
+    "PLA",
+    "South China Sea",
+    "decoupling",
+    "de-risking",
+    "Chinese AI",
+    "Huawei",
+    "TSMC",
+    "Chinese culture",
+    "Xi Jinping",
+    "CCP",
+    "Chinese Communist Party",
+    "trade war",
+    "AUKUS",
+    "Indo-Pacific",
+    "Chinese demographics",
+    "yuan renminbi",
+    "tech transfer",
+    "ASEAN China",
+    "Xinjiang",
+    "Hong Kong",
+    "Chinese soft power",
+    "dual circulation",
+    "common prosperity",
+    "chip war",
+    "rare earth minerals",
+    "Chinese EV electric vehicles",
+    "TikTok ByteDance",
+    "supply chain China",
+]
+
+narrative = """
+I want to comprehensively track developments related to China across multiple dimensions: geopolitical maneuvering and great-power competition (especially US-China relations, Taiwan contingencies, and South China Sea tensions); Chinese technology and industrial policy (semiconductors, AI, EVs, internet platforms, and export control regimes); the Chinese economy (growth trajectory, property crisis, demographics, trade patterns, Belt and Road); Chinese domestic politics and governance under Xi Jinping; and Chinese culture and soft power projection. I care about both granular policy analysis (new sanctions, diplomatic meetings, military exercises) and big-picture strategic assessments. Cross-disciplinary angles—such as how demographic decline intersects with economic policy, or how cultural factors shape tech adoption—are particularly valuable. I want primary reporting, think-tank analysis, and occasionally academic or technical perspectives on computational social science relating to Chinese society.
+"""
+
+paywalled_domains = [
+    "ft.com",
+    "scmp.com",
+    "nikkei.com",
+    "caixinglobal.com",
+    "technologyreview.com",
+    "economist.com",
+    "wsj.com",
+]
+
+[overrides]
+min_score = 0.50

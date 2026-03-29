@@ -1,0 +1,56 @@
+name = "Example Profile"
+description = "Neuroscience electrophysiology research"
+enabled = false  # skipped by --all, run explicitly with --profile example
+
+[feeds]
+list = [
+    "Nature Neuroscience | https://www.nature.com/neuro.rss",
+    "bioRxiv neuro | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
+    "Neuron | https://www.cell.com/neuron/inpress.rss",
+    "J Neurosci | https://www.jneurosci.org/rss/current.xml",
+]
+
+[interests]
+keywords = [
+    "EEG",
+    "neural oscillations",
+    "aperiodic activity",
+    "spectral parameterization",
+]
+
+narrative = """
+My research focuses on neural dynamics using computational approaches.
+I care about methods for time-series analysis, oscillations, aperiodic
+activity, and cross-species electrophysiology. Down-weight purely
+clinical papers without neural data or computational modeling.
+"""
+
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "thelancet.com",
+]
+
+# Your publications and tools — triggers "builds on your work" detection
+[my_work]
+tools = ["specparam", "fooof", "bycycle", "neurodsp"]
+paper_keywords = ["spectral parameterization", "aperiodic activity", "waveform shape"]
+
+# Per-profile overrides (inherit from config.toml if not set)
+[overrides]
+# lookback_days = 7
+# min_score = 0.70
+# max_returned = 25
+
+# Output configuration
+[outputs.slack]
+webhook = "$SLACK_WEBHOOK_URL"
+channel_name = "#neuro-papers"
+
+[outputs.obsidian]
+vault_path = ""
+subfolder = "autofeeder/neuro"
+
+[outputs.email]
+recipients = []

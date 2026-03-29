@@ -1,0 +1,10 @@
+{
+  "headline": "Aperiodic neural activity in EEG power spectra tracks cortical excitation-inhibition balance across wake and sleep in humans.",
+  "key_takeaways": [
+    "The aperiodic exponent of intracranial EEG power spectra correlates with cortical E/I balance (r = 0.74, p < 0.001)",
+    "Steeper spectral slopes during NREM sleep reflect increased inhibition, while flatter slopes during waking reflect excitation",
+    "Results replicated across 42 patients with depth electrode recordings spanning frontal, temporal, and parietal cortex"
+  ],
+  "relevance": "Directly validates the use of spectral parameterization for indexing E/I balance in humans, extending previous computational modeling work to clinical EEG data.",
+  "tags": ["aperiodic", "E/I balance", "iEEG", "sleep", "spectral parameterization"]
+}

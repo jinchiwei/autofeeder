@@ -1,0 +1,82 @@
+You are helping a user find RSS feeds for a topic they want to track. Given their topic description, suggest 20-30 relevant RSS feed sources with comprehensive coverage.
+
+STEP 1 — EVENT TYPE MAPPING (do this BEFORE picking feeds):
+Think about what kinds of events and developments happen in this domain. For example:
+- For a geopolitical topic: legislative sessions, military exercises, diplomatic meetings, sanctions, economic data releases, leadership changes, elections, treaty negotiations
+- For a scientific topic: new papers, conference proceedings, grant announcements, preprints, replication studies, method releases
+- For a consumer/tech topic: product launches, reviews, price changes, company earnings, regulatory actions, community discussions
+
+List 5-8 event types for this specific topic.
+
+STEP 2 — SOURCE MATCHING (match sources to event types):
+For each event type, identify which sources provide the best coverage:
+- **Official/primary sources**: government press offices, institutional feeds, official blogs. These are essential — never skip the primary source of the entity being tracked.
+- **Wire services**: AP, Reuters, AFP, Xinhua — the backbone of breaking news. Include for any non-academic topic.
+- **Specialist outlets**: publications focused on this exact domain (trade journals, niche blogs, topic-specific newsletters)
+- **Analysis/think tanks**: organizations that provide deeper context and interpretation
+- **Academic/research**: journals, preprint servers, conference feeds (when relevant)
+- **Financial/business press**: for topics with economic dimensions
+- **General quality press**: for broader context and public discourse
+
+STEP 3 — COVERAGE GAP CHECK:
+Before finalizing, verify: Is there any event type from Step 1 with no feed covering it? If so, add a source. Every event type should have at least one feed.
+
+RULES:
+- Suggest 20-30 feeds total
+- Only suggest feeds you are confident have working RSS/Atom endpoints
+- For each feed, provide the exact RSS URL (not the homepage)
+- Use common RSS URL patterns for known publishers:
+  - Nature journals: https://www.nature.com/{journal_code}.rss
+  - Cell Press: https://www.cell.com/{journal}/rss
+  - Science/AAAS: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc={journal}
+  - PLOS: https://journals.plos.org/{journal}/feed/atom
+  - bioRxiv: http://connect.biorxiv.org/biorxiv_xml.php?subject={subject}
+  - medRxiv: http://connect.medrxiv.org/medrxiv_xml.php?subject={subject}
+  - arXiv: https://rss.arxiv.org/rss/{category}
+  - Hacker News: https://hnrss.org/frontpage
+- Group feeds by category
+- Do NOT use Reddit RSS feeds (reddit.com/r/*/rss) — Reddit blocks automated access
+- Include 2-3 "wildcard" feeds for unexpected cross-disciplinary connections
+
+NARRATIVE RULES:
+The narrative should explicitly mention:
+- What event types are highest priority (and when they occur if seasonal/periodic)
+- What kinds of coverage to prioritize (breaking news vs. analysis vs. primary data)
+- What to de-prioritize or ignore
+- Use "HIGH PRIORITY — score highly when they occur:" and "ALSO TRACK:" sections
+
+OUTPUT FORMAT:
+Return a complete TOML profile matching this EXACT schema:
+```toml
+[feeds]
+list = [
+    "Feed Name | https://feed.url/rss",
+]
+
+[interests]
+keywords = [
+    "keyword one",
+    "keyword two",
+]
+
+narrative = """
+Description with HIGH PRIORITY and ALSO TRACK sections...
+"""
+
+paywalled_domains = [
+    "example.com",
+]
+
+[overrides]
+min_score = 0.50
+```
+
+IMPORTANT:
+- Keywords go under [interests] keywords (NOT [keywords] terms)
+- Narrative goes under [interests] narrative
+- Include paywalled_domains for sites that require subscriptions
+- Set min_score = 0.50 in overrides for non-academic topics (consumer/news content tends to score lower)
+- Set min_score = 0.55 for academic topics
+
+TOPIC:
+{{TOPIC}}

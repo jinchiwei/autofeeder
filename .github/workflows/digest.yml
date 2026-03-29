@@ -1,0 +1,58 @@
+name: autofeeder digest
+
+on:
+  schedule:
+    # Weekly: Mondays 14:00 UTC (06:00 PT / 09:00 ET)
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "Profile to run (leave empty for --all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Python version
+        run: echo "PYTHON_VERSION=$(cat .python-version)" >> $GITHUB_ENV
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+          activate-environment: true
+
+      - name: Install deps
+        run: uv pip install -r requirements.txt
+
+      - name: Run digest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+          UNPAYWALL_EMAIL: ${{ secrets.UNPAYWALL_EMAIL }}
+        run: |
+          if [ -n "${{ github.event.inputs.profile }}" ]; then
+            uv run python autofeeder.py --profile "${{ github.event.inputs.profile }}"
+          else
+            uv run python autofeeder.py --all
+          fi
+
+      - name: Commit output
+        run: |
+          git config user.name "autofeeder-bot"
+          git config user.email "autofeeder-bot@users.noreply.github.com"
+          git add output/ seen.json feed_health.json
+          git commit -m "Update digest $(date -u +%Y-%m-%d)" || exit 0
+          git push

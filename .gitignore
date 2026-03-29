@@ -1,0 +1,28 @@
+# Internal planning docs (not public)
+docs/designs/
+BUILDPLAN.md
+TODOS.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Conda/venv
+.venv/
+venv/
+
+# Data files
+seen.json
+feed_health.json
+output/
+
+# OS
+.DS_Store

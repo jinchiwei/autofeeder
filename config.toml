@@ -1,0 +1,55 @@
+[general]
+backend = "anthropic"
+frequency = "weekly"
+log_level = "INFO"
+
+[fetch]
+max_items_per_feed = 50
+max_total_items = 400
+lookback_days = 7
+concurrency = 10
+
+[triage]
+batch_size = 25
+prefilter_keep_top = 200
+concurrency = 4
+
+[summarize]
+enabled = true
+concurrency = 3
+max_content_chars = 15000
+archive_ph_enabled = true
+unpaywall_email = "$UNPAYWALL_EMAIL"
+
+[output]
+dir = "output"
+min_score = 0.65
+max_returned = 40
+
+[anthropic]
+# Direct API model names (if using ANTHROPIC_API_KEY)
+# model = "claude-opus-4-6"
+# triage_model = "claude-sonnet-4-6"
+
+# Bedrock model names (if using AWS credentials / UCSF Versa)
+model = "us.anthropic.claude-opus-4-6-v1"
+triage_model = "us.anthropic.claude-opus-4-6-v1"
+timeout = 300
+
+[openai]
+base_url = "https://unified-api.ucsf.edu/general"
+model = "gpt-5.2-2025-12-11"
+timeout = 300
+
+[local]
+base_url = "http://localhost:1234/v1"
+model = "qwen2.5-72b"
+structured_output = false
+
+[cross_profile]
+slack_webhook = "$CROSS_PROFILE_SLACK_WEBHOOK"
+
+[ledger]
+enabled = true
+path = "seen.json"
+prune_after_days = 90

@@ -1,0 +1,129 @@
+# Auto-generated profile for: Chinese politics geopolitics US-China relations Taiwan South China Sea Xi Jinping CCP foreign policy diplomacy military NPC National People's Congress Two Sessions Government Work Report Five-Year Plan PLA military modernization Indo-Pacific AUKUS Quad semiconductor export controls Belt and Road Xinjiang Hong Kong
+# Review and edit before using!
+# Some RSS URLs may need verification.
+
+name = "china-geopolitics"
+description = "Auto-discovered feeds for: Chinese politics geopolitics US-China relations Taiwan South China Sea Xi Jinping CCP foreign policy diplomacy military NPC National People's Congress Two Sessions Government Work Report Five-Year Plan PLA military modernization Indo-Pacific AUKUS Quad semiconductor export controls Belt and Road Xinjiang Hong Kong"
+
+[feeds]
+list = [
+    # === Wire Services & Breaking News ===
+    "Reuters - China | https://www.reuters.com/arc/outboundfeeds/news-sitemap-index/?outputType=xml",
+    "Associated Press - Asia Pacific | https://rsshub.app/apnews/topics/apf-asia-pacific",
+    "AFP - Asia | https://www.france24.com/en/asia-pacific/rss",
+
+    # === Official / Primary Sources ===
+    "Xinhua English - China | http://www.xinhuanet.com/english/rss/chinarss.xml",
+    "US State Department Press Releases | https://www.state.gov/rss-feed/press-releases/feed/",
+    "US Department of Defense News | https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=945&max=10",
+    "White House Briefing Room | https://www.whitehouse.gov/briefing-room/feed/",
+
+    # === Specialist China / Asia Outlets ===
+    "South China Morning Post - China | https://www.scmp.com/rss/91/feed",
+    "South China Morning Post - Diplomacy | https://www.scmp.com/rss/318220/feed",
+    "Nikkei Asia | https://asia.nikkei.com/rss",
+    "The Diplomat | https://thediplomat.com/feed/",
+    "Caixin Global | https://www.caixinglobal.com/rss.html",
+    "China Briefing (Dezan Shira) | https://www.china-briefing.com/news/feed/",
+
+    # === Think Tanks & Analysis ===
+    "CSIS - Asia Program | https://www.csis.org/program/asia-program/feed",
+    "Brookings - Foreign Policy | https://www.brookings.edu/topic/foreign-policy/feed/",
+    "Carnegie Endowment - Asia | https://carnegieendowment.org/topic/asia/feed",
+    "ChinaFile | https://www.chinafile.com/rss.xml",
+    "Lowy Institute - The Interpreter | https://www.lowyinstitute.org/the-interpreter/rss.xml",
+    "War on the Rocks | https://warontherocks.com/feed/",
+    "Council on Foreign Relations - Asia | https://www.cfr.org/asia/rss",
+    "RAND - China | https://www.rand.org/topics/china/feed.xml",
+
+    # === Security / Military ===
+    "Defense One | https://www.defenseone.com/rss/",
+    "IISS Analysis | https://www.iiss.org/rss",
+
+    # === Financial / Business Press ===
+    "Financial Times - China | https://www.ft.com/china?format=rss",
+    "Bloomberg - China | https://feeds.bloomberg.com/politics/news.rss",
+
+    # === Wildcard / Cross-Disciplinary ===
+    "Lawfare Blog | https://www.lawfaremedia.org/rss.xml",
+    "Tom's Hardware (semiconductor industry) | https://www.tomshardware.com/feeds/all",
+    "East Asia Forum | https://eastasiaforum.org/feed/",
+]
+
+[interests]
+keywords = [
+    "US-China relations",
+    "Xi Jinping",
+    "Chinese Communist Party",
+    "CCP",
+    "Taiwan Strait",
+    "South China Sea",
+    "PLA",
+    "People's Liberation Army",
+    "Indo-Pacific",
+    "AUKUS",
+    "Quad alliance",
+    "semiconductor export controls",
+    "Belt and Road Initiative",
+    "BRI",
+    "National People's Congress",
+    "NPC Two Sessions",
+    "Government Work Report",
+    "Five-Year Plan",
+    "Xinjiang",
+    "Hong Kong national security",
+    "Politburo Standing Committee",
+    "cross-strait relations",
+    "ASEAN South China Sea",
+    "military modernization China",
+    "tech decoupling",
+    "chip war",
+    "PLAN navy",
+    "Taiwan reunification",
+    "wolf warrior diplomacy",
+    "Zhongnanhai",
+    "Central Committee plenum",
+    "PRC foreign ministry",
+    "ADIZ air defense identification zone",
+    "freedom of navigation",
+    "entity list China",
+    "CHIPS Act",
+    "TSMC",
+]
+
+narrative = """
+Track Chinese domestic politics, CCP leadership dynamics, US-China strategic competition, and regional security developments across the Taiwan Strait, South China Sea, and broader Indo-Pacific.
+
+HIGH PRIORITY — score highly when they occur:
+- NPC and CPPCC "Two Sessions" coverage (annually in March): Government Work Reports, budget announcements, GDP targets, defense spending figures, Five-Year Plan updates, personnel appointments. These set China's policy direction for the year.
+- CCP Central Committee plenums and Politburo Standing Committee decisions — especially leadership reshuffles, purges, or unexpected personnel changes (like the 2023 defense minister disappearance pattern).
+- US-China summits, bilateral diplomatic meetings, and any direct communication between heads of state or senior officials. Score very highly for any Xi-Biden or Xi-Trump interactions.
+- Taiwan Strait military provocations: PLA exercises, ADIZ incursions, carrier group deployments, missile tests near Taiwan, and any US arms sales to Taiwan or transit of US warships through the Taiwan Strait.
+- Semiconductor export control actions: US Commerce Department / BIS entity list additions, new chip export restrictions, Dutch/Japanese ASML-related export controls, and Chinese countermeasures or domestic chip breakthroughs.
+- South China Sea military incidents: confrontations between Chinese coast guard/navy and Philippine, Vietnamese, or other ASEAN vessels; island-building activity; freedom of navigation operations by US or allied navies.
+- AUKUS and Quad developments: submarine deal milestones, joint military exercises, technology sharing agreements, and ministerial-level meetings.
+- Sanctions and counter-sanctions: US sanctions on Chinese officials/entities (especially related to Xinjiang, Hong Kong, or military), Chinese retaliatory sanctions, and any EU sanctions coordination.
+
+ALSO TRACK:
+- Belt and Road Initiative developments: major infrastructure deals, debt restructuring in BRI countries, BRI summits, and any significant project cancellations or pivots.
+- Hong Kong political developments: national security law prosecutions, media closures, electoral changes, and international responses.
+- Xinjiang-related developments: forced labor supply chain actions, UN reports, corporate divestment decisions.
+- PLA military modernization: new weapons systems, nuclear warhead estimates, space and cyber capabilities, defense white papers.
+- Chinese economic indicators that have geopolitical implications: GDP growth, property sector crises, youth unemployment, trade surplus data, rare earth export controls.
+- Think tank analysis and long-form assessments from CSIS, Brookings, Carnegie, RAND, and Lowy — these provide essential context for interpreting events.
+- Cross-strait economic ties: trade data, investment flows, tourism restrictions.
+
+De-prioritize: routine consular notices, cultural exchange events without political significance, individual business deals without strategic implications, generic Asia tourism content, and semiconductor news that is purely consumer/retail focused (e.g., GPU gaming benchmarks) with no geopolitical or supply chain dimension.
+"""
+
+paywalled_domains = [
+    "scmp.com",
+    "ft.com",
+    "bloomberg.com",
+    "nikkei.com",
+    "caixinglobal.com",
+    "wsj.com",
+]
+
+[overrides]
+min_score = 0.50

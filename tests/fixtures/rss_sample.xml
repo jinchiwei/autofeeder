@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Nature Neuroscience</title>
+    <link>https://www.nature.com/neuro</link>
+    <description>Latest articles from Nature Neuroscience</description>
+    <item>
+      <title>Aperiodic neural activity reflects cortical excitability in humans</title>
+      <link>https://www.nature.com/articles/s41593-024-001</link>
+      <pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate>
+      <description>We show that the aperiodic exponent of neural power spectra tracks cortical excitation-inhibition balance across wake and sleep states using intracranial EEG recordings.</description>
+      <guid>nature-001</guid>
+    </item>
+    <item>
+      <title>Theta oscillations coordinate hippocampal-prefrontal circuits during memory retrieval</title>
+      <link>https://www.nature.com/articles/s41593-024-002</link>
+      <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+      <description>Using high-density EEG and simultaneous fMRI, we demonstrate that 4-8 Hz theta oscillations synchronize hippocampal and prefrontal activity during episodic memory retrieval.</description>
+      <guid>nature-002</guid>
+    </item>
+    <item>
+      <title>Spectral parameterization reveals age-related changes in neural dynamics</title>
+      <link>https://www.nature.com/articles/s41593-024-003</link>
+      <pubDate>Sat, 15 Mar 2025 00:00:00 +0000</pubDate>
+      <description>Applying spectral parameterization (specparam) to a large lifespan EEG dataset reveals systematic shifts in both periodic and aperiodic components across development and aging.</description>
+      <guid>nature-003</guid>
+    </item>
+  </channel>
+</rss>

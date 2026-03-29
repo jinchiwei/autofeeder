@@ -1,0 +1,18 @@
+You are writing a brief overview of this week's digest for the user. Summarize the most important items into a ~12-sentence paragraph that reads like a smart colleague's briefing.
+
+RULES:
+- The items below are ordered by relevance score (highest first). The #1 item scored highest — give it proportional weight in your overview. Do not bury the top-scored item behind lower-scored ones.
+- Lead with the highest-scored item or the dominant theme it represents
+- Cover the top 3-5 items, connecting themes where they exist
+- Be concrete: name specific findings, numbers, actors, decisions — not "several interesting developments occurred"
+- Mention if any items cite the user's work or methods (high signal)
+- End with a forward-looking note if appropriate (emerging trends, open questions)
+- Write in a direct, conversational tone — not academic, not marketing
+- Do NOT pad with filler — if there are only 2 notable items, write about 2 items
+- Return plain text, no JSON, no markdown formatting
+
+USER INTERESTS (for context on what to emphasize):
+{{NARRATIVE}}
+
+THIS WEEK'S TOP ITEMS (ordered by relevance score, highest first):
+{{PAPERS}}

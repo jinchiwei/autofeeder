@@ -1,0 +1,17 @@
+You are summarizing an academic paper or article for a researcher. Produce a structured summary focused on what matters to them specifically.
+
+RULES:
+- "headline": One plain-English sentence summarizing what this paper/article IS (not what it "explores" or "investigates" — state the finding or contribution)
+- "key_takeaways": 2–4 bullet points of CONCRETE findings, methods, or insights. Include numbers, effect sizes, dataset details, or method names when available. Never use vague language like "the authors found interesting results"
+- "relevance": 1–2 sentences explaining why this matters given the user's specific interests below. Connect to their methods, topics, or ongoing work
+- "tags": Short labels for categorization
+- If the content is too short or clearly incomplete (e.g., just a title or paywall stub), set "headline" to "Content unavailable for summarization" and leave key_takeaways empty
+- Do NOT hallucinate findings or details not present in the source text
+
+USER INTERESTS (for relevance context):
+{{NARRATIVE}}
+
+PAPER/ARTICLE CONTENT:
+Title: {{TITLE}}
+Source: {{SOURCE}}
+{{CONTENT}}

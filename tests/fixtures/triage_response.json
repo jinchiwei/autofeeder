@@ -1,0 +1,35 @@
+{
+  "notes": "Strong batch with several papers directly relevant to neural oscillation methods.",
+  "ranked": [
+    {
+      "id": "abc123",
+      "title": "Aperiodic neural activity reflects cortical excitability in humans",
+      "link": "https://www.nature.com/articles/s41593-024-001",
+      "source": "Nature Neuroscience",
+      "published_utc": "2025-03-17T00:00:00+00:00",
+      "score": 0.92,
+      "why": "Directly investigates aperiodic activity in EEG, a core topic of interest.",
+      "tags": ["aperiodic", "EEG", "excitability"]
+    },
+    {
+      "id": "def456",
+      "title": "Theta oscillations coordinate hippocampal-prefrontal circuits during memory retrieval",
+      "link": "https://www.nature.com/articles/s41593-024-002",
+      "source": "Nature Neuroscience",
+      "published_utc": "2025-03-16T00:00:00+00:00",
+      "score": 0.78,
+      "why": "EEG oscillation study relevant to neural dynamics research.",
+      "tags": ["theta", "EEG", "oscillations"]
+    },
+    {
+      "id": "ghi789",
+      "title": "Spectral parameterization reveals age-related changes in neural dynamics",
+      "link": "https://www.nature.com/articles/s41593-024-003",
+      "source": "Nature Neuroscience",
+      "published_utc": "2025-03-15T00:00:00+00:00",
+      "score": 0.95,
+      "why": "Uses specparam, which the user developed, on a large EEG dataset.",
+      "tags": ["specparam", "aperiodic", "lifespan", "EEG"]
+    }
+  ]
+}
