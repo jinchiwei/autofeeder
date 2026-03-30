@@ -1,4 +1,4 @@
-You are writing a brief overview of this week's digest for the user. Summarize the most important items into a ~12-sentence paragraph that reads like a smart colleague's briefing.
+You are writing a brief overview of this week's digest for the user. Summarize the most important items into a ~12-sentence briefing that reads like a smart colleague's email.
 
 RULES:
 - The items below are ordered by relevance score (highest first). The #1 item scored highest — give it proportional weight in your overview. Do not bury the top-scored item behind lower-scored ones.
@@ -9,7 +9,8 @@ RULES:
 - End with a forward-looking note if appropriate (emerging trends, open questions)
 - Write in a direct, conversational tone — not academic, not marketing
 - Do NOT pad with filler — if there are only 2 notable items, write about 2 items
-- Return plain text, no JSON, no markdown formatting
+- Break the briefing into 2-4 short paragraphs grouped by theme. Each paragraph should be 2-4 sentences. Separate paragraphs with a blank line.
+- Return plain text with blank lines between paragraphs. No JSON, no markdown, no bullet points, no headers.
 
 USER INTERESTS (for context on what to emphasize):
 {{NARRATIVE}}

@@ -162,14 +162,20 @@ def _build_html(digest_data: dict[str, Any]) -> str:
     # TL;DR section
     tldr_html = ""
     if tldr:
+        # Split on blank lines to get paragraphs, render each as a <p>
+        paragraphs = [p.strip() for p in tldr.split("\n\n") if p.strip()]
+        tldr_body = "".join(
+            f'<p style="margin:0 0 12px 0;color:#ddd;font-family:Geist,Helvetica,Arial,'
+            f'sans-serif;font-size:14px;line-height:1.6;">{_html_escape(p)}</p>'
+            for p in paragraphs
+        )
         tldr_html = (
             f'<div style="margin-bottom:24px;padding:14px 16px;'
             f'border-left:4px solid {_TURQUOISE};background:#16162b;'
             f'border-radius:0 6px 6px 0;">'
             f'<div style="color:#999;font-family:Geist Mono,Consolas,monospace;'
             f'font-size:11px;text-transform:uppercase;margin-bottom:6px;">TL;DR</div>'
-            f'<div style="color:#ddd;font-family:Geist,Helvetica,Arial,sans-serif;'
-            f'font-size:14px;line-height:1.5;">{_html_escape(tldr)}</div>'
+            f'{tldr_body}'
             f"</div>"
         )
 
