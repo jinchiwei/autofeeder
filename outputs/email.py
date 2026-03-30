@@ -162,8 +162,17 @@ def _build_html(digest_data: dict[str, Any]) -> str:
     # TL;DR section
     tldr_html = ""
     if tldr:
-        # Split on blank lines to get paragraphs, render each as a <p>
+        # Split on blank lines to get paragraphs
         paragraphs = [p.strip() for p in tldr.split("\n\n") if p.strip()]
+        # If model returned a single block, force-split every 3 sentences
+        if len(paragraphs) == 1:
+            import re
+            sentences = re.split(r'(?<=[.!?])\s+', paragraphs[0])
+            paragraphs = []
+            for i in range(0, len(sentences), 3):
+                chunk = " ".join(sentences[i:i + 3])
+                if chunk:
+                    paragraphs.append(chunk)
         tldr_body = "".join(
             f'<p style="margin:0 0 12px 0;color:#ddd;font-family:Geist,Helvetica,Arial,'
             f'sans-serif;font-size:14px;line-height:1.6;">{_html_escape(p)}</p>'
