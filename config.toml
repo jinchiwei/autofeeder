@@ -27,14 +27,14 @@ min_score = 0.65
 max_returned = 40
 
 [anthropic]
-# Direct API model names (if using ANTHROPIC_API_KEY)
-# model = "claude-opus-4-6"
-# triage_model = "claude-sonnet-4-6"
-
-# Bedrock model names (if using AWS credentials / UCSF Versa)
+# Bedrock model names (UCSF Versa - requires VPN/campus IP)
 model = "us.anthropic.claude-opus-4-6-v1"
 triage_model = "us.anthropic.claude-opus-4-6-v1"
 timeout = 300
+
+# Direct API model names (for GitHub Actions or off-campus)
+# model = "claude-opus-4-6"
+# triage_model = "claude-opus-4-6"
 
 [openai]
 base_url = "https://unified-api.ucsf.edu/general"

@@ -135,3 +135,7 @@ paywalled_domains = [
 
 [overrides]
 min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]
