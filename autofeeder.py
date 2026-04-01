@@ -22,6 +22,7 @@ import logging
 import os
 import sys
 import time
+from datetime import datetime, timedelta
 from glob import glob
 from pathlib import Path
 
@@ -453,6 +454,7 @@ def main() -> None:
     )
     parser.add_argument("--profile", "-p", help="Profile name (without .toml extension)")
     parser.add_argument("--all", "-a", action="store_true", help="Run all profiles in profiles/")
+    parser.add_argument("--cooldown", type=int, default=7, help="Skip profiles run within N days (default: 7, 0 to disable)")
     parser.add_argument("--diff-only", action="store_true", help="Only show new items since last run")
     parser.add_argument("--discover", "-d", help="Discover RSS feeds for a topic (e.g., 'Alzheimer EEG')")
     parser.add_argument("--discover-name", help="Profile name for discovered feeds (default: derived from topic)")
@@ -513,6 +515,31 @@ def main() -> None:
         if not profiles:
             logger.error("No profiles found in profiles/")
             sys.exit(1)
+
+        # Cooldown: skip profiles that ran within --cooldown days
+        if args.cooldown > 0:
+            output_dir = Path(config.get("output", {}).get("dir", "output"))
+            cutoff = datetime.now() - timedelta(days=args.cooldown)
+            filtered = []
+            for p in profiles:
+                name = Path(p).stem
+                profile_dir = output_dir / name
+                if profile_dir.exists():
+                    outputs = sorted(profile_dir.glob("*.md"), reverse=True)
+                    if outputs:
+                        try:
+                            last_date = datetime.strptime(outputs[0].stem, "%Y-%m-%d")
+                            if last_date >= cutoff:
+                                logger.info("Skipping %s — last run %s (within %d-day cooldown)",
+                                            name, outputs[0].stem, args.cooldown)
+                                continue
+                        except ValueError:
+                            pass
+                filtered.append(p)
+            profiles = filtered
+            if not profiles:
+                logger.info("All profiles within cooldown period, nothing to run")
+                return
 
         all_results = asyncio.run(run_all_profiles_async(profiles, config))
 
