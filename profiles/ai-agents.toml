@@ -38,6 +38,10 @@ list = [
     # === Podcasts (show notes) ===
     "Latent Space Podcast | https://api.substack.com/feed/podcast/1084089.rss",
 
+    # === Individual Voices ===
+    "Andrej Karpathy Blog | https://karpathy.github.io/feed.xml",
+    "Andrej Karpathy YouTube | https://www.youtube.com/feeds/videos.xml?channel_id=UCXUPKJO5MZQN11PqgIvyuvQ",
+
     # === arXiv ===
     "arXiv Software Engineering | https://rss.arxiv.org/rss/cs.SE",
     "arXiv AI | https://rss.arxiv.org/rss/cs.AI",
