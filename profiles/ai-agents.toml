@@ -1,0 +1,125 @@
+name = "ai-agents"
+description = "AI coding agents, dev tools, Claude Code, Codex, and the ecosystem around them"
+
+[feeds]
+list = [
+    # === Official Blogs ===
+    "Anthropic Blog | https://www.anthropic.com/research/rss.xml",
+    "OpenAI Blog | https://openai.com/blog/rss.xml",
+    "Google AI Blog | https://blog.google/technology/ai/rss/",
+    "Cursor Blog | https://www.cursor.com/blog/rss.xml",
+    "Vercel Blog | https://vercel.com/blog/rss.xml",
+
+    # === Community & Dev Tool Blogs ===
+    "Simon Willison's Weblog | https://simonwillison.net/atom/everything/",
+    "Hacker News (AI) | https://hnrss.org/newest?q=claude+code+OR+codex+OR+ai+agent+OR+cursor+OR+windsurf&points=50",
+    "Hacker News (LLM tools) | https://hnrss.org/newest?q=llm+tool+OR+mcp+OR+coding+assistant&points=30",
+    "Lobste.rs AI | https://lobste.rs/t/ai.rss",
+
+    # === GitHub Releases & Trending ===
+    "Claude Code Releases | https://github.com/anthropics/claude-code/releases.atom",
+    "OpenAI Codex Releases | https://github.com/openai/codex/releases.atom",
+    "Superpowers Releases | https://github.com/obra/superpowers/releases.atom",
+    "Aider Releases | https://github.com/Aider-AI/aider/releases.atom",
+    "Continue Releases | https://github.com/continuedev/continue/releases.atom",
+
+    # === Substacks & Newsletters ===
+    "Latent Space | https://www.latent.space/feed",
+    "AI Engineer | https://www.aiengineer.substack.com/feed",
+    "Ben's Bites | https://bensbites.beehiiv.com/feed",
+    "The Pragmatic Engineer | https://newsletter.pragmaticengineer.com/feed",
+    "Lenny's Newsletter | https://www.lennysnewsletter.com/feed",
+
+    # === Reddit ===
+    "r/ClaudeAI | https://www.reddit.com/r/ClaudeAI/top/.rss?t=week",
+    "r/ChatGPTCoding | https://www.reddit.com/r/ChatGPTCoding/top/.rss?t=week",
+    "r/LocalLLaMA | https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
+
+    # === Podcasts (show notes) ===
+    "Latent Space Podcast | https://api.substack.com/feed/podcast/1084089.rss",
+
+    # === arXiv ===
+    "arXiv Software Engineering | https://rss.arxiv.org/rss/cs.SE",
+    "arXiv AI | https://rss.arxiv.org/rss/cs.AI",
+]
+
+[interests]
+keywords = [
+    "Claude Code",
+    "claude code",
+    "Codex CLI",
+    "coding agent",
+    "AI coding assistant",
+    "agentic coding",
+    "AI pair programming",
+    "cursor",
+    "windsurf",
+    "cline",
+    "aider",
+    "continue.dev",
+    "copilot",
+    "MCP",
+    "Model Context Protocol",
+    "tool use",
+    "function calling",
+    "computer use",
+    "code generation",
+    "AI developer tools",
+    "AI IDE",
+    "vscode extension AI",
+    "agent framework",
+    "agent SDK",
+    "agent protocol",
+    "autonomous agent",
+    "multi-agent",
+    "subagent",
+    "prompt engineering",
+    "system prompt",
+    "skills",
+    "hooks",
+    "slash commands",
+    "AI workflow",
+    "AI automation",
+    "code review AI",
+    "AI testing",
+    "AI debugging",
+    "TDD AI",
+    "plan and execute",
+    "Claude API",
+    "Anthropic API",
+    "OpenAI API",
+    "Claude plugin",
+    "gstack",
+    "superpowers",
+    "AI shell",
+    "terminal AI",
+    "headless browser",
+    "playwright AI",
+    "dotfiles AI",
+    "dev environment AI",
+]
+
+narrative = """
+I use AI coding agents daily (Claude Code, Codex) and want to stay on top of this fast-moving ecosystem. I care about:
+
+1. **Agent tools and releases**: New versions of Claude Code, Codex CLI, Cursor, Windsurf, Aider, Continue, and similar tools. Feature announcements, breaking changes, new capabilities.
+
+2. **Plugins, skills, and extensions**: Things like gstack, superpowers, MCP servers, Claude Code plugins, custom slash commands, hooks, and agent customization. The layer on top of the base tools.
+
+3. **Techniques and workflows**: Prompt engineering for coding agents, subagent-driven development, TDD with AI, plan-and-execute patterns, code review workflows, QA automation. How people are actually using these tools effectively.
+
+4. **Infrastructure**: Model Context Protocol (MCP), tool use / function calling, agent SDKs, agent protocols, multi-agent orchestration. The plumbing that makes agents work.
+
+5. **Community discoveries**: Tips, tricks, and workflows shared on Reddit, Hacker News, Twitter/X. What power users are figuring out.
+
+6. **Research**: Papers on code generation, autonomous agents, program synthesis, AI-assisted software engineering. Academic work that will influence tools.
+
+Prioritize practical, actionable content over hype. A blog post showing a novel Claude Code workflow is more valuable than a press release about an AI startup raising money. Score highly: new tool releases, workflow innovations, MCP servers, and community-discovered techniques.
+"""
+
+[overrides]
+min_score = 0.50
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]

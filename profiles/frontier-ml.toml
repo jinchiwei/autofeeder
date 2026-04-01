@@ -1,0 +1,121 @@
+name = "frontier-ml"
+description = "Groundbreaking ML/DL research: new architectures, scaling laws, reasoning, multimodal, and foundational advances"
+
+[feeds]
+list = [
+    # === Preprints (primary source for frontier work) ===
+    "arXiv Machine Learning | https://rss.arxiv.org/rss/cs.LG",
+    "arXiv AI | https://rss.arxiv.org/rss/cs.AI",
+    "arXiv Computation and Language | https://rss.arxiv.org/rss/cs.CL",
+    "arXiv Computer Vision | https://rss.arxiv.org/rss/cs.CV",
+    "arXiv Neural and Evolutionary Computing | https://rss.arxiv.org/rss/cs.NE",
+    "arXiv Information Retrieval | https://rss.arxiv.org/rss/cs.IR",
+    "arXiv Multiagent Systems | https://rss.arxiv.org/rss/cs.MA",
+
+    # === Top Venues ===
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "Nature | https://www.nature.com/nature.rss",
+    "Science | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science",
+
+    # === Lab Blogs & Industry Research ===
+    "Google AI Blog | https://blog.google/technology/ai/rss/",
+    "OpenAI Blog | https://openai.com/blog/rss.xml",
+    "Anthropic Research | https://www.anthropic.com/research/rss.xml",
+    "Meta AI Blog | https://ai.meta.com/blog/rss/",
+    "DeepMind Blog | https://deepmind.google/blog/rss.xml",
+    "Microsoft Research Blog | https://www.microsoft.com/en-us/research/feed/",
+
+    # === Community & News ===
+    "The Gradient | https://thegradient.pub/rss/",
+    "Distill.pub | https://distill.pub/rss.xml",
+    "Papers With Code | https://paperswithcode.com/latest.atom",
+    "Hugging Face Blog | https://huggingface.co/blog/feed.xml",
+    "Lil'Log (Lilian Weng) | https://lilianweng.github.io/index.xml",
+
+    # === Aggregators ===
+    "Import AI Newsletter | https://importai.substack.com/feed",
+    "The Batch (Andrew Ng) | https://read.deeplearning.ai/feed",
+    "AK's Daily Papers | https://huggingface.co/papers/rss",
+]
+
+[interests]
+keywords = [
+    "transformer architecture",
+    "scaling laws",
+    "large language model",
+    "foundation model",
+    "chain of thought",
+    "reasoning",
+    "multimodal",
+    "vision-language model",
+    "diffusion model",
+    "state space model",
+    "Mamba",
+    "mixture of experts",
+    "sparse attention",
+    "reinforcement learning from human feedback",
+    "RLHF",
+    "DPO",
+    "constitutional AI",
+    "alignment",
+    "emergent abilities",
+    "in-context learning",
+    "few-shot",
+    "zero-shot",
+    "distillation",
+    "quantization",
+    "efficient inference",
+    "world model",
+    "neural architecture search",
+    "self-supervised learning",
+    "contrastive learning",
+    "retrieval augmented generation",
+    "RAG",
+    "long context",
+    "memory augmented",
+    "test-time compute",
+    "benchmark",
+    "SOTA",
+    "new dataset",
+    "interpretability",
+    "mechanistic interpretability",
+    "superalignment",
+    "capability evaluation",
+    "tokenization",
+    "pretraining",
+    "post-training",
+    "synthetic data",
+    "neural scaling",
+    "compute optimal",
+    "Chinchilla",
+    "GPT",
+    "Claude",
+    "Gemini",
+    "Llama",
+    "open weights",
+]
+
+narrative = """
+I track frontier ML/DL research at the cutting edge. I care about:
+
+1. **New architectures and training methods**: Novel model architectures (beyond standard transformers), new attention mechanisms, state space models, mixture of experts, and fundamental advances in how models learn. Papers that introduce genuinely new ideas, not incremental improvements.
+
+2. **Scaling and efficiency**: Scaling laws, compute-optimal training, distillation, quantization, efficient inference, long-context methods. How do we make models bigger, cheaper, and faster?
+
+3. **Reasoning and capabilities**: Chain-of-thought, test-time compute, tool use, planning, code generation, mathematical reasoning. Breakthroughs in what models can actually do.
+
+4. **Multimodal and generative**: Vision-language models, video understanding, diffusion models, world models, embodied AI. Cross-modal understanding and generation.
+
+5. **Alignment and interpretability**: RLHF, DPO, constitutional AI, mechanistic interpretability, superalignment. How do we understand and steer these systems?
+
+6. **Benchmarks and evaluations**: New benchmarks, SOTA results, capability evaluations, failure mode analysis. Rigorous measurement of progress.
+
+I want to catch the papers and blog posts that the ML research community will be talking about. Prioritize novelty and significance over volume. A single paper introducing a new paradigm is worth more than 10 incremental improvements. Score highly: new architectures, surprising empirical results, compelling theoretical insights, and major open-source releases.
+"""
+
+[overrides]
+min_score = 0.60
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]
