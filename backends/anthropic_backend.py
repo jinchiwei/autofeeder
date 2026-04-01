@@ -190,6 +190,8 @@ async def call_triage(
             max_tokens=16384,
             messages=[{"role": "user", "content": prompt + json_instruction}],
         )
+        if not response.content:
+            raise RuntimeError("Bedrock returned empty content array")
         text = response.content[0].text  # type: ignore[union-attr]
         logger.debug("Anthropic triage raw response (first 1000): %s", text[:1000])
         try:
@@ -242,6 +244,8 @@ async def call_summarize(
             max_tokens=4096,
             messages=[{"role": "user", "content": prompt + json_instruction}],
         )
+        if not response.content:
+            raise RuntimeError("Bedrock returned empty content array")
         text = response.content[0].text  # type: ignore[union-attr]
         logger.debug("Anthropic summary raw response: %s", text[:500])
         return parse_summary_response(text)
