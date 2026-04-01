@@ -185,8 +185,14 @@ async def run_profile_async(profile_path: str, config: dict) -> dict | None:
                             if result.get("notes", "").strip():
                                 combined["notes"] += " " + result["notes"].strip()
                         except Exception:
-                            logger.warning("  sub-batch %d-%d also failed, skipping %d items",
-                                           i + 1, min(i + 5, len(batch)), len(sub))
+                            # Last resort: try each item individually
+                            logger.warning("  sub-batch %d-%d failed, trying individually", i + 1, min(i + 5, len(batch)))
+                            for j, item in enumerate(sub):
+                                try:
+                                    result = await triage_fn(interests, [item])
+                                    combined["ranked"].extend(result.get("ranked", []))
+                                except Exception:
+                                    logger.warning("    item '%s' failed, skipping", item.get("title", "?")[:60])
                     return combined if combined["ranked"] else None
                 else:
                     logger.warning("Triage batch %d/%d failed, skipping %d items", batch_num, total_batches, len(batch))
