@@ -173,8 +173,24 @@ async def run_profile_async(profile_path: str, config: dict) -> dict | None:
             try:
                 return await triage_fn(interests, batch)
             except Exception:
-                logger.exception("Triage batch %d/%d failed, skipping", batch_num, total_batches)
-                return None
+                # Retry with smaller sub-batches before giving up
+                if len(batch) > 5:
+                    logger.warning("Triage batch %d/%d failed, retrying in sub-batches of 5", batch_num, total_batches)
+                    combined = {"ranked": [], "notes": ""}
+                    for i in range(0, len(batch), 5):
+                        sub = batch[i:i + 5]
+                        try:
+                            result = await triage_fn(interests, sub)
+                            combined["ranked"].extend(result.get("ranked", []))
+                            if result.get("notes", "").strip():
+                                combined["notes"] += " " + result["notes"].strip()
+                        except Exception:
+                            logger.warning("  sub-batch %d-%d also failed, skipping %d items",
+                                           i + 1, min(i + 5, len(batch)), len(sub))
+                    return combined if combined["ranked"] else None
+                else:
+                    logger.warning("Triage batch %d/%d failed, skipping %d items", batch_num, total_batches, len(batch))
+                    return None
 
     triage_results = await asyncio.gather(
         *[_run_triage_batch(i + 1, b) for i, b in enumerate(batches)],
