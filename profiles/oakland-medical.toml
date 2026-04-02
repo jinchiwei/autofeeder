@@ -1,0 +1,106 @@
+name = "oakland-medical"
+description = "Medical incidents, public health emergencies, and healthcare safety events in Oakland"
+
+[feeds]
+list = [
+    # === Local News ===
+    "Oakland News Now | https://oaklandnewsnow.com/feed/",
+    "East Bay Times | https://www.eastbaytimes.com/feed/",
+    "Oaklandside | https://oaklandside.org/feed/",
+    "KQED News | https://www.kqed.org/news/feed",
+    "SF Chronicle Bay Area | https://www.sfchronicle.com/bayarea/feed/Bay-Area-San-Francisco-News-702.php",
+    "Mercury News | https://www.mercurynews.com/feed/",
+    "ABC7 Bay Area | https://abc7news.com/feed/",
+    "NBC Bay Area | https://www.nbcbayarea.com/news/feed/",
+    "CBS Bay Area | https://www.cbsnews.com/sanfrancisco/latest/rss/main/",
+
+    # === Public Health ===
+    "Alameda County Public Health | https://covid-19.acgov.org/feed.xml",
+    "California Dept of Public Health | https://www.cdph.ca.gov/rss",
+    "CDC MMWR | https://www.cdc.gov/mmwr/rss/mmwr_wk.xml",
+    "ProMED | https://promedmail.org/feed/",
+
+    # === Patient Safety & Healthcare ===
+    "Patient Safety Network (PSNet) | https://psnet.ahrq.gov/rss/issues.xml",
+    "FDA Safety Recalls | https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/recalls/rss.xml",
+    "FDA MedWatch | https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medwatch/rss.xml",
+
+    # === EMS / Emergency ===
+    "EMS1 | https://www.ems1.com/rss/",
+    "JEMS | https://www.jems.com/feed/",
+
+    # === Reddit ===
+    "r/oakland | https://www.reddit.com/r/oakland/search/.rss?q=hospital+OR+medical+OR+health+OR+ambulance+OR+ER+OR+shooting+OR+injury&sort=new&restrict_sr=on&t=week",
+]
+
+[interests]
+keywords = [
+    "Oakland",
+    "Alameda County",
+    "Highland Hospital",
+    "UCSF Benioff Oakland",
+    "Kaiser Oakland",
+    "Alta Bates",
+    "Summit Medical Center",
+    "medical incident",
+    "patient safety",
+    "hospital",
+    "emergency room",
+    "ambulance",
+    "EMS",
+    "overdose",
+    "fentanyl",
+    "mass casualty",
+    "shooting victim",
+    "trauma center",
+    "public health emergency",
+    "disease outbreak",
+    "foodborne illness",
+    "water contamination",
+    "hazmat",
+    "drug recall",
+    "medical device recall",
+    "hospital closure",
+    "ER diversion",
+    "nursing shortage",
+    "healthcare access",
+    "Medicaid",
+    "Medi-Cal",
+    "uninsured",
+    "mental health crisis",
+    "psychiatric emergency",
+    "fire injury",
+    "pedestrian injury",
+    "hit and run",
+    "workplace injury",
+    "OSHA",
+    "infection outbreak",
+    "tuberculosis",
+    "measles",
+    "lead poisoning",
+    "air quality health",
+    "wildfire smoke health",
+]
+
+narrative = """
+I want to track medical incidents and healthcare-related events specifically in Oakland, CA and surrounding Alameda County. This includes:
+
+1. **Acute incidents**: Shootings with injuries, mass casualty events, major accidents with hospitalizations, fires with injuries, hazmat exposures affecting health.
+
+2. **Public health**: Disease outbreaks, foodborne illness, water contamination, air quality emergencies, overdose clusters, lead exposure, tuberculosis or measles cases.
+
+3. **Healthcare system**: Hospital incidents (patient safety events, ER closures, diversions), staffing crises, hospital closures or service reductions, access issues.
+
+4. **Safety recalls**: FDA drug or medical device recalls affecting Oakland-area facilities.
+
+5. **EMS and emergency response**: Ambulance response issues, trauma center capacity, emergency department wait times.
+
+Prioritize Oakland-specific events. Bay Area or Alameda County events are relevant if they directly impact Oakland residents or Oakland hospitals. National news is only relevant if it involves Oakland facilities or personnel. Score items higher if they name specific Oakland locations, hospitals, or neighborhoods.
+"""
+
+[overrides]
+min_score = 0.45
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "stanley.hua@berkeley.edu"]
