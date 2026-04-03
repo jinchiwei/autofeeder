@@ -502,6 +502,10 @@ def main() -> None:
         run_setup()
         return
 
+    # Default to --all if no mode specified
+    if not args.profile and not args.all and not args.discover and not args.setup:
+        args.all = True
+
     if args.diff_only:
         # Force ledger filtering — items already seen will be excluded
         config["ledger"]["enabled"] = True
