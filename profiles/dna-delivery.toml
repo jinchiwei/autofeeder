@@ -1,0 +1,135 @@
+name = "dna-delivery"
+description = "DNA delivery modalities, polymer nanoparticles, nanomedicine, and high-throughput screening for gene therapy"
+
+[feeds]
+list = [
+    # === Core Journals ===
+    "ACS Nano | https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=ancac3",
+    "Nano Letters | https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=nalefd",
+    "Advanced Materials | https://onlinelibrary.wiley.com/feed/15214095/most-recent",
+    "Biomaterials | https://rss.sciencedirect.com/publication/science/01429612",
+    "Journal of Controlled Release | https://rss.sciencedirect.com/publication/science/01683659",
+    "Nature Nanotechnology | https://www.nature.com/nnano.rss",
+    "Nature Biomedical Engineering | https://www.nature.com/natbiomedeng.rss",
+    "Nature Materials | https://www.nature.com/nmat.rss",
+    "Nucleic Acids Research | https://academic.oup.com/rss/site_5127/3091.xml",
+    "Molecular Therapy | https://www.cell.com/molecular-therapy-family/nucleic-acids/rss",
+    "Small | https://onlinelibrary.wiley.com/feed/16136829/most-recent",
+    "Nanoscale | https://pubs.rsc.org/en/journals/journal/nr?type=feed&issueid=new",
+    "ACS Applied Materials & Interfaces | https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=aamick",
+    "Macromolecules | https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=mamobx",
+
+    # === Gene Therapy & Delivery ===
+    "Molecular Therapy | https://www.cell.com/molecular-therapy/rss",
+    "Gene Therapy (Nature) | https://www.nature.com/gt.rss",
+    "Human Gene Therapy | https://www.liebertpub.com/action/showFeed?type=etoc&feed=rss&jc=hum",
+    "Bioconjugate Chemistry | https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=bcches",
+
+    # === High-Impact General ===
+    "Science | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science",
+    "Nature | https://www.nature.com/nature.rss",
+    "Nature Chemistry | https://www.nature.com/nchem.rss",
+    "PNAS | https://www.pnas.org/action/showFeed?type=etoc&feed=rss&jc=pnas",
+
+    # === Preprints ===
+    "bioRxiv Bioengineering | http://connect.biorxiv.org/biorxiv_xml.php?subject=bioengineering",
+    "bioRxiv Molecular Biology | http://connect.biorxiv.org/biorxiv_xml.php?subject=molecular_biology",
+    "ChemRxiv | https://chemrxiv.org/engage/rss/chemrxiv",
+
+    # === Polymer & Materials ===
+    "Polymer Chemistry (RSC) | https://pubs.rsc.org/en/journals/journal/py?type=feed&issueid=new",
+    "Soft Matter (RSC) | https://pubs.rsc.org/en/journals/journal/sm?type=feed&issueid=new",
+]
+
+[interests]
+keywords = [
+    "DNA delivery",
+    "gene delivery",
+    "polymer nanoparticle",
+    "polyplex",
+    "coacervate",
+    "nanomedicine",
+    "lipid nanoparticle",
+    "LNP",
+    "non-viral delivery",
+    "non-viral vector",
+    "high-throughput screening",
+    "combinatorial library",
+    "mRNA delivery",
+    "siRNA delivery",
+    "nucleic acid delivery",
+    "gene therapy",
+    "polyethylenimine",
+    "PEI",
+    "PAMAM",
+    "dendrimer",
+    "polymeric micelle",
+    "block copolymer",
+    "self-assembly nanoparticle",
+    "endosomal escape",
+    "transfection efficiency",
+    "biodegradable polymer",
+    "stimuli-responsive",
+    "pH-responsive",
+    "targeted delivery",
+    "CRISPR delivery",
+    "gene editing delivery",
+    "Cas9 delivery",
+    "ribonucleoprotein delivery",
+    "polyester nanoparticle",
+    "poly(beta-amino ester)",
+    "PBAE",
+    "ionizable lipid",
+    "charge-altering releasable transporter",
+    "CART",
+    "cell-penetrating peptide",
+    "formulation screening",
+    "microfluidic formulation",
+    "nanoparticle characterization",
+    "DLS",
+    "zeta potential",
+    "encapsulation efficiency",
+    "in vivo delivery",
+    "biodistribution",
+    "organ-selective delivery",
+    "lung-targeted delivery",
+    "liver-targeted delivery",
+]
+
+narrative = """
+I am a materials scientist interested in non-viral DNA and nucleic acid delivery. My primary interests include:
+
+1. **Polymer nanoparticles and polyplexes**: Design, synthesis, and characterization of polymeric carriers for DNA, mRNA, and siRNA delivery. This includes polyethylenimine (PEI), poly(beta-amino esters) (PBAEs), dendrimers, block copolymers, and novel polymer architectures for gene delivery.
+
+2. **Coacervates**: Complex coacervation for nucleic acid encapsulation, charge-driven self-assembly, and coacervate-based delivery systems.
+
+3. **High-throughput screening**: Combinatorial approaches to nanoparticle formulation, microfluidic synthesis, automated screening platforms, and machine learning-guided materials discovery for optimizing delivery vehicles.
+
+4. **Nanomedicine fundamentals**: Endosomal escape mechanisms, intracellular trafficking, biodistribution, organ-selective targeting, and in vivo performance of non-viral delivery systems.
+
+5. **Gene therapy applications**: CRISPR/Cas9 delivery, base editing, prime editing, and other gene editing tools delivered via non-viral carriers. Clinical translation of polymer-based gene therapies.
+
+6. **Characterization and formulation**: DLS, zeta potential, cryo-EM of nanoparticles, encapsulation efficiency, stability, and scalable manufacturing of polymer nanoparticles.
+
+Prioritize papers that introduce novel polymer chemistries, new screening methodologies, or demonstrate significant improvements in delivery efficiency. Papers combining machine learning with materials screening should be scored highly.
+"""
+
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "pubs.acs.org",
+    "onlinelibrary.wiley.com",
+    "academic.oup.com",
+    "sciencedirect.com",
+    "liebertpub.com",
+    "pubs.rsc.org",
+    "pnas.org",
+]
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["dpshannon8@gmail.com", "mrjinch@gmail.com"]
