@@ -23,7 +23,7 @@ _GOLD = "#FFD700"
 _BLUEVIOLET = "#8A2BE2"
 
 # How many items to include in the email.
-_MAX_ITEMS = 50
+_MAX_ITEMS = 12
 
 
 def _html_escape(text: str) -> str:
