@@ -185,8 +185,14 @@ def ledger_update(
         if not item_id:
             continue
 
+        profile_name = result.get("profile_name", "")
         if item_id in seen:
             seen[item_id]["last_seen"] = today
+            # Track which profiles have scored this item
+            profiles = seen[item_id].get("profiles", [])
+            if profile_name and profile_name not in profiles:
+                profiles.append(profile_name)
+            seen[item_id]["profiles"] = profiles
             updated += 1
         else:
             seen[item_id] = {
@@ -194,6 +200,7 @@ def ledger_update(
                 "title": item.get("title", ""),
                 "first_seen": today,
                 "last_seen": today,
+                "profiles": [profile_name] if profile_name else [],
             }
             added += 1
 
@@ -250,3 +257,46 @@ def prune_old_entries(
             pruned[item_id] = entry
 
     return pruned
+
+
+# ---------------------------------------------------------------------------
+# Reset per-profile
+# ---------------------------------------------------------------------------
+
+def reset_profile(profile_name: str, config: dict[str, Any]) -> int:
+    """Remove all ledger entries belonging to a specific profile.
+
+    If an item belongs to multiple profiles, only this profile is removed
+    from its profiles list. If it was the only profile, the entry is deleted.
+
+    Args:
+        profile_name: Name of the profile to reset.
+        config: Global config dict (uses ``config["ledger"]``).
+
+    Returns:
+        Number of entries removed or modified.
+    """
+    ledger_cfg = config.get("ledger", {})
+    ledger_path = ledger_cfg.get("path", "seen.json")
+    seen = load_ledger(ledger_path)
+
+    removed = 0
+    to_delete = []
+
+    for item_id, entry in seen.items():
+        profiles = entry.get("profiles", [])
+        if profile_name in profiles:
+            profiles.remove(profile_name)
+            removed += 1
+            if not profiles:
+                to_delete.append(item_id)
+            else:
+                entry["profiles"] = profiles
+
+    for item_id in to_delete:
+        del seen[item_id]
+
+    save_ledger(seen, ledger_path)
+    logger.info("Reset profile '%s': %d entries removed/modified, %d fully deleted",
+                profile_name, removed, len(to_delete))
+    return removed

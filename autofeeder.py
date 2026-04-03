@@ -30,7 +30,7 @@ from config import load_config, merge_config
 from profiles import load_profile
 from fetch import fetch_items
 from prefilter import prefilter
-from ledger import ledger_filter, ledger_update
+from ledger import ledger_filter, ledger_update, reset_profile
 from feed_health import load_health, record_fetch, analyze_health, save_health, format_health_report
 from backends import get_backend
 from pubmed import enrich_from_pubmed
@@ -244,7 +244,7 @@ async def run_profile_async(profile_path: str, config: dict) -> dict | None:
         digest_data = build_digest_data(profile, [], pconfig)
         publish_all(digest_data, profile, pconfig)
         # Still update ledger with all scored items
-        ledger_update({"ranked": ranked}, pconfig)
+        ledger_update({"ranked": ranked, "profile_name": profile_name}, pconfig)
         return {"ranked": ranked, "notes": " ".join(notes_parts)}
 
     # Merge original item data into ranked results — original data is authoritative
@@ -482,6 +482,7 @@ def main() -> None:
     parser.add_argument("--discover-name", help="Profile name for discovered feeds (default: derived from topic)")
     parser.add_argument("--setup", action="store_true", help="Run the interactive setup wizard")
     parser.add_argument("--config", default="config.toml", help="Path to config file")
+    parser.add_argument("--reset", help="Reset a profile: clear its seen items and output, then re-run")
     parser.add_argument("--log-level", help="Override log level (DEBUG, INFO, WARNING, ERROR)")
     args = parser.parse_args()
 
@@ -505,6 +506,19 @@ def main() -> None:
     # Default to --all if no mode specified
     if not args.profile and not args.all and not args.discover and not args.setup:
         args.all = True
+
+    # --- Reset mode ---
+    if args.reset:
+        import shutil
+        profile_name = args.reset
+        reset_profile(profile_name, config)
+        output_dir = Path(config.get("output", {}).get("dir", "output")) / profile_name
+        if output_dir.exists():
+            shutil.rmtree(output_dir)
+            logger.info("Removed output directory: %s", output_dir)
+        # Set profile to run after reset
+        args.profile = profile_name
+        logger.info("Profile '%s' reset — will re-run now", profile_name)
 
     if args.diff_only:
         # Force ledger filtering — items already seen will be excluded
