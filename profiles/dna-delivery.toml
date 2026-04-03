@@ -109,6 +109,28 @@ keywords = [
     "organ-selective delivery",
     "lung-targeted delivery",
     "liver-targeted delivery",
+    "nanoparticle",
+    "gene therapy",
+    "mRNA",
+    "siRNA",
+    "CRISPR",
+    "transfection",
+    "polymer",
+    "lipid",
+    "delivery vehicle",
+    "delivery system",
+    "therapeutic delivery",
+    "intracellular delivery",
+    "viral vector",
+    "AAV",
+    "formulation",
+    "encapsulation",
+    "biocompatible",
+    "biodegradable",
+    "PEGylation",
+    "self-assembly",
+    "drug carrier",
+    "controlled release",
 ]
 
 narrative = """
@@ -143,7 +165,7 @@ paywalled_domains = [
 ]
 
 [overrides]
-min_score = 0.45
+min_score = 0.30
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
