@@ -39,6 +39,20 @@ list = [
     # === Polymer & Materials ===
     "Polymer Chemistry (RSC) | https://pubs.rsc.org/en/journals/journal/py?type=feed&issueid=new",
     "Soft Matter (RSC) | https://pubs.rsc.org/en/journals/journal/sm?type=feed&issueid=new",
+
+    # === Industry & News ===
+    "STAT News | https://www.statnews.com/feed/",
+    "Fierce Biotech | https://www.fiercebiotech.com/rss/xml",
+    "GEN - Genetic Engineering & Biotech News | https://www.genengnews.com/feed/",
+    "Endpoints News | https://endpts.com/feed/",
+    "Drug Delivery Business News | https://www.drugdeliverybusiness.com/feed/",
+
+    # === Reddit ===
+    "r/biotech | https://www.reddit.com/r/biotech/top/.rss?t=week",
+    "r/labrats | https://www.reddit.com/r/labrats/top/.rss?t=week",
+
+    # === Preprints (broader) ===
+    "arXiv Biomolecules | https://rss.arxiv.org/rss/q-bio.BM",
 ]
 
 [interests]
@@ -128,7 +142,7 @@ paywalled_domains = [
 ]
 
 [overrides]
-min_score = 0.55
+min_score = 0.45
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
