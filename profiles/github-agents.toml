@@ -1,0 +1,121 @@
+name = "github-agents"
+description = "GitHub Enterprise Server, GitHub Actions, AI agents for GitHub, Copilot, and GitHub platform updates"
+
+[feeds]
+list = [
+    # === Official GitHub ===
+    "GitHub Blog | https://github.blog/feed/",
+    "GitHub Changelog | https://github.blog/changelog/feed/",
+    "GitHub Engineering | https://github.blog/category/engineering/feed/",
+    "GitHub Security | https://github.blog/category/security/feed/",
+
+    # === GitHub Releases ===
+    "GHES Releases | https://github.com/github/releases/releases.atom",
+    "GitHub Actions Runner | https://github.com/actions/runner/releases.atom",
+    "GitHub CLI | https://github.com/cli/cli/releases.atom",
+    "GitHub Copilot CLI | https://github.com/github/copilot-cli/releases.atom",
+
+    # === AI Agents for GitHub ===
+    "Claude Code Releases | https://github.com/anthropics/claude-code/releases.atom",
+    "OpenAI Codex Releases | https://github.com/openai/codex/releases.atom",
+    "Aider Releases | https://github.com/Aider-AI/aider/releases.atom",
+
+    # === Community & News ===
+    "Hacker News (GitHub) | https://hnrss.org/newest?q=github+enterprise+OR+github+actions+OR+github+copilot+OR+GHES&points=30",
+    "Simon Willison's Weblog | https://simonwillison.net/atom/everything/",
+    "The Pragmatic Engineer | https://newsletter.pragmaticengineer.com/feed",
+    "DevOps Weekly | https://devopsweeklyarchive.com/feed.xml",
+
+    # === Reddit ===
+    "r/github | https://www.reddit.com/r/github/top/.rss?t=week",
+    "r/devops | https://www.reddit.com/r/devops/search/.rss?q=github+OR+GHES+OR+actions&sort=new&restrict_sr=on&t=week",
+
+    # === Security ===
+    "GitHub Advisory Database | https://github.com/advisories/feed",
+    "CISA Advisories | https://www.cisa.gov/cybersecurity-advisories/all.xml",
+
+    # === DevOps / CI-CD ===
+    "The New Stack | https://thenewstack.io/feed/",
+    "InfoQ DevOps | https://feed.infoq.com/devops",
+]
+
+[interests]
+keywords = [
+    "GitHub Enterprise Server",
+    "GHES",
+    "GitHub Enterprise",
+    "GitHub Actions",
+    "GitHub Copilot",
+    "Copilot Workspace",
+    "Copilot agent",
+    "GitHub API",
+    "GitHub REST API",
+    "GitHub GraphQL",
+    "GitHub Apps",
+    "GitHub webhooks",
+    "GitHub runner",
+    "self-hosted runner",
+    "GitHub security",
+    "GitHub advisory",
+    "Dependabot",
+    "code scanning",
+    "secret scanning",
+    "CodeQL",
+    "GitHub Advanced Security",
+    "GHAS",
+    "GitHub Packages",
+    "GitHub Container Registry",
+    "GitHub Pages",
+    "GitHub CLI",
+    "gh CLI",
+    "GitHub MCP",
+    "GitHub integration",
+    "CI/CD",
+    "workflow automation",
+    "GitHub Actions workflow",
+    "reusable workflow",
+    "composite action",
+    "GitHub deployment",
+    "GitHub release",
+    "pull request automation",
+    "code review automation",
+    "AI code review",
+    "AI agent GitHub",
+    "GitHub bot",
+    "GitHub Action AI",
+    "Copilot Extensions",
+    "GitHub Codespaces",
+    "dev container",
+    "GHES upgrade",
+    "GHES administration",
+    "GHES backup",
+    "GHES clustering",
+    "GHES authentication",
+    "SAML SSO GitHub",
+    "LDAP GitHub",
+]
+
+narrative = """
+I manage and develop on GitHub Enterprise Server (GHES) and want to stay current on the full GitHub ecosystem. My interests include:
+
+1. **GHES administration**: Upgrades, patches, security advisories, backup strategies, clustering, authentication (SAML, LDAP), performance tuning, and infrastructure best practices.
+
+2. **GitHub Actions**: New features, self-hosted runner updates, reusable workflows, composite actions, CI/CD patterns, security hardening for Actions, and workflow optimization.
+
+3. **AI agents and Copilot**: GitHub Copilot updates, Copilot Extensions, AI-powered code review, AI agents that integrate with GitHub (Claude Code, Codex, Aider), MCP servers for GitHub, and automated PR workflows.
+
+4. **Security**: GitHub Advanced Security (GHAS), CodeQL, Dependabot, secret scanning, code scanning, supply chain security, and vulnerability advisories affecting GitHub or GHES.
+
+5. **API and integrations**: GitHub REST/GraphQL API changes, GitHub Apps, webhooks, GitHub CLI updates, and third-party integrations.
+
+6. **Platform updates**: New GitHub features, GitHub Changelog entries, GitHub blog posts about engineering practices, and community-discovered tips.
+
+Prioritize GHES-specific content, security advisories, and AI agent integrations. Score GitHub Changelog entries and GHES release notes highly. Community tips about Actions optimization or Copilot workflows are also valuable.
+"""
+
+[overrides]
+min_score = 0.40
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["Pierre.Nedelec@ucsf.edu", "mrjinch@gmail.com"]
