@@ -44,9 +44,9 @@ jobs:
           UNPAYWALL_EMAIL: ${{ secrets.UNPAYWALL_EMAIL }}
         run: |
           if [ -n "${{ github.event.inputs.profile }}" ]; then
-            uv run python autofeeder.py --profile "${{ github.event.inputs.profile }}"
+            uv run --no-project python autofeeder.py --profile "${{ github.event.inputs.profile }}"
           else
-            uv run python autofeeder.py --all
+            uv run --no-project python autofeeder.py --all
           fi
 
       - name: Commit output
