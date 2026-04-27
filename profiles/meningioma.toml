@@ -1,0 +1,163 @@
+name = "meningioma"
+description = "Meningioma research — imaging, molecular classification, surgical and radiation outcomes, AI/ML"
+
+[feeds]
+list = [
+    # === Neuro-Oncology ===
+    "Neuro-Oncology | https://academic.oup.com/rss/site_5273/3201.xml",
+    "Neuro-Oncology Advances | https://academic.oup.com/rss/site_6360/6444.xml",
+    "Journal of Neuro-Oncology | https://link.springer.com/search.rss?facet-journal-id=11060",
+    "Acta Neuropathologica | https://link.springer.com/search.rss?facet-journal-id=401",
+
+    # === Neurosurgery ===
+    "Journal of Neurosurgery | https://thejns.org/rss/current.jns.xml",
+    "Neurosurgery (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/7802914/?limit=100&name=Neurosurgery&utm_campaign=journals",
+    "Operative Neurosurgery (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/101599625/?limit=100&name=Oper%20Neurosurg&utm_campaign=journals",
+    "World Neurosurgery | https://rss.sciencedirect.com/publication/science/18788750",
+    "Acta Neurochirurgica | https://link.springer.com/search.rss?facet-journal-id=701",
+
+    # === Radiation Oncology ===
+    "International Journal of Radiation Oncology, Biology, Physics | https://rss.sciencedirect.com/publication/science/03603016",
+    "Radiotherapy and Oncology | https://rss.sciencedirect.com/publication/science/01678140",
+
+    # === Neuroimaging ===
+    "Neuroradiology | https://link.springer.com/search.rss?facet-journal-id=234",
+    "AJNR (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/8003708/?limit=100&name=AJNR%20Am%20J%20Neuroradiol&utm_campaign=journals",
+    "Radiology | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=radiology",
+    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
+
+    # === Neuropathology & Molecular ===
+    "Brain Pathology | https://onlinelibrary.wiley.com/feed/17503639/most-recent",
+    "Journal of Neuropathology & Experimental Neurology | https://academic.oup.com/rss/site_5317/3269.xml",
+    "Nature Genetics | https://www.nature.com/ng.rss",
+
+    # === High-Impact General ===
+    "Nature Medicine | https://www.nature.com/nm.rss",
+    "Lancet Oncology | https://www.thelancet.com/rssfeed/lanonc_current.xml",
+    "JAMA Oncology | https://jamanetwork.com/rss/site_12/158.xml",
+    "Cancer Cell | https://rss.sciencedirect.com/publication/science/15356108",
+    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
+
+    # === Preprints ===
+    "bioRxiv Cancer Biology | http://connect.biorxiv.org/biorxiv_xml.php?subject=cancer_biology",
+    "medRxiv Oncology | http://connect.medrxiv.org/medrxiv_xml.php?subject=oncology",
+    "medRxiv Radiology & Imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
+    "medRxiv Neurosurgery | http://connect.medrxiv.org/medrxiv_xml.php?subject=neurosurgery",
+
+    # === AI / ML in Medicine ===
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "Radiology: AI | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=ai",
+    "Medical Image Analysis | https://rss.sciencedirect.com/publication/science/13618415",
+    "arXiv Image & Video Processing | https://rss.arxiv.org/rss/eess.IV",
+    "arXiv Machine Learning | https://rss.arxiv.org/rss/cs.LG",
+
+    # === PubMed meningioma-specific ===
+    "PubMed: meningioma | https://pubmed.ncbi.nlm.nih.gov/rss/search/1VWjLaVyNn7Xo_FsLFGvwoGF80vgUSGvz_IN-SW31MalpaFMLn/?limit=100&utm_campaign=pubmed-2&fc=20260421181352",
+]
+
+[interests]
+keywords = [
+    "meningioma",
+    "meningiomas",
+    "atypical meningioma",
+    "anaplastic meningioma",
+    "WHO grade II meningioma",
+    "WHO grade III meningioma",
+    "skull base meningioma",
+    "convexity meningioma",
+    "parasagittal meningioma",
+    "sphenoid wing meningioma",
+    "petroclival meningioma",
+    "cavernous sinus meningioma",
+    "optic nerve sheath meningioma",
+    "spinal meningioma",
+    "NF2",
+    "neurofibromatosis type 2",
+    "SMARCB1",
+    "TRAF7",
+    "KLF4",
+    "AKT1",
+    "SMO meningioma",
+    "PIK3CA meningioma",
+    "POLR2A",
+    "methylation classification meningioma",
+    "DNA methylation meningioma",
+    "DKFZ classifier",
+    "integrated meningioma grading",
+    "CNS WHO 2021",
+    "chromosomal instability meningioma",
+    "1p loss meningioma",
+    "22q loss meningioma",
+    "Simpson grade",
+    "extent of resection meningioma",
+    "gross total resection meningioma",
+    "recurrence meningioma",
+    "progression meningioma",
+    "stereotactic radiosurgery meningioma",
+    "Gamma Knife meningioma",
+    "CyberKnife meningioma",
+    "fractionated radiotherapy meningioma",
+    "proton therapy meningioma",
+    "DOTATATE PET",
+    "68Ga-DOTATATE",
+    "somatostatin receptor imaging",
+    "peritumoral edema meningioma",
+    "brain invasion meningioma",
+    "hemangiopericytoma",
+    "solitary fibrous tumor meninges",
+    "radiomics meningioma",
+    "deep learning meningioma",
+    "segmentation meningioma",
+    "classification meningioma AI",
+    "liquid biopsy meningioma",
+    "cfDNA meningioma",
+    "bevacizumab meningioma",
+    "targeted therapy meningioma",
+    "clinical trial meningioma",
+]
+
+narrative = """
+I am researching meningiomas — the most common primary intracranial tumor — with interests spanning clinical, molecular, and AI-driven research. Specifically:
+
+1. **Molecular classification**: Driver mutations (NF2, TRAF7, KLF4, AKT1, SMO, PIK3CA, POLR2A, SMARCB1), DNA methylation-based subtyping (DKFZ classifier, integrated grading), chromosomal alterations (1p, 22q, 14q loss), and how molecular subtype predicts recurrence and response to therapy. Papers advancing the CNS WHO 2021 classification or its successors should be scored highly.
+
+2. **Imaging biomarkers**: Multiparametric MRI, advanced MR techniques (perfusion, diffusion, spectroscopy), and somatostatin-receptor PET (68Ga-DOTATATE) for grading, recurrence detection, and radiotherapy planning. Peritumoral edema, brain invasion, and skull-base involvement as imaging biomarkers.
+
+3. **Surgical outcomes**: Extent of resection (Simpson grading), skull-base approaches, recurrence after gross total vs subtotal resection, and intraoperative adjuncts (neuronavigation, 5-ALA, neuromonitoring).
+
+4. **Radiation therapy**: Stereotactic radiosurgery (Gamma Knife, CyberKnife, LINAC), fractionated radiotherapy, proton therapy — dose, fractionation, target delineation, and long-term outcomes including radiation-induced complications.
+
+5. **AI / ML in meningioma research**: Automated segmentation, radiomics signatures for grade prediction, recurrence prediction models, deep learning classifiers, methylation-from-MRI prediction, treatment response prediction. Methodological contributions that push the state of medical image analysis on meningioma cohorts should be scored highly even when not yet clinically deployed.
+
+6. **Medical therapy & liquid biopsy**: Trials of bevacizumab, mTOR inhibitors, SMO inhibitors, and emerging targeted agents; cfDNA / methylation-based liquid biopsies for recurrence monitoring.
+
+7. **Related entities**: Solitary fibrous tumor / hemangiopericytoma (formerly considered meningeal), atypical and anaplastic variants, pediatric meningioma, radiation-induced meningioma.
+
+Down-weight pure case reports without molecular/imaging/AI content, purely veterinary studies, and papers where meningioma is mentioned only as a differential but is not the subject of the paper.
+"""
+
+paywalled_domains = [
+    "jamanetwork.com",
+    "thelancet.com",
+    "cell.com",
+    "nature.com",
+    "science.org",
+    "academic.oup.com",
+    "pubs.rsna.org",
+    "onlinelibrary.wiley.com",
+    "sciencedirect.com",
+    "thejns.org",
+    "link.springer.com",
+]
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = [
+    "mrjinch@gmail.com",
+    "radhika.bhalerao@ucsf.edu",
+    "Andreas.Rauschecker@ucsf.edu",
+    "Pierre.Nedelec@ucsf.edu",
+]

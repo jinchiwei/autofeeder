@@ -53,3 +53,9 @@ slack_webhook = "$CROSS_PROFILE_SLACK_WEBHOOK"
 enabled = true
 path = "seen.json"
 prune_after_days = 90
+
+[sync]
+# Mirror output/ into an Obsidian vault subfolder after every run.
+# Leave vault_path empty to disable.
+vault_path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/jkw_obs"
+subfolder = "臥龍/Autofeeder"

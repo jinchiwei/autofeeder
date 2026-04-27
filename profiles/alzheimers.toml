@@ -10,23 +10,23 @@ list = [
     # === Core Neurology & Dementia Journals ===
     "Alzheimer's & Dementia | https://alz-journals.onlinelibrary.wiley.com/feed/15525279/most-recent",
     "Neurology | https://www.neurology.org/rss/current.xml",
-    "Brain | https://academic.oup.com/rss/site_5504/3369.xml",
+    "Brain (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0372537/?limit=100&name=Brain&utm_campaign=journals",
     "Annals of Neurology | https://onlinelibrary.wiley.com/feed/15318249/most-recent",
     "JAMA Neurology | https://jamanetwork.com/rss/site_12/68.xml",
     "Lancet Neurology | http://www.thelancet.com/rssfeed/laneur_current.xml",
     "Neurobiology of Aging | https://rss.sciencedirect.com/publication/science/01974580",
-    "Alzheimer's Research & Therapy | https://alzres.biomedcentral.com/articles/most-recent/rss.xml",
+    "Alzheimer's Research & Therapy | https://link.springer.com/search.rss?facet-journal-id=13195&channel-name=Alzheimer%27s+Research+%26+Therapy",
     
     # === Neuroimaging Journals ===
     "NeuroImage | https://rss.sciencedirect.com/publication/science/10538119",
     "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
     "Human Brain Mapping | https://onlinelibrary.wiley.com/feed/10970193/most-recent",
     "Radiology | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=radiology",
-    "AJNR - American Journal of Neuroradiology | http://www.ajnr.org/rss/current.xml",
+    "AJNR (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/8003708/?limit=100&name=AJNR%20Am%20J%20Neuroradiol&utm_campaign=journals",
     
     # === Genetics & Genomics ===
     "Nature Genetics | https://www.nature.com/ng.rss",
-    "American Journal of Human Genetics | https://www.cell.com/ajhg/rss",
+    "American Journal of Human Genetics | https://rss.sciencedirect.com/publication/science/00029297",
     "Genome Research | https://genome.cshlp.org/rss/current.xml",
     "PLOS Genetics | https://journals.plos.org/plosgenetics/feed/atom",
     
@@ -34,7 +34,7 @@ list = [
     "Nature Neuroscience | https://www.nature.com/neuro.rss",
     "Nature Medicine | https://www.nature.com/nm.rss",
     "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
-    "Cell | https://www.cell.com/cell/rss",
+    "Cell | https://rss.sciencedirect.com/publication/science/00928674",
     
     # === Preprints ===
     "bioRxiv Neuroscience | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
@@ -43,7 +43,7 @@ list = [
     "medRxiv Genetic & Genomic Medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=genetic_and_genomic_medicine",
     
     # === News & Commentary ===
-    "Alzforum News | https://www.alzforum.org/rss-feeds/news.rss",
+    "Alzforum News | http://feeds.feedburner.com/alzforum/PpcR",
     "STAT News | https://www.statnews.com/feed/",
     
     # === Wildcard / Cross-Disciplinary ===
@@ -138,4 +138,4 @@ min_score = 0.55
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
-recipients = ["mrjinch@gmail.com"]
+recipients = ["mrjinch@gmail.com", "jake.oxendine@ucsf.edu", "Andreas.Rauschecker@ucsf.edu", "Luke.Bonham@ucsf.edu"]

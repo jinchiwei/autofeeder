@@ -470,6 +470,55 @@ async def run_all_profiles_async(profile_paths: list[str], config: dict) -> list
     return [(name, result) for name, result in results if result is not None]
 
 
+def _sync_output_to_vault(config: dict) -> None:
+    """Mirror the output/ directory into an Obsidian vault subfolder.
+
+    Reads ``[sync]`` from config. Silently skipped when ``vault_path`` is empty,
+    the vault path doesn't exist, or there is no output dir to sync.
+    """
+    import shutil
+
+    sync_cfg = config.get("sync", {})
+    vault_path_raw = sync_cfg.get("vault_path", "")
+    if not vault_path_raw:
+        logger.debug("Vault sync skipped — [sync].vault_path is empty")
+        return
+
+    vault_path = Path(vault_path_raw).expanduser()
+    if not vault_path.is_dir():
+        logger.warning("Vault sync skipped — path does not exist: %s", vault_path)
+        return
+
+    output_dir = Path(config.get("output", {}).get("dir", "output"))
+    if not output_dir.is_dir():
+        logger.debug("Vault sync skipped — no output/ directory")
+        return
+
+    subfolder = sync_cfg.get("subfolder", "autofeeder")
+    target_dir = vault_path / subfolder
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    def _skip(_src, names):
+        return [n for n in names if n == ".DS_Store"]
+
+    copied = failed = 0
+    for src in output_dir.iterdir():
+        if src.name.startswith("."):
+            continue
+        dst = target_dir / src.name
+        try:
+            if src.is_dir():
+                shutil.copytree(src, dst, dirs_exist_ok=True, ignore=_skip)
+            else:
+                shutil.copy2(src, dst)
+            copied += 1
+        except OSError as exc:
+            logger.warning("Sync: failed to copy %s → %s: %s", src, dst, exc)
+            failed += 1
+
+    logger.info("Synced output/ → %s (%d ok, %d failed)", target_dir, copied, failed)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="autofeeder — aggregate, score, summarize, and deliver research feeds",
@@ -504,7 +553,7 @@ def main() -> None:
         return
 
     # Default to --all if no mode specified
-    if not args.profile and not args.all and not args.discover and not args.setup:
+    if not args.profile and not args.all and not args.discover and not args.setup and not args.reset:
         args.all = True
 
     # --- Reset mode ---
@@ -604,6 +653,8 @@ def main() -> None:
             sys.exit(1)
 
         run_profile(profile_path, config)
+
+    _sync_output_to_vault(config)
 
     elapsed = time.time() - start_time
     logger.info("Total time: %.1fs", elapsed)

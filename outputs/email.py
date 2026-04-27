@@ -216,7 +216,13 @@ def _build_html(digest_data: dict[str, Any]) -> str:
     return f"""\
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<style>:root {{ color-scheme: dark; }}</style>
+</head>
 <body style="margin:0;padding:0;background:#0d0d1a;color:#eee;font-family:Geist,Helvetica,Arial,sans-serif;">
 <div style="max-width:680px;margin:0 auto;padding:24px;">
 

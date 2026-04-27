@@ -68,6 +68,10 @@ DEFAULTS: dict[str, Any] = {
         "path": "seen.json",
         "prune_after_days": 90,
     },
+    "sync": {
+        "vault_path": "",
+        "subfolder": "autofeeder",
+    },
 }
 
 # ---------------------------------------------------------------------------
