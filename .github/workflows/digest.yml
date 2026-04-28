@@ -29,7 +29,8 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           enable-cache: true
-          cache-dependency-glob: "**/requirements.txt"
+          activate-environment: true
+          no-project: true
 
       - name: Install deps
         run: uv pip install -r requirements.txt
