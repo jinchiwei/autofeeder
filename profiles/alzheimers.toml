@@ -5,6 +5,21 @@
 name = "alzheimers"
 description = "Auto-discovered feeds for: Alzheimer's disease imaging MRI biomarkers genomics"
 
+# Top-level key — MUST sit above the first [section] header (TOML scoping rule).
+paywalled_domains = [
+    "jamanetwork.com",
+    "thelancet.com",
+    "cell.com",
+    "nature.com",
+    "science.org",
+    "academic.oup.com",
+    "pubs.rsna.org",
+    "onlinelibrary.wiley.com",
+    "neurology.org",
+    "ajnr.org",
+    "sciencedirect.com",
+]
+
 [feeds]
 list = [
     # === Core Neurology & Dementia Journals ===
@@ -118,20 +133,6 @@ I am researching the intersection of neuroimaging and genomics in Alzheimer's di
 
 I want to stay current on both cutting-edge research and clinical developments, from large cohort studies (ADNI, UK Biobank) to novel computational methods for image analysis and genetic data integration. Papers applying novel AI/ML methods to AD data should be scored highly even if the primary contribution is methodological rather than clinical.
 """
-
-paywalled_domains = [
-    "jamanetwork.com",
-    "thelancet.com",
-    "cell.com",
-    "nature.com",
-    "science.org",
-    "academic.oup.com",
-    "pubs.rsna.org",
-    "onlinelibrary.wiley.com",
-    "neurology.org",
-    "ajnr.org",
-    "sciencedirect.com",
-]
 
 [overrides]
 min_score = 0.55

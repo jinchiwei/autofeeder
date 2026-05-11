@@ -1,0 +1,182 @@
+# Profile: neuroimaging-ai
+# Scope: ML/DL applied to neuroimaging — foundation models, brain segmentation,
+# registration, harmonization, multimodal (imaging × genomics × clinical),
+# self-supervised / contrastive learning, generative models for MRI,
+# imaging biomarkers, radiogenomics.
+
+name = "neuroimaging-ai"
+description = "ML/DL for neuroimaging: foundation models, brain segmentation, multimodal (imaging × genomics), self-supervised learning, generative models, radiogenomics."
+
+# Top-level key — MUST sit above the first [section] header (TOML scoping rule).
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "thelancet.com",
+    "jamanetwork.com",
+    "academic.oup.com",
+    "onlinelibrary.wiley.com",
+    "link.springer.com",
+    "ieee.org",
+    "pubs.rsna.org",
+    "ajnr.org",
+    "neurology.org",
+    "sciencedirect.com",
+]
+
+[feeds]
+list = [
+    # === arXiv (primary firehose for ML/DL methods) ===
+    "arXiv - eess.IV (image & video processing) | https://rss.arxiv.org/rss/eess.IV",
+    "arXiv - cs.CV (computer vision) | https://rss.arxiv.org/rss/cs.CV",
+    "arXiv - cs.LG (machine learning) | https://rss.arxiv.org/rss/cs.LG",
+    "arXiv - q-bio.NC (neurons & cognition) | https://rss.arxiv.org/rss/q-bio.NC",
+    "arXiv - q-bio.QM (quantitative methods) | https://rss.arxiv.org/rss/q-bio.QM",
+
+    # === Preprints (biomedical) ===
+    "bioRxiv - neuroscience | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
+    "bioRxiv - bioinformatics | http://connect.biorxiv.org/biorxiv_xml.php?subject=bioinformatics",
+    "medRxiv - radiology & imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
+    "medRxiv - neurology | http://connect.medrxiv.org/medrxiv_xml.php?subject=neurology",
+    "medRxiv - genetic & genomic medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=genetic_and_genomic_medicine",
+
+    # === Journals — neuroimaging / medical imaging methods ===
+    "NeuroImage | https://rss.sciencedirect.com/publication/science/10538119",
+    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
+    "Medical Image Analysis | https://rss.sciencedirect.com/publication/science/13618415",
+    "Radiology: AI (RSNA) | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=ai",
+    "Radiology (RSNA) | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=radiology",
+    "AJNR | http://www.ajnr.org/rss/current.xml",
+
+    # === Journals — high-impact w/ neuro/AI overlap ===
+    "Nature Methods | https://www.nature.com/nmeth.rss",
+    "Nature Biomedical Engineering | https://www.nature.com/natbiomedeng.rss",
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "Cell | https://www.cell.com/cell/rss",
+    "Cell Reports Medicine | https://www.cell.com/cell-reports-medicine/rss",
+
+    # === Industry / research blogs (foundation models, tooling) ===
+    "Hugging Face Daily Papers | https://huggingface.co/papers.atom",
+    "Anthropic Research | https://www.anthropic.com/research/rss.xml",
+    "Google AI Blog | https://blog.google/technology/ai/rss/",
+
+    # === Specialist news / community ===
+    "Alzforum - News | https://www.alzforum.org/rss-feeds/news.rss",
+]
+
+[interests]
+keywords = [
+    # Foundation models for medical / brain imaging
+    "foundation model medical imaging",
+    "foundation model brain MRI",
+    "foundation model radiology",
+    "vision language model radiology",
+    "RadFM",
+    "MedSAM",
+    "BrainSAM",
+    "SAM medical imaging",
+    "M3D foundation model",
+
+    # Segmentation
+    "brain segmentation deep learning",
+    "nnU-Net",
+    "MONAI",
+    "FastSurfer",
+    "SynthSeg",
+    "brain tumor segmentation",
+    "BraTS",
+    "white matter lesion segmentation",
+    "white matter hyperintensity deep learning",
+    "atlas-based segmentation deep learning",
+    "skull stripping deep learning",
+
+    # Self-supervised / contrastive learning
+    "self-supervised learning medical imaging",
+    "contrastive learning brain MRI",
+    "masked autoencoder MRI",
+    "DINO medical imaging",
+
+    # Generative / diffusion / harmonization
+    "diffusion model brain MRI",
+    "generative model MRI",
+    "MRI harmonization deep learning",
+    "scanner harmonization neuroimaging",
+    "image-to-image translation MRI",
+
+    # Multimodal / radiogenomics
+    "imaging genomics deep learning",
+    "radiogenomics deep learning",
+    "multimodal brain MRI genomics",
+    "multimodal radiology clinical text",
+    "vision language brain imaging",
+
+    # Functional / diffusion MRI
+    "fMRI deep learning",
+    "functional connectivity deep learning",
+    "diffusion MRI deep learning",
+    "tractography deep learning",
+    "brain encoding model deep learning",
+
+    # Applications: prediction / biomarkers
+    "brain age prediction MRI",
+    "Alzheimer prediction MRI deep learning",
+    "amyloid PET deep learning",
+    "tau PET deep learning",
+    "biomarker discovery neuroimaging deep learning",
+
+    # Registration / atlas
+    "deep learning image registration",
+    "atlas construction deep learning brain",
+
+    # Population imaging / scaling
+    "UK Biobank brain MRI deep learning",
+    "ADNI deep learning",
+    "OASIS deep learning",
+    "population imaging foundation model",
+
+    # Method evaluation / robustness
+    "domain adaptation MRI",
+    "transfer learning medical imaging",
+    "few-shot medical image segmentation",
+    "uncertainty estimation medical imaging",
+    "robustness medical image segmentation",
+]
+
+narrative = """
+Track ML/DL research applied to neuroimaging across modalities (structural MRI, fMRI, diffusion MRI, PET) and across the methodological stack (segmentation, registration, harmonization, generative, multimodal, foundation models).
+
+HIGH PRIORITY — score highly when they occur:
+- New foundation models for medical imaging or specifically brain MRI/CT/PET. Especially open-weights releases, novel pretraining strategies on large brain imaging corpora (UK Biobank, ADNI, ENIGMA), and vision-language models trained on radiology reports + images. Examples: MedSAM, BrainSAM, RadFM, RadiologyGPT, M3D, Tx-LLM, RadDINO, BiomedCLIP for brain.
+- Brain segmentation breakthroughs: new architectures (transformer-based, diffusion-based), new training paradigms (self-supervised, prompted/SAM-style), domain generalization across scanners/sites, segmentation of subtle lesions (WMH, microbleeds, microinfarcts).
+- Multimodal models combining brain imaging with: genomics (imaging genomics, radiogenomics), clinical text (reports, EHR), longitudinal time-series, or molecular data (PET tracers). Especially when they enable prediction tasks that single-modality models couldn't.
+- Generative models for brain MRI: diffusion models, GANs, flow-based models used for harmonization, super-resolution, modality translation, data augmentation, or counterfactual generation.
+- Tool releases that change practice: MONAI updates, nnU-Net derivatives, FastSurfer/SynthSeg updates, new open-source pipelines for brain imaging analysis.
+- Scaling/sample-efficiency studies: how performance scales with pretraining data size, how few-shot adapts to new sites/scanners, how foundation models transfer to neuroimaging downstream tasks.
+
+ALSO TRACK:
+- Image registration deep learning (deformable, intra-/inter-modal, atlas construction).
+- Functional connectivity / brain encoding models using deep learning.
+- Diffusion MRI methods (tractography, microstructure, fixel-based).
+- Brain age prediction and other "biomarker" prediction tasks.
+- Population-scale imaging studies (UK Biobank, ADNI, OASIS, HCP, ABCD) that apply deep learning, especially when they reveal something biological.
+- Robustness, harmonization across scanners/sites, fairness across demographics.
+- Uncertainty estimation, calibration, evaluation methodology for medical imaging.
+- Conference proceedings from MICCAI, MIDL, IPMI, ISBI, NeurIPS, ICLR, ICML when topic-relevant (these often appear on arXiv first).
+- New benchmarks and evaluation suites for medical imaging.
+
+DE-PRIORITIZE:
+- Pure NLP/LLM frontier research without an imaging component (that's the frontier-ai feed).
+- General computer vision on natural images (ImageNet, COCO) unless directly transferable to medical imaging.
+- Hardware reviews, gaming GPU benchmarks, consumer AI product launches.
+- Pure neuroscience papers (no ML/DL component).
+- Clinical case series / retrospective chart reviews without a deep learning method.
+- Pure software engineering / framework release notes without methodological substance.
+- Generic radiology news without research content.
+"""
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "Andreas.Rauschecker@ucsf.edu"]

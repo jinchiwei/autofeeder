@@ -5,6 +5,16 @@
 name = "china-geopolitics"
 description = "Auto-discovered feeds for: Chinese politics geopolitics US-China relations Taiwan South China Sea Xi Jinping CCP foreign policy diplomacy military NPC National People's Congress Two Sessions Government Work Report Five-Year Plan PLA military modernization Indo-Pacific AUKUS Quad semiconductor export controls Belt and Road Xinjiang Hong Kong"
 
+# Top-level key — MUST sit above the first [section] header (TOML scoping rule).
+paywalled_domains = [
+    "scmp.com",
+    "ft.com",
+    "bloomberg.com",
+    "nikkei.com",
+    "caixinglobal.com",
+    "wsj.com",
+]
+
 [feeds]
 list = [
     # === Wire Services & Breaking News ===
@@ -115,15 +125,6 @@ ALSO TRACK:
 
 De-prioritize: routine consular notices, cultural exchange events without political significance, individual business deals without strategic implications, generic Asia tourism content, and semiconductor news that is purely consumer/retail focused (e.g., GPU gaming benchmarks) with no geopolitical or supply chain dimension.
 """
-
-paywalled_domains = [
-    "scmp.com",
-    "ft.com",
-    "bloomberg.com",
-    "nikkei.com",
-    "caixinglobal.com",
-    "wsj.com",
-]
 
 [overrides]
 min_score = 0.50
