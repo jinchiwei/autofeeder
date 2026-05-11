@@ -57,5 +57,5 @@ prune_after_days = 90
 [sync]
 # Mirror output/ into an Obsidian vault subfolder after every run.
 # Leave vault_path empty to disable.
-vault_path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/jkw_obs"
+vault_path = "~/arcadia/jkw_dm"
 subfolder = "臥龍/Autofeeder"
