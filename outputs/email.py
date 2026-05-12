@@ -6,11 +6,139 @@ Resend transactional email API.  Shows TL;DR + top 5-8 items.
 
 from __future__ import annotations
 
+import datetime as dt
+import json
 import logging
 import os
+from pathlib import Path
 from typing import Any
 
 import httpx
+
+_WEEKDAY_NAMES = {
+    "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+    "friday": 4, "saturday": 5, "sunday": 6,
+}
+
+
+def _split_cohorts(
+    recipients: list[str], config: dict[str, Any], today: dt.date | None = None,
+) -> tuple[list[str], list[str], bool]:
+    """Split a profile's `recipients` list into (daily_cohort, weekly_cohort, is_weekly_day).
+
+    daily_cohort = addresses in config[cadence][daily_only] (always emailed).
+    weekly_cohort = all other addresses (only emailed on weekly_day).
+    Case-insensitive match; preserves original order.
+
+    When [cadence] is absent or daily_only is empty, everyone is treated as
+    daily_cohort (backward-compatible: every recipient gets every email).
+    """
+    cadence = config.get("cadence", {})
+    daily_only_raw = cadence.get("daily_only", [])
+    today = today or dt.date.today()
+    weekly_day_str = str(cadence.get("weekly_day", "monday")).lower().strip()
+    weekly_day = _WEEKDAY_NAMES.get(weekly_day_str, 0)
+    is_weekly_day = today.weekday() == weekly_day
+    if not daily_only_raw:
+        return recipients, [], is_weekly_day
+    daily_only = {a.lower().strip() for a in daily_only_raw}
+    daily_cohort = [r for r in recipients if r.lower() in daily_only]
+    weekly_cohort = [r for r in recipients if r.lower() not in daily_only]
+    return daily_cohort, weekly_cohort, is_weekly_day
+
+
+def _collate_week_digest(
+    profile_name: str, today: dt.date, output_dir: Path, days: int = 7,
+) -> dict[str, Any] | None:
+    """Build a past-week digest by merging JSON sidecars from the last `days` days.
+
+    Reads `output/{profile_name}/YYYY-MM-DD.json` for each of the last N days,
+    merges items (dedup by link / url / title — first occurrence wins), and
+    score-ranks the result. Returns None if no sidecars are found.
+
+    The returned dict matches the digest_data shape consumed by _build_html.
+    """
+    profile_dir = output_dir / profile_name
+    if not profile_dir.is_dir():
+        return None
+
+    seen: set[str] = set()
+    merged_items: list[dict[str, Any]] = []
+    daily_tldrs: list[tuple[str, str]] = []
+    source_dates: list[str] = []
+
+    for offset in range(days):
+        d = today - dt.timedelta(days=offset)
+        sidecar = profile_dir / f"{d.isoformat()}.json"
+        if not sidecar.is_file():
+            continue
+        try:
+            data = json.loads(sidecar.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            logger.warning("Skipping unreadable sidecar %s: %s", sidecar, exc)
+            continue
+        source_dates.append(d.isoformat())
+        if data.get("tldr"):
+            daily_tldrs.append((d.isoformat(), data["tldr"]))
+        for item in data.get("items", []):
+            key = (item.get("link") or item.get("url") or item.get("title") or "").strip()
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            merged_items.append(item)
+
+    if not source_dates:
+        return None
+
+    merged_items.sort(key=lambda it: it.get("score", 0.0), reverse=True)
+    daily_tldrs.sort(key=lambda dt_: dt_[0])  # chronological
+
+    week_label = f"week of {min(source_dates)} – {today.isoformat()}"
+    if daily_tldrs:
+        tldr_body = "\n\n".join(f"**{d}:** {t}" for d, t in daily_tldrs)
+        weekly_tldr = (
+            f"Past-week digest collated from {len(source_dates)} daily run(s).\n\n"
+            + tldr_body
+        )
+    else:
+        weekly_tldr = f"Past-week digest collated from {len(source_dates)} daily run(s)."
+
+    return {
+        "profile_name": profile_name,
+        "date": week_label,
+        "items": merged_items,
+        "tldr": weekly_tldr,
+        "min_score": 0.0,
+        "is_first_run": False,
+    }
+
+
+def _send_one(
+    *, api_key: str, from_addr: str, recipients: list[str],
+    subject: str, html_body: str,
+) -> None:
+    """Single Resend POST. Logs but never raises."""
+    payload = {"from": from_addr, "to": recipients, "subject": subject, "html": html_body}
+    logger.info(
+        "Sending '%s' to %d recipient(s): %s",
+        subject, len(recipients), ", ".join(recipients),
+    )
+    try:
+        resp = httpx.post(
+            _RESEND_URL,
+            json=payload,
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            timeout=30.0,
+        )
+        if resp.status_code in (200, 201):
+            logger.info("Email sent successfully (status %d)", resp.status_code)
+        else:
+            logger.error("Resend API returned %d: %s", resp.status_code, resp.text[:500])
+    except httpx.HTTPError:
+        logger.exception("Failed to send email via Resend API")
 
 logger = logging.getLogger("autofeeder")
 
@@ -265,19 +393,17 @@ def publish(
 ) -> None:
     """Send the digest as an HTML email via the Resend API.
 
-    Reads recipients from ``profile["outputs"]["email"]["recipients"]`` and
-    the API key from the ``RESEND_API_KEY`` environment variable.
+    Two cohorts derived from config[cadence]:
+      - daily_cohort (addresses in cadence.daily_only): receive today's digest
+        on every run.
+      - weekly_cohort (everyone else): receive a *past-week collated* digest
+        on cadence.weekly_day, built from the past 7 JSON sidecars so they see
+        everything the daily-cohort saw during the week.
 
-    Skips silently (with a log message) if recipients or the API key are
-    not configured.  Does not send if the digest contains no items.
-    HTTP errors are logged but never raised.
+    Skips silently (with a log message) when recipients / API key / items are
+    missing. HTTP errors are logged but never raised.
     """
-    # Don't send email if no items
     items = digest_data.get("items", [])
-    if not items:
-        logger.info("Email output skipped — no items in digest, nothing to send")
-        return
-
     email_cfg = profile.get("outputs", {}).get("email", {})
     recipients: list[str] = email_cfg.get("recipients", [])
 
@@ -290,42 +416,39 @@ def publish(
         logger.info("Email output skipped — RESEND_API_KEY not set")
         return
 
-    profile_name = digest_data.get("profile_name", "unknown")
-    date = digest_data.get("date", "unknown")
-    subject = f"autofeeder: {profile_name} digest — {date}"
-
-    html_body = _build_html(digest_data)
-
     from_addr = email_cfg.get("from", "autofeeder <digest@autofeeder.dev>")
+    profile_name = digest_data.get("profile_name", "unknown")
+    daily_cohort, weekly_cohort, is_weekly_day = _split_cohorts(recipients, config)
 
-    payload = {
-        "from": from_addr,
-        "to": recipients,
-        "subject": subject,
-        "html": html_body,
-    }
-
-    logger.info(
-        "Sending email digest to %d recipient(s): %s",
-        len(recipients),
-        ", ".join(recipients),
-    )
-
-    try:
-        resp = httpx.post(
-            _RESEND_URL,
-            json=payload,
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            },
-            timeout=30.0,
+    # --- Daily cohort: today's digest (skip when there are no items) ---
+    if daily_cohort and items:
+        subject = f"autofeeder: {profile_name} digest — {digest_data.get('date', 'unknown')}"
+        _send_one(
+            api_key=api_key, from_addr=from_addr, recipients=daily_cohort,
+            subject=subject, html_body=_build_html(digest_data),
         )
-        if resp.status_code in (200, 201):
-            logger.info("Email sent successfully (status %d)", resp.status_code)
-        else:
-            logger.error(
-                "Resend API returned %d: %s", resp.status_code, resp.text[:500]
-            )
-    except httpx.HTTPError:
-        logger.exception("Failed to send email via Resend API")
+    elif daily_cohort and not items:
+        logger.info("Daily cohort skipped — no items in today's digest")
+
+    # --- Weekly cohort: past-week collated digest, only on weekly_day ---
+    if not weekly_cohort:
+        return
+    if not is_weekly_day:
+        logger.info(
+            "Weekly cohort (%d recipient(s)) skipped — not weekly_day yet",
+            len(weekly_cohort),
+        )
+        return
+    output_dir = Path(config.get("output", {}).get("dir", "output"))
+    weekly = _collate_week_digest(profile_name, dt.date.today(), output_dir, days=7)
+    if not weekly or not weekly["items"]:
+        logger.info(
+            "Weekly cohort skipped — no items found in past 7 daily sidecars for %s",
+            profile_name,
+        )
+        return
+    subject = f"autofeeder: {profile_name} weekly — {weekly['date']}"
+    _send_one(
+        api_key=api_key, from_addr=from_addr, recipients=weekly_cohort,
+        subject=subject, html_body=_build_html(weekly),
+    )

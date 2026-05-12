@@ -249,3 +249,14 @@ def publish(
     except OSError:
         logger.exception("Failed to write markdown digest to %s", out_path)
         raise
+
+    # JSON sidecar — structured copy of digest_data for downstream consumers
+    # (e.g. the email publisher's weekly collator reads past N daily JSONs).
+    # default=str handles any stray datetime / Path objects in the dict.
+    import json as _json
+    sidecar = out_path.with_suffix(".json")
+    try:
+        sidecar.write_text(_json.dumps(digest_data, default=str, indent=2), encoding="utf-8")
+    except (OSError, TypeError) as exc:
+        # Non-fatal — markdown is the source of truth, sidecar is a convenience.
+        logger.warning("JSON sidecar write failed for %s: %s", sidecar, exc)

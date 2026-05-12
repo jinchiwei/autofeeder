@@ -59,3 +59,12 @@ prune_after_days = 90
 # Leave vault_path empty to disable.
 vault_path = "~/arcadia/jkw_dm"
 subfolder = "臥龍/Autofeeder"
+
+[cadence]
+# Email-recipient cadence filter (applied across ALL profiles).
+# Addresses in `daily_only` get every digest. Every OTHER address listed in a
+# profile's outputs.email.recipients only receives mail when today's weekday
+# matches `weekly_day`. Case-insensitive match.
+# weekly_day accepts: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+daily_only = ["mrjinch@gmail.com"]
+weekly_day = "monday"
