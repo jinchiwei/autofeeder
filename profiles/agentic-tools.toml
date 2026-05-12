@@ -61,92 +61,89 @@ list = [
 [interests]
 # Atomic terms for the substring-match prefilter. Substrings only — phrases
 # fine, but each item must be a literal string the prefilter can find in
-# titles + RSS summaries. Rich descriptive guidance lives in `narrative` below.
+# titles + RSS summaries. Concepts only — no specific tool / brand names, so
+# the profile doesn't go stale as the landscape shifts. New tools surface
+# organically via descriptive posts that match the narrative's categories.
 keywords = [
-    # === Named tools (high-precision triggers) ===
-    "gstack",
-    "superpowers",
-    "warp",
-    "cmux",
-    "aerospace",
-    "feynman",
-    "claude code",
-    "claude-code",
-    "codex",
-    "cursor",
-    "windsurf",
-    "cline",
-    "aider",
-    "continue.dev",
-    "amp",
-    "goose",
-    "opencode",
-    "roo code",
-    "obsidian",
-
-    # === Agentic dev concepts ===
-    "MCP",
-    "Model Context Protocol",
-    "MCP server",
+    # === Agent / coding-assistant concepts ===
     "AI coding agent",
     "coding agent",
     "agentic coding",
     "agentic development",
     "agent loop",
     "agent SDK",
-    "subagent",
     "agent framework",
+    "agent orchestration",
+    "subagent",
     "AI IDE",
     "AI pair programming",
+    "headless coding",
+    "autonomous agent",
+    "vibecoding",
+    "vibe coding",
+
+    # === Agent / tool-use protocol concepts ===
+    "MCP",
+    "Model Context Protocol",
+    "MCP server",
+    "MCP client",
     "tool use",
+    "tool calling",
     "computer use",
     "skill",
     "slash command",
-    "headless coding",
-    "autonomous agent",
 
-    # === Productivity / brain-building adjacent ===
+    # === Terminal / window / dev-environment concepts ===
     "tiling window manager",
     "terminal multiplexer",
+    "TUI",
+    "developer experience",
+
+    # === Brain-building / PKM concepts ===
     "second brain",
     "PKM",
     "knowledge management",
     "note-taking",
     "personal knowledge",
+    "knowledge graph",
+    "zettelkasten",
 ]
 
 narrative = """
-This feed is about TOOLS, not about LLM frontier news. The goal: surface software that makes agentic coding better, makes AI usable in new ways for development, or augments a thinking/building workflow (terminal stack, window manager, second brain). NOT about model benchmarks, RLHF papers, or LLM safety debates — that's the frontier-ai feed.
+This feed is about TOOLS, not about LLM frontier news. The goal: surface software that makes agentic coding better, enables AI to be used in new ways for development, or augments a thinking/building workflow (terminal stack, window manager, second brain). NOT about model benchmarks, RLHF papers, or LLM safety debates — that's the frontier-ai feed.
+
+Important: NO specific brand or product names appear in the keyword list or this narrative. Score items by *category fit* — does the thing being discussed belong in the buckets below? — not by name match. New tools should rise organically when they're described well; established tools surface via their own GitHub releases feeds (already subscribed).
 
 SURFACE HIGH (score ≥ 0.70):
-- New tools in the named set or close kin: gstack, superpowers (Obra), Warp, cmux (Manaflow), AeroSpace (tiling WM for macOS), Feynman (research agent), Claude Code, Codex CLI, Cursor, Windsurf, Cline, Aider, Continue, OpenCode, Sourcegraph Amp, Block's Goose, Roo Code, MCP servers.
-- New patterns/workflows for agentic dev: novel skill / slash-command setups, multi-agent orchestration patterns, agent-loop architectures, headless agent infra, "subagent-driven development", new ways to use Claude Code or Codex non-obviously.
-- New MCP servers — especially ones that unlock a class of capability (browser control, obsidian/note-taking, calendar, code review, sandbox/eval).
-- Productivity / brain-building tools that pair with this stack: tiling window managers (AeroSpace, yabai), terminal stacks (Warp, Ghostty, WezTerm, Zellij, tmux configs), obsidian plugins / PKM workflows that are clearly agent-adjacent (second brain, daily review, knowledge graphs).
-- Honest writeups about real workflows ("I built X with Claude Code and here's what broke") from credible builders. Prefer specifics + screenshots / repos over abstract opinion pieces.
+- A new tool — CLI, IDE plugin, desktop app, agent runner, MCP server — built to make agentic coding better. Especially when the post describes what it does and why it's different (a concrete capability, workflow, or design choice), not just "we launched". Brand-new niche tools count: score the *idea*, not the recognition.
+- New MCP servers — especially ones that unlock a *class* of capability (browser control, note-taking / second-brain access, calendar, code review, sandbox / eval, database introspection). Even small / one-person MCP server releases qualify if the capability is novel.
+- Novel patterns / workflows for agentic dev: skill / slash-command setups, multi-agent orchestration, subagent-driven dev, agent loops, headless agent infra, sandbox / eval architectures, prompt-cache strategies, agent-aware version control. Patterns are worth as much as tools.
+- Honest builder writeups: "I built X this weekend and here's what broke," "we moved our team to Y and here are the failure modes," workflow tours with screenshots / repos. Prefer specifics over abstract opinion pieces.
+- Productivity stack pieces that pair with agentic coding: tiling window managers, terminal stacks (alt-shells, GPU-accelerated terminals, multiplexers), keyboard-driven launchers, note-taking apps with agent-aware features.
+- PKM / second-brain workflows that are clearly agent-adjacent: daily review automation, note synthesis via LLMs, knowledge-graph extraction, agent-driven study / research workflows.
 
 ALSO TRACK (score 0.5-0.7):
-- Substantive blog posts from tool makers explaining a design decision, capability, or roadmap shift.
+- Substantive blog posts from tool makers explaining a design decision, capability, or roadmap shift — even when the tool itself is well-known.
 - Tutorials / walkthroughs that teach a new technique, not just rehash an announcement.
-- Lobsters / HN discussion threads where the comments add real signal beyond the headline.
-- Obsidian plugin releases when they're agent-aware or knowledge-graph-related (not generic UI tweaks).
+- Lobsters / HN discussion threads where comments add real signal beyond the headline (especially when commenters share their own workflows).
+- Plugin / extension releases for note-taking apps when they're agent-aware or knowledge-graph-related (not generic UI tweaks).
 - Conference talks / podcast episodes where a builder demos something concrete.
 
 SCORE DOWN (≤ 0.4) OR EXCLUDE:
-- Routine version-bump release notes — "Claude Code v2.1.139", "Codex 0.x.y", "Cursor 0.x.y" with bullet-point bug fixes and no headline capability. SCORE LOW unless the release adds a major capability (new model, new sandboxing/computer-use paradigm, new install method, new agent loop). The 2.1.x firehose is the noise you want filtered out.
+- Routine version-bump release notes — a coding agent or AI IDE shipping a `vX.Y.Z` with bullet-point bug fixes and no headline capability. SCORE LOW unless the release adds a major capability (new model, new sandboxing / computer-use paradigm, new install method, new agent loop, new MCP capability, new computer-use leap). The micro-version-bump firehose is the noise to filter out.
 - Generic LLM news: new model size, benchmark scores, foundation-model releases, RLHF / alignment papers, AI safety debates, vendor pricing changes. Those belong in frontier-ai.
 - Hardware reviews, GPU benchmarks, datacenter / inference cost analysis.
-- Cursor-vs-Claude-vs-Copilot ranking opinion pieces without a concrete new tool / pattern.
-- AI hype takes ("this changes everything"), AGI timelines, doomer/accelerationist debates.
+- "Which AI coding tool is best" ranking opinion pieces without a concrete new tool, pattern, or insight.
+- AI hype takes ("this changes everything"), AGI timelines, doomer / accelerationist debates.
 - Generic productivity advice not tied to a tool or workflow ("how to focus").
 
 MAJOR EXCEPTIONS that DO belong:
-- A major Claude Code or Codex release that changes how you'd use the tool (new model architecture for agent use, new MCP capability, native installer redesign, computer-use leap). Score high. The dividing line: "would I want to install this immediately?" yes = surface; no = noise.
-- A new Anthropic / OpenAI announcement that introduces a primitive the agent ecosystem will build on (Computer Use, MCP launch, Skills, Memory API).
+- A major release from any agent CLI / AI IDE / coding-assistant platform that introduces a substantive new capability — new model architecture for agent use, new MCP capability, native installer redesign, computer-use leap, sandbox model. The dividing line: "would I want to install this immediately?" yes = surface; no = noise.
+- A new platform-level announcement that introduces a primitive the wider agent ecosystem will build on (e.g., a new tool-use protocol, a new computer-use API, a new agent-memory API, a new skills / plugin standard).
 
 DEFAULTS:
-- When in doubt about a tool you've never heard of: score ~0.5 and let the LLM brief explain what it is. Better to surface a new thing once than miss it.
-- When a tool name in the keyword list appears but the post is about something unrelated (rare), score by actual content not name match.
+- When in doubt about a tool you've never heard of, score ~0.5 and let the LLM brief explain what it is. Better to surface a new thing once than miss it.
+- Score by what the item actually describes, not by superficial keyword match. A generic post that happens to mention an agent-CLI tool in passing should NOT score high; a post that genuinely describes a new agentic-coding workflow / tool SHOULD score high even if it doesn't trigger any keyword.
 """
 
 [overrides]
