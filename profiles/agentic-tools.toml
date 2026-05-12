@@ -1,0 +1,157 @@
+# Profile: agentic-tools
+# Scope: tools and meta-tools for agentic / AI-assisted development — terminal
+# multiplexers for AI agents, agent CLIs, AI IDEs, MCP ecosystem, productivity
+# tools that orbit this work (tiling window managers, PKM / second-brain
+# tooling, etc.). Excludes generic LLM news + routine version bumps.
+
+name = "agentic-tools"
+description = "Tools for agentic development: gstack, superpowers, warp, cmux, aerospace, feynman, MCP servers, AI IDEs, PKM/Obsidian, plus MAJOR Claude/Codex updates only."
+
+# No paywalled blogs in this space — most updates are GitHub releases, dev
+# blogs, HN, Lobsters. Empty list is fine; LLM still gets full RSS summaries.
+paywalled_domains = []
+
+[feeds]
+list = [
+    # === GitHub releases for the named tools (firehose, narrative scores down routine bumps) ===
+    "gstack releases | https://github.com/garrytan/gstack/releases.atom",
+    "Superpowers releases | https://github.com/obra/superpowers/releases.atom",
+    "cmux releases | https://github.com/manaflow-ai/cmux/releases.atom",
+    "AeroSpace releases | https://github.com/nikitabobko/AeroSpace/releases.atom",
+    "Feynman releases | https://github.com/companion-inc/feynman/releases.atom",
+    "Claude Code releases | https://github.com/anthropics/claude-code/releases.atom",
+    "Codex CLI releases | https://github.com/openai/codex/releases.atom",
+    "Aider releases | https://github.com/Aider-AI/aider/releases.atom",
+    "Cline releases | https://github.com/cline/cline/releases.atom",
+    "Continue releases | https://github.com/continuedev/continue/releases.atom",
+    "OpenCode releases | https://github.com/sst/opencode/releases.atom",
+    "Sourcegraph Amp releases | https://github.com/sourcegraph/amp/releases.atom",
+    "Goose releases | https://github.com/block/goose/releases.atom",
+    "Roo Code releases | https://github.com/RooCodeInc/Roo-Code/releases.atom",
+
+    # === Official blogs (filtered toward MAJOR announcements via narrative) ===
+    "Anthropic News | https://www.anthropic.com/news/rss.xml",
+    "Anthropic Research | https://www.anthropic.com/research/rss.xml",
+    "Cursor Blog | https://www.cursor.com/blog/rss.xml",
+    "Warp Blog | https://www.warp.dev/blog/rss.xml",
+
+    # === Individual voices that consistently surface real tools (not noise) ===
+    "Simon Willison | https://simonwillison.net/atom/everything/",
+    "Andrej Karpathy | https://karpathy.github.io/feed.xml",
+
+    # === Newsletters / podcasts that cover this space ===
+    "Latent Space | https://www.latent.space/feed",
+    "Pragmatic Engineer | https://newsletter.pragmaticengineer.com/feed",
+
+    # === Hacker News — focused queries, high-points threshold to filter noise ===
+    "HN — AI coding tools | https://hnrss.org/newest?q=ai+coding+tool+OR+coding+agent+OR+ai+ide&points=100",
+    "HN — MCP & agent infra | https://hnrss.org/newest?q=mcp+server+OR+model+context+protocol+OR+agent+framework&points=75",
+    "HN — terminal / CLI tools | https://hnrss.org/newest?q=terminal+OR+tui+OR+cli+tool+OR+tmux&points=100",
+    "HN — second brain / PKM | https://hnrss.org/newest?q=second+brain+OR+pkm+OR+obsidian&points=75",
+
+    # === Lobsters — devtools-tagged + AI-tagged ===
+    "Lobsters — devtools | https://lobste.rs/t/devtools.rss",
+    "Lobsters — ai | https://lobste.rs/t/ai.rss",
+
+    # === Obsidian / PKM ecosystem (concept-relevant per user's interest) ===
+    "Obsidian Releases | https://github.com/obsidianmd/obsidian-releases/releases.atom",
+    "r/ObsidianMD — top week | https://www.reddit.com/r/ObsidianMD/top/.rss?t=week",
+]
+
+[interests]
+# Atomic terms for the substring-match prefilter. Substrings only — phrases
+# fine, but each item must be a literal string the prefilter can find in
+# titles + RSS summaries. Rich descriptive guidance lives in `narrative` below.
+keywords = [
+    # === Named tools (high-precision triggers) ===
+    "gstack",
+    "superpowers",
+    "warp",
+    "cmux",
+    "aerospace",
+    "feynman",
+    "claude code",
+    "claude-code",
+    "codex",
+    "cursor",
+    "windsurf",
+    "cline",
+    "aider",
+    "continue.dev",
+    "amp",
+    "goose",
+    "opencode",
+    "roo code",
+    "obsidian",
+
+    # === Agentic dev concepts ===
+    "MCP",
+    "Model Context Protocol",
+    "MCP server",
+    "AI coding agent",
+    "coding agent",
+    "agentic coding",
+    "agentic development",
+    "agent loop",
+    "agent SDK",
+    "subagent",
+    "agent framework",
+    "AI IDE",
+    "AI pair programming",
+    "tool use",
+    "computer use",
+    "skill",
+    "slash command",
+    "headless coding",
+    "autonomous agent",
+
+    # === Productivity / brain-building adjacent ===
+    "tiling window manager",
+    "terminal multiplexer",
+    "second brain",
+    "PKM",
+    "knowledge management",
+    "note-taking",
+    "personal knowledge",
+]
+
+narrative = """
+This feed is about TOOLS, not about LLM frontier news. The goal: surface software that makes agentic coding better, makes AI usable in new ways for development, or augments a thinking/building workflow (terminal stack, window manager, second brain). NOT about model benchmarks, RLHF papers, or LLM safety debates — that's the frontier-ai feed.
+
+SURFACE HIGH (score ≥ 0.70):
+- New tools in the named set or close kin: gstack, superpowers (Obra), Warp, cmux (Manaflow), AeroSpace (tiling WM for macOS), Feynman (research agent), Claude Code, Codex CLI, Cursor, Windsurf, Cline, Aider, Continue, OpenCode, Sourcegraph Amp, Block's Goose, Roo Code, MCP servers.
+- New patterns/workflows for agentic dev: novel skill / slash-command setups, multi-agent orchestration patterns, agent-loop architectures, headless agent infra, "subagent-driven development", new ways to use Claude Code or Codex non-obviously.
+- New MCP servers — especially ones that unlock a class of capability (browser control, obsidian/note-taking, calendar, code review, sandbox/eval).
+- Productivity / brain-building tools that pair with this stack: tiling window managers (AeroSpace, yabai), terminal stacks (Warp, Ghostty, WezTerm, Zellij, tmux configs), obsidian plugins / PKM workflows that are clearly agent-adjacent (second brain, daily review, knowledge graphs).
+- Honest writeups about real workflows ("I built X with Claude Code and here's what broke") from credible builders. Prefer specifics + screenshots / repos over abstract opinion pieces.
+
+ALSO TRACK (score 0.5-0.7):
+- Substantive blog posts from tool makers explaining a design decision, capability, or roadmap shift.
+- Tutorials / walkthroughs that teach a new technique, not just rehash an announcement.
+- Lobsters / HN discussion threads where the comments add real signal beyond the headline.
+- Obsidian plugin releases when they're agent-aware or knowledge-graph-related (not generic UI tweaks).
+- Conference talks / podcast episodes where a builder demos something concrete.
+
+SCORE DOWN (≤ 0.4) OR EXCLUDE:
+- Routine version-bump release notes — "Claude Code v2.1.139", "Codex 0.x.y", "Cursor 0.x.y" with bullet-point bug fixes and no headline capability. SCORE LOW unless the release adds a major capability (new model, new sandboxing/computer-use paradigm, new install method, new agent loop). The 2.1.x firehose is the noise you want filtered out.
+- Generic LLM news: new model size, benchmark scores, foundation-model releases, RLHF / alignment papers, AI safety debates, vendor pricing changes. Those belong in frontier-ai.
+- Hardware reviews, GPU benchmarks, datacenter / inference cost analysis.
+- Cursor-vs-Claude-vs-Copilot ranking opinion pieces without a concrete new tool / pattern.
+- AI hype takes ("this changes everything"), AGI timelines, doomer/accelerationist debates.
+- Generic productivity advice not tied to a tool or workflow ("how to focus").
+
+MAJOR EXCEPTIONS that DO belong:
+- A major Claude Code or Codex release that changes how you'd use the tool (new model architecture for agent use, new MCP capability, native installer redesign, computer-use leap). Score high. The dividing line: "would I want to install this immediately?" yes = surface; no = noise.
+- A new Anthropic / OpenAI announcement that introduces a primitive the agent ecosystem will build on (Computer Use, MCP launch, Skills, Memory API).
+
+DEFAULTS:
+- When in doubt about a tool you've never heard of: score ~0.5 and let the LLM brief explain what it is. Better to surface a new thing once than miss it.
+- When a tool name in the keyword list appears but the post is about something unrelated (rare), score by actual content not name match.
+"""
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]
