@@ -41,6 +41,35 @@ from outputs import publish_all
 logger = logging.getLogger("autofeeder")
 
 
+def _preflight_llm_endpoint(timeout: float = 5.0) -> tuple[bool, str]:
+    """Quick TCP probe of the LLM endpoint so we fail fast when off-network.
+
+    UCSF Versa (the Bedrock proxy at $ANTHROPIC_BEDROCK_BASE_URL) only answers
+    on campus or via VPN. Without this probe, an off-network run hangs for
+    ~140 min waiting on per-request timeouts × retries × profiles × batches.
+
+    Returns (reachable, endpoint_url). If no custom Bedrock URL is configured
+    (direct API mode), returns (True, "") and skips the probe.
+    """
+    import socket
+    from urllib.parse import urlparse
+
+    url = os.environ.get("ANTHROPIC_BEDROCK_BASE_URL", "")
+    if not url:
+        return True, ""
+    parsed = urlparse(url)
+    host = parsed.hostname
+    port = parsed.port or (443 if parsed.scheme == "https" else 80)
+    if not host:
+        return True, url  # unparseable — let the SDK fail loudly later
+    try:
+        with socket.create_connection((host, port), timeout=timeout):
+            return True, url
+    except (OSError, socket.timeout) as exc:
+        logger.warning("Preflight TCP probe to %s:%d failed: %s", host, port, exc)
+        return False, url
+
+
 def detect_builds_on_your_work(items: list[dict], profile: dict) -> None:
     """Scan full text for references to user's publications/tools."""
     my_work = profile.get("my_work", {})
@@ -555,6 +584,17 @@ def main() -> None:
     # Default to --all if no mode specified
     if not args.profile and not args.all and not args.discover and not args.setup and not args.reset:
         args.all = True
+
+    # Preflight: fail fast if the LLM endpoint is unreachable (e.g., off UCSF wifi/VPN).
+    # Every non-setup path eventually hits the LLM, so probing once at the top
+    # turns a 2-hour hang into a 5-second abort.
+    reachable, endpoint = _preflight_llm_endpoint()
+    if not reachable:
+        logger.error(
+            "LLM endpoint %s unreachable (likely off UCSF wifi/VPN). "
+            "Aborting before any LLM calls. Reconnect and retry.", endpoint,
+        )
+        sys.exit(2)
 
     # --- Reset mode ---
     if args.reset:
