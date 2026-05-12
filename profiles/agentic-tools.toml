@@ -18,7 +18,6 @@ list = [
     "Superpowers releases | https://github.com/obra/superpowers/releases.atom",
     "cmux releases | https://github.com/manaflow-ai/cmux/releases.atom",
     "AeroSpace releases | https://github.com/nikitabobko/AeroSpace/releases.atom",
-    "Feynman releases | https://github.com/companion-inc/feynman/releases.atom",
     "Claude Code releases | https://github.com/anthropics/claude-code/releases.atom",
     "Codex CLI releases | https://github.com/openai/codex/releases.atom",
     "Aider releases | https://github.com/Aider-AI/aider/releases.atom",
