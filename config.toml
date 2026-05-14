@@ -66,5 +66,5 @@ subfolder = "臥龍/Autofeeder"
 # profile's outputs.email.recipients only receives mail when today's weekday
 # matches `weekly_day`. Case-insensitive match.
 # weekly_day accepts: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
-daily_only = ["mrjinch@gmail.com", "wkkwei@hotmail.com"]
+daily_only = ["mrjinch@gmail.com", "wkkwei@hotmail.com", "curtis.chambers@berkeley.edu"]
 weekly_day = "monday"
