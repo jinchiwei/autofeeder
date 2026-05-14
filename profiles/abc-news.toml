@@ -51,6 +51,12 @@ list = [
     # === Pew / data ===
     "Pew Research - Race & Ethnicity | https://www.pewresearch.org/topic/race-ethnicity/feed/",
 
+    # === Education (admissions, K-12 specialized, higher ed policy) ===
+    "Inside Higher Ed | https://www.insidehighered.com/news/rss.xml",
+    "The 74 Million (K-12 policy) | https://www.the74million.org/feed/",
+    "Hechinger Report | https://hechingerreport.org/feed/",
+    "Education Week | https://www.edweek.org/feed/main",
+
     # === Hacker News — focused queries ===
     "HN — Chinese-American politics + policy | https://hnrss.org/newest?q=chinese+american+OR+china+initiative+OR+aapi&points=50",
     "HN — TikTok / Huawei / WeChat US enforcement | https://hnrss.org/newest?q=tiktok+ban+OR+huawei+US+OR+wechat+US&points=50",
@@ -79,10 +85,27 @@ keywords = [
     "Sinophobia",
     "anti-Asian hate",
     "Stop AAPI Hate",
+    "model minority",
+
+    # === Education / admissions (intersects strongly with Chinese-American community) ===
     "affirmative action",
     "Asian student admission",
     "SFFA",
-    "model minority",
+    "Students for Fair Admissions",
+    "race-conscious admissions",
+    "race-blind admissions",
+    "Harvard admissions",
+    "Asian American Coalition for Education",
+    "AACE",
+    "Title VI education",
+    "magnet school admissions",
+    "specialized high school",
+    "Stuyvesant",
+    "TJHSST",
+    "Lowell High",
+    "Boston Latin",
+    "gifted and talented",
+    "merit-based admissions",
 
     # === Federal enforcement / policy ===
     "China Initiative",
@@ -128,6 +151,7 @@ SURFACE HIGH (score ≥ 0.70):
 - Anti-Asian hate: incidents with national attention, federal civil-rights responses, Stop AAPI Hate data releases, sentencing in major attacks, university anti-Asian discrimination cases.
 - US tech/app enforcement against Chinese platforms (TikTok ban legislation, WeChat restrictions, Huawei in 5G networks, Chinese semiconductor company entity-list additions) — but ONLY when the news is the US-side decision / lawsuit / enforcement action, not China's reaction.
 - Supreme Court and major lower-court rulings affecting Asian Americans: SFFA aftermath, Title VI complaints, Chinese-American civil-rights cases.
+- **Education-side battles** (intersects heavily with the Chinese-American community): SFFA fallout at major universities, K-12 specialized / magnet admissions fights (Stuyvesant + Bronx Science + Brooklyn Tech in NYC, Lowell in SF, TJHSST in Northern Virginia, Boston Latin in MA, Hunter College HS), gifted-and-talented program restructurings, race-conscious vs race-blind admissions debates, Title VI complaints filed by Asian-American families with the Office for Civil Rights, federal investigations into Asian-American admissions discrimination, "model minority" rhetoric in admissions / test-prep discourse, higher-ed legacy/donor admissions reforms tied to the race debate, university DEI policy shifts post-SFFA.
 - Hong Kong / Tibet / Uyghur / Taiwan diaspora activism happening in US: congressional testimony, protest organizing, sanctuary debates, transnational repression complaints.
 - Chinatown urban-policy stories: redevelopment fights, displacement, federal grants, anti-gentrification organizing in major US Chinatowns (SF, NYC, LA, Boston, Seattle, Philly, Honolulu).
 - Pew Research / AAPI Data demographic releases on Chinese-American population, language, political affiliation, generational attitudes.
