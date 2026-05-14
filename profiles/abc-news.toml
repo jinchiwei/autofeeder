@@ -1,0 +1,164 @@
+# Profile: abc-news (ABC = "American Born Chinese", tongue-in-cheek)
+# Scope: news about CHINESE-AMERICAN COMMUNITY AND US-SIDE CHINA POLICY —
+# i.e. things happening in / about America, with a Sino-American angle.
+# Distinct from china-geopolitics, which covers China itself + US-China
+# bilateral diplomacy. abc-news is US-domestic-focused.
+
+name = "abc-news"
+description = "Chinese-American community + US-side China policy: federal enforcement, university tensions, civic representation, diaspora activism, Asian-American civil rights."
+
+# US-domestic outlets pretty much all open; paywall list is short.
+paywalled_domains = [
+    "nytimes.com",
+    "wsj.com",
+    "washingtonpost.com",
+    "latimes.com",
+    "bloomberg.com",
+]
+
+[feeds]
+list = [
+    # === Asian-American outlets ===
+    "NBC Asian America | https://www.nbcnews.com/feeds/asian-america/rss",
+    "AsAm News | https://asamnews.com/feed/",
+    "NextShark | https://nextshark.com/feed",
+    "Hyphen Magazine | https://hyphenmagazine.com/feed",
+    "NPR Code Switch | https://feeds.npr.org/510312/podcast.xml",
+
+    # === US Chinese-language outlets (RSS in Chinese — LLM handles it fine) ===
+    "World Journal — North America | https://www.worldjournal.com/feed",
+    "Sing Tao USA | https://www.singtaousa.com/feed",
+
+    # === Federal enforcement / policy signals ===
+    "DOJ Press Releases | https://www.justice.gov/feeds/press_releases.xml",
+    "USCC (US-China Economic & Security Review Commission) | https://www.uscc.gov/rss.xml",
+    "House Select Committee on the CCP | https://selectcommitteeontheccp.house.gov/feed",
+
+    # === Civil rights / advocacy ===
+    "Stop AAPI Hate | https://stopaapihate.org/feed/",
+    "Asian Americans Advancing Justice | https://www.advancingjustice-aajc.org/feed",
+
+    # === Think tanks (US-focused dimension on China issues) ===
+    "Brookings - Asia | https://www.brookings.edu/topic/asia-the-pacific/feed/",
+    "Asia Society Policy Institute | https://asiasociety.org/policy-institute/rss.xml",
+    "Cato - Foreign Policy | https://www.cato.org/rss/foreign-policy",
+    "ChinaFile | https://www.chinafile.com/rss.xml",
+
+    # === Mainstream w/ Asia-American beat ===
+    "LA Times - California | https://www.latimes.com/california/rss2.0.xml",
+    "SF Chronicle - Bay Area | https://www.sfchronicle.com/bayarea/feed/Bay-Area-RSS-518.php",
+
+    # === Pew / data ===
+    "Pew Research - Race & Ethnicity | https://www.pewresearch.org/topic/race-ethnicity/feed/",
+
+    # === Hacker News — focused queries ===
+    "HN — Chinese-American politics + policy | https://hnrss.org/newest?q=chinese+american+OR+china+initiative+OR+aapi&points=50",
+    "HN — TikTok / Huawei / WeChat US enforcement | https://hnrss.org/newest?q=tiktok+ban+OR+huawei+US+OR+wechat+US&points=50",
+
+    # === Reddit ===
+    "r/asianamerican — top week | https://www.reddit.com/r/asianamerican/top/.rss?t=week",
+    "r/AsianAmerican — top week | https://www.reddit.com/r/AsianAmerican/top/.rss?t=week",
+]
+
+[interests]
+# Concept-only keywords (no specific brand names per the agentic-tools pattern).
+# Substrings only — for the prefilter. Rich guidance lives in `narrative`.
+keywords = [
+    # === Community / demographic ===
+    "Asian American",
+    "Chinese American",
+    "Chinese diaspora",
+    "AAPI",
+    "Asian American Pacific Islander",
+    "Chinatown",
+    "Cantonese community",
+    "Lunar New Year",
+    "Asian American Heritage",
+
+    # === Civil rights / policy ===
+    "Sinophobia",
+    "anti-Asian hate",
+    "Stop AAPI Hate",
+    "affirmative action",
+    "Asian student admission",
+    "SFFA",
+    "model minority",
+
+    # === Federal enforcement / policy ===
+    "China Initiative",
+    "Chinese student visa",
+    "Chinese researcher FBI",
+    "Confucius Institute",
+    "Entity List",
+    "export controls China",
+    "Bureau of Industry and Security",
+    "BIS sanctions",
+    "Commerce Department China",
+    "USCIS visa China",
+
+    # === US-side tech / business enforcement ===
+    "TikTok ban",
+    "WeChat US",
+    "Huawei US",
+    "Chinese app US",
+    "national security review",
+    "CFIUS",
+
+    # === Diaspora activism ===
+    "Hong Kong diaspora",
+    "Tibetan American",
+    "Uyghur American",
+    "Taiwanese American",
+    "Hong Kong activism US",
+
+    # === Civic / electoral ===
+    "Asian American voter",
+    "Asian American congressional",
+    "Asian American mayor",
+    "Chinese-American politician",
+]
+
+narrative = """
+This feed is about ACTION HAPPENING IN / ABOUT AMERICA with a Sino-American angle. It is NOT about China itself or US-China bilateral diplomacy — that's the china-geopolitics feed. If you can't tell whether a story belongs in this feed or in china-geopolitics, ask: "is the primary action / decision-maker / community at issue located in America?" If yes → here. If no → china-geopolitics.
+
+SURFACE HIGH (score ≥ 0.70):
+- Chinese-American political figures making national / major-state-level news: candidates, elected officials, congressional staffers, prominent civic leaders.
+- Federal enforcement actions involving Chinese nationals or China policy on US soil: DOJ prosecutions (especially economic-espionage / 1030 cases), FBI counter-intelligence, Commerce Department / BIS export-control actions and Entity List additions, USCIS visa-policy changes affecting Chinese nationals, CFIUS reviews of China-linked investments.
+- University-side China stories: Chinese researcher visa pauses, "China Initiative" legacy cases, federal-funding restrictions on China-linked labs, academic-freedom debates over Chinese-affiliated faculty.
+- Anti-Asian hate: incidents with national attention, federal civil-rights responses, Stop AAPI Hate data releases, sentencing in major attacks, university anti-Asian discrimination cases.
+- US tech/app enforcement against Chinese platforms (TikTok ban legislation, WeChat restrictions, Huawei in 5G networks, Chinese semiconductor company entity-list additions) — but ONLY when the news is the US-side decision / lawsuit / enforcement action, not China's reaction.
+- Supreme Court and major lower-court rulings affecting Asian Americans: SFFA aftermath, Title VI complaints, Chinese-American civil-rights cases.
+- Hong Kong / Tibet / Uyghur / Taiwan diaspora activism happening in US: congressional testimony, protest organizing, sanctuary debates, transnational repression complaints.
+- Chinatown urban-policy stories: redevelopment fights, displacement, federal grants, anti-gentrification organizing in major US Chinatowns (SF, NYC, LA, Boston, Seattle, Philly, Honolulu).
+- Pew Research / AAPI Data demographic releases on Chinese-American population, language, political affiliation, generational attitudes.
+
+ALSO TRACK (score 0.5-0.7):
+- US Chinese-language media (World Journal, Sing Tao) reporting on US-domestic stories — sometimes the framing reveals community-internal politics not visible in English coverage.
+- Bay Area / NYC / LA / Houston / Seattle local politics where Asian-American electoral coalitions are pivotal.
+- Federal think-tank reports on US-China decoupling that focus on US-side institutional changes (export controls, research policy, supply chain).
+- Lunar New Year / AAPI Heritage Month coverage that has policy or civic substance (not pure cultural / entertainment).
+
+SCORE DOWN (≤ 0.4) OR EXCLUDE:
+- News about China itself: Xi Jinping, Taiwan Strait military activity, PLA, NPC, BRI summits, China domestic politics. That's china-geopolitics.
+- Bilateral diplomatic summits, US-China leader meetings, trade deals — covered in china-geopolitics.
+- Pure cultural / entertainment: K-pop, Asian celebrity gossip, food coverage with no civic angle, lifestyle pieces.
+- Generic AAPI inclusion / DEI content without a specific event or policy hook.
+- Asian-American business news (restaurant openings, IPOs) unless there's a structural angle (CFIUS review, anti-Asian discrimination, etc.).
+- Anti-Asian hate incidents without national attention or federal involvement (local police-blotter level) — sad but not actionable signal.
+
+MAJOR EXCEPTIONS that DO belong here:
+- A China-policy story that lives PRIMARILY on the US side (e.g. a House committee report on Chinese-American firms, a DOJ indictment, a Commerce Department new rule). Score high even though China is the subject — the action is in America.
+- Stories that bridge both: surface here ONLY if there's a substantive US-domestic dimension (Chinese-American congressional response, civil-rights filing, electoral mobilization). Otherwise leave them to china-geopolitics.
+
+When in doubt about a story you've never seen analyzed this way: score ~0.5 and let the LLM brief frame it. Better to surface a borderline story once than miss the start of a trend.
+"""
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "wenchi.wei@gmail.com", "mc.manchi.wong@gmail.com", "wkkwei@hotmail.com"]
+# Bilingual weekly: translate + send one email with trad-zh on top, English below.
+weekly_translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
+weekly_translate_label = "繁體中文"

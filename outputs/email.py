@@ -273,15 +273,15 @@ def _build_item_html(item: dict[str, Any]) -> str:
     return "\n".join(parts)
 
 
-def _build_html(digest_data: dict[str, Any]) -> str:
-    """Build the full HTML email body with inline CSS."""
-    profile_name = _html_escape(digest_data.get("profile_name", "unknown"))
-    date = _html_escape(digest_data.get("date", "unknown"))
-    description = _html_escape(digest_data.get("profile_description", ""))
+def _build_html_inner(digest_data: dict[str, Any]) -> str:
+    """Build the body content of the email — first-run note, TL;DR, items, footer note.
+
+    No outer HTML/head/body shell, no header chip. Shared by single-language and
+    bilingual renderings (bilingual stacks two inner blocks under one shell).
+    """
     items = digest_data.get("items", [])
     total_items = len(items)
     items = items[:_MAX_ITEMS]
-    min_score = digest_data.get("min_score", 0.0)
     tldr = digest_data.get("tldr", "")
     is_first_run = digest_data.get("is_first_run", False)
 
@@ -341,6 +341,17 @@ def _build_html(digest_data: dict[str, Any]) -> str:
             f"See all {total_items} papers in your full digest</div>"
         )
 
+    return "\n\n".join(p for p in (first_run_html, tldr_html, items_html, footer_note) if p)
+
+
+def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
+    """Wrap inner content with autofeeder header, count chip, and HTML shell."""
+    profile_name = _html_escape(digest_data.get("profile_name", "unknown"))
+    date = _html_escape(digest_data.get("date", "unknown"))
+    description = _html_escape(digest_data.get("profile_description", ""))
+    total_items = len(digest_data.get("items", []))
+    min_score = digest_data.get("min_score", 0.0)
+
     return f"""\
 <!DOCTYPE html>
 <html lang="en">
@@ -368,13 +379,7 @@ def _build_html(digest_data: dict[str, Any]) -> str:
   <span style="color:#ccc;font-size:14px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
 </div>
 
-{first_run_html}
-
-{tldr_html}
-
-{items_html}
-
-{footer_note}
+{inner_html}
 
 <div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #333;
      color:#666;font-size:11px;font-family:Geist Mono,Consolas,monospace;">
@@ -384,6 +389,133 @@ def _build_html(digest_data: dict[str, Any]) -> str:
 </div>
 </body>
 </html>"""
+
+
+def _build_html(digest_data: dict[str, Any]) -> str:
+    """Build the full HTML email body with inline CSS (single language)."""
+    return _build_html_shell(digest_data, _build_html_inner(digest_data))
+
+
+def _build_html_bilingual(
+    digest_data: dict[str, Any],
+    digest_translated: dict[str, Any],
+    lang_label_native: str = "繁體中文",
+) -> str:
+    """One email with translated content on top, then English version below.
+
+    Outer header / shell uses English (profile slug is untranslated). The two
+    inner blocks are stacked with a visual divider.
+    """
+    divider = (
+        f'<div style="margin:48px 0 32px;padding:12px 0 8px;'
+        f'border-top:2px solid {_TURQUOISE};text-align:center;'
+        f'color:{_TURQUOISE};font-family:Geist Mono,Consolas,monospace;'
+        f'font-size:12px;text-transform:uppercase;letter-spacing:2px;">'
+        f"English version below &middot; {_html_escape(lang_label_native)} above"
+        f"</div>"
+    )
+    combined = (
+        _build_html_inner(digest_translated)
+        + "\n\n"
+        + divider
+        + "\n\n"
+        + _build_html_inner(digest_data)
+    )
+    return _build_html_shell(digest_data, combined)
+
+
+def _translate_digest_data(
+    digest_data: dict[str, Any],
+    target_lang: str,
+    config: dict[str, Any],
+) -> dict[str, Any]:
+    """Return a deep copy of digest_data with text fields translated to target_lang.
+
+    Translatable fields:
+      - top-level: tldr, profile_description
+      - per-item: title, summary, why_relevant, tags (list)
+
+    Uses one Anthropic LLM call via the same backend autofeeder is configured
+    with. Falls back to returning the original (untranslated) deep copy on any
+    failure — caller decides whether to use the translation or not.
+    """
+    import copy
+    import json as _json
+    import sys
+    from pathlib import Path as _Path
+
+    # Lazy import — avoids hard dep at module load time
+    _af_root = _Path(__file__).resolve().parent.parent
+    if str(_af_root) not in sys.path:
+        sys.path.insert(0, str(_af_root))
+    from backends.anthropic_backend import make_client  # type: ignore[import-not-found]
+
+    payload: dict[str, str] = {}
+    if digest_data.get("tldr"):
+        payload["__tldr"] = digest_data["tldr"]
+    if digest_data.get("profile_description"):
+        payload["__desc"] = digest_data["profile_description"]
+    for i, item in enumerate(digest_data.get("items", [])):
+        for field in ("title", "summary", "why_relevant"):
+            v = item.get(field)
+            if isinstance(v, str) and v.strip():
+                payload[f"i{i}.{field}"] = v
+        tags = item.get("tags")
+        if isinstance(tags, list) and tags:
+            payload[f"i{i}.tags"] = " | ".join(str(t) for t in tags)
+
+    if not payload:
+        return copy.deepcopy(digest_data)
+
+    prompt = (
+        f"Translate the VALUES of the following JSON object to {target_lang}.\n\n"
+        f"Rules:\n"
+        f"- Return a JSON object with the SAME keys; only values change.\n"
+        f"- Preserve URLs, scores, dates, well-known acronyms (US, CCP, NPC, BRI, AUKUS, etc.)\n"
+        f"  and proper nouns that have no standard translation.\n"
+        f"- For commonly-translated names (Xi Jinping → 習近平, Taiwan → 台灣, etc.) use the\n"
+        f"  standard {target_lang} form.\n"
+        f"- Preserve markdown (**, *, `, [text](url)) in values that contain it.\n"
+        f"- For keys ending in '.tags', values are pipe-separated ('a | b | c'); translate each\n"
+        f"  tag, keep the ' | ' separators.\n"
+        f"- Tone: formal news / analyst, professional.\n"
+        f"- Output ONLY a valid JSON object. No prose, no markdown fences.\n\n"
+        f"Input:\n{_json.dumps(payload, ensure_ascii=False)}\n\n"
+        f"Output:"
+    )
+
+    client = make_client(config)
+    model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-6-v1")
+    resp = client.messages.create(
+        model=model,
+        max_tokens=8192,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    text = resp.content[0].text.strip()
+    # Strip code fences if model added them despite instructions
+    if text.startswith("```"):
+        nl = text.find("\n")
+        if nl != -1:
+            text = text[nl + 1 :]
+        if text.endswith("```"):
+            text = text[:-3]
+        text = text.strip()
+    translated = _json.loads(text)
+
+    result = copy.deepcopy(digest_data)
+    if "__tldr" in translated:
+        result["tldr"] = translated["__tldr"]
+    if "__desc" in translated:
+        result["profile_description"] = translated["__desc"]
+    for i, item in enumerate(result.get("items", [])):
+        for field in ("title", "summary", "why_relevant"):
+            k = f"i{i}.{field}"
+            if k in translated:
+                item[field] = translated[k]
+        tag_k = f"i{i}.tags"
+        if tag_k in translated:
+            item["tags"] = [t.strip() for t in translated[tag_k].split("|") if t.strip()]
+    return result
 
 
 def publish(
@@ -447,8 +579,24 @@ def publish(
             profile_name,
         )
         return
+    # If profile opted into bilingual delivery, render translated + English in
+    # one email. Graceful-degrade: if translation fails (off-VPN, API error,
+    # bad JSON), fall back to English-only.
+    weekly_translate_to = email_cfg.get("weekly_translate_to")
+    html_body = _build_html(weekly)
     subject = f"autofeeder: {profile_name} weekly — {weekly['date']}"
+    if weekly_translate_to:
+        try:
+            translated = _translate_digest_data(weekly, weekly_translate_to, config)
+            lang_label_native = email_cfg.get("weekly_translate_label", "繁體中文")
+            html_body = _build_html_bilingual(weekly, translated, lang_label_native=lang_label_native)
+            subject = f"autofeeder: {profile_name} weekly (中英) — {weekly['date']}"
+            logger.info("Bilingual rendering OK (target=%s)", weekly_translate_to)
+        except Exception:
+            logger.exception(
+                "Translation to %s failed; falling back to English-only", weekly_translate_to,
+            )
     _send_one(
         api_key=api_key, from_addr=from_addr, recipients=weekly_cohort,
-        subject=subject, html_body=_build_html(weekly),
+        subject=subject, html_body=html_body,
     )
