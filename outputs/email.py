@@ -552,12 +552,38 @@ def publish(
     profile_name = digest_data.get("profile_name", "unknown")
     daily_cohort, weekly_cohort, is_weekly_day = _split_cohorts(recipients, config)
 
+    # Helper: pick bilingual or English-only rendering based on profile config.
+    # `translate_to` is the new key; `weekly_translate_to` kept for back-compat.
+    translate_to = email_cfg.get("translate_to") or email_cfg.get("weekly_translate_to")
+    lang_label_native = (
+        email_cfg.get("translate_label")
+        or email_cfg.get("weekly_translate_label")
+        or "繁體中文"
+    )
+
+    def _render(payload: dict[str, Any], subject_base: str) -> tuple[str, str]:
+        """Return (subject, html_body). Bilingual if translate_to set; falls back
+        to English-only on translation failure."""
+        if not translate_to:
+            return subject_base, _build_html(payload)
+        # Translate only the items that'll actually render (avoids burning LLM
+        # budget on items _build_html_inner would cap off).
+        for_xlate = {**payload, "items": payload.get("items", [])[:_MAX_ITEMS]}
+        try:
+            translated = _translate_digest_data(for_xlate, translate_to, config)
+            html = _build_html_bilingual(payload, translated, lang_label_native=lang_label_native)
+            return f"{subject_base} (中英)", html
+        except Exception:
+            logger.exception("Translation to %s failed; falling back to English-only", translate_to)
+            return subject_base, _build_html(payload)
+
     # --- Daily cohort: today's digest (skip when there are no items) ---
     if daily_cohort and items:
-        subject = f"autofeeder: {profile_name} digest — {digest_data.get('date', 'unknown')}"
+        subj_base = f"autofeeder: {profile_name} digest — {digest_data.get('date', 'unknown')}"
+        subject, html_body = _render(digest_data, subj_base)
         _send_one(
             api_key=api_key, from_addr=from_addr, recipients=daily_cohort,
-            subject=subject, html_body=_build_html(digest_data),
+            subject=subject, html_body=html_body,
         )
     elif daily_cohort and not items:
         logger.info("Daily cohort skipped — no items in today's digest")
@@ -579,27 +605,8 @@ def publish(
             profile_name,
         )
         return
-    # If profile opted into bilingual delivery, render translated + English in
-    # one email. Graceful-degrade: if translation fails (off-VPN, API error,
-    # bad JSON), fall back to English-only.
-    weekly_translate_to = email_cfg.get("weekly_translate_to")
-    html_body = _build_html(weekly)
-    subject = f"autofeeder: {profile_name} weekly — {weekly['date']}"
-    if weekly_translate_to:
-        # Only translate the items that will actually appear in the email.
-        # _build_html_inner already caps at _MAX_ITEMS; translating the full
-        # ~250-item collated set would waste ~20x the LLM budget.
-        weekly_for_translation = {**weekly, "items": weekly["items"][:_MAX_ITEMS]}
-        try:
-            translated = _translate_digest_data(weekly_for_translation, weekly_translate_to, config)
-            lang_label_native = email_cfg.get("weekly_translate_label", "繁體中文")
-            html_body = _build_html_bilingual(weekly, translated, lang_label_native=lang_label_native)
-            subject = f"autofeeder: {profile_name} weekly (中英) — {weekly['date']}"
-            logger.info("Bilingual rendering OK (target=%s)", weekly_translate_to)
-        except Exception:
-            logger.exception(
-                "Translation to %s failed; falling back to English-only", weekly_translate_to,
-            )
+    subj_base = f"autofeeder: {profile_name} weekly — {weekly['date']}"
+    subject, html_body = _render(weekly, subj_base)
     _send_one(
         api_key=api_key, from_addr=from_addr, recipients=weekly_cohort,
         subject=subject, html_body=html_body,
