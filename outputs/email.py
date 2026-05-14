@@ -586,8 +586,12 @@ def publish(
     html_body = _build_html(weekly)
     subject = f"autofeeder: {profile_name} weekly — {weekly['date']}"
     if weekly_translate_to:
+        # Only translate the items that will actually appear in the email.
+        # _build_html_inner already caps at _MAX_ITEMS; translating the full
+        # ~250-item collated set would waste ~20x the LLM budget.
+        weekly_for_translation = {**weekly, "items": weekly["items"][:_MAX_ITEMS]}
         try:
-            translated = _translate_digest_data(weekly, weekly_translate_to, config)
+            translated = _translate_digest_data(weekly_for_translation, weekly_translate_to, config)
             lang_label_native = email_cfg.get("weekly_translate_label", "繁體中文")
             html_body = _build_html_bilingual(weekly, translated, lang_label_native=lang_label_native)
             subject = f"autofeeder: {profile_name} weekly (中英) — {weekly['date']}"
