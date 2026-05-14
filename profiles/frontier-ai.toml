@@ -118,4 +118,4 @@ min_score = 0.60
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
-recipients = ["mrjinch@gmail.com"]
+recipients = ["mrjinch@gmail.com", "curtis.chambers@berkeley.edu"]
