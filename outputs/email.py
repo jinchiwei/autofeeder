@@ -375,21 +375,13 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
   :root {{ color-scheme: only dark; }}
   body, table, td {{ background:#0d0d1a !important; color:#eee !important; }}
 
-  /* === Gmail iOS / Android anti-inversion overrides ===
-     Gmail apps add data-ogsb (Original Gmail Style Background) and data-ogsc
-     (Original Gmail Style Color) attributes to elements they auto-recolor.
-     Targeting those attributes lets us re-override back to our palette
-     AFTER Gmail's inversion pass. This is the documented workaround for
-     Gmail's color-stripping behavior. */
+  /* === Anti-Gmail-auto-darken overrides ===
+     Gmail apps tag auto-recolored elements with data-ogsb (Original Gmail
+     Style Background) and data-ogsc (Original Gmail Style Color), and
+     rewrite inline 'style' values. Class attributes survive — so every
+     brand-colored element in _build_*_html carries a matching class. */
   [data-ogsb] {{ background-color: #0d0d1a !important; }}
   [data-ogsc] {{ color: #eee !important; }}
-
-  /* Re-pin brand accents specifically after Gmail's auto-darken touches them.
-     Class-based selectors survive Gmail's style-attribute rewriting (Gmail
-     rewrites inline 'style' values during auto-darken but leaves 'class'
-     attributes intact). Every brand-colored element in _build_*_html carries
-     a matching class. The [data-ogsc] / [data-ogsb] prefix ensures these
-     override Gmail's darkened version specifically. */
   .brand-turquoise, [data-ogsc].brand-turquoise {{ color: {_TURQUOISE} !important; }}
   .brand-deeppink, [data-ogsc].brand-deeppink {{ color: {_DEEPPINK} !important; }}
   .brand-gold, [data-ogsc].brand-gold {{ color: {_GOLD} !important; }}
@@ -398,13 +390,32 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
   .bg-brand-blueviolet, [data-ogsb].bg-brand-blueviolet {{ background: {_BLUEVIOLET} !important; }}
 
   /* @media (prefers-color-scheme: dark) — explicit dark reassertion.
-     Apple Mail + Gmail iOS (when in system-following theme) respect this. */
+     Apple Mail + Gmail iOS (system-following theme) respect this. */
   @media (prefers-color-scheme: dark) {{
     body, table, td {{ background:#0d0d1a !important; color:#eee !important; }}
   }}
+
+  /* === Gmail iOS dark-mode-specific override ('u + body' hack) ===
+     Gmail iOS sets up the DOM such that selectors prefixed with `u + body`
+     match ONLY when Gmail iOS is rendering — other clients see no `<u>`
+     before `<body>` and these rules don't apply. Use this to re-pin colors
+     after Gmail iOS's auto-darken transform. */
+  u + body .ae-canvas {{ background: #0d0d1a !important; }}
+  u + body, u + body table, u + body td {{
+    background: #0d0d1a !important; color: #eee !important;
+  }}
+  u + body .brand-turquoise {{ color: {_TURQUOISE} !important; }}
+  u + body .brand-deeppink {{ color: {_DEEPPINK} !important; }}
+  u + body .brand-gold {{ color: {_GOLD} !important; }}
+  u + body .brand-blueviolet {{ color: {_BLUEVIOLET} !important; }}
+  u + body .bg-brand-gold {{ background: {_GOLD} !important; }}
+  u + body .bg-brand-blueviolet {{ background: {_BLUEVIOLET} !important; }}
 </style>
 </head>
-<body bgcolor="#0d0d1a" style="margin:0;padding:0;background:#0d0d1a;color:#eee;font-family:Geist,Helvetica,Arial,sans-serif;">
+<!-- Empty <u></u> right before <body> is the Gmail iOS dark-mode detection
+     hook. Other clients ignore it; Gmail iOS renders these selectors. -->
+<u></u>
+<body bgcolor="#0d0d1a" class="ae-canvas" style="margin:0;padding:0;background:#0d0d1a;color:#eee;font-family:Geist,Helvetica,Arial,sans-serif;">
 <!-- Outer table = full-width dark canvas. bgcolor attribute is universally
      respected by Gmail / Outlook / Apple Mail; inline-style on divs alone is
      not enough (Gmail web in particular overrides div backgrounds). -->
