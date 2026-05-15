@@ -184,26 +184,26 @@ def _build_item_html(item: dict[str, Any]) -> str:
     badges = ""
     if is_new:
         badges += (
-            f'<span style="background:{_GOLD} !important;color:#000;padding:2px 6px;'
+            f'<span class="bg-brand-gold" style="background:{_GOLD} !important;color:#000;padding:2px 6px;'
             f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"NEW</span>"
         )
     if cites:
         badges += (
-            f'<span style="background:{_BLUEVIOLET} !important;color:#fff;padding:2px 6px;'
+            f'<span class="bg-brand-blueviolet" style="background:{_BLUEVIOLET} !important;color:#fff;padding:2px 6px;'
             f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"Cites your work</span>"
         )
 
     if link:
         title_html = (
-            f'<a href="{_html_escape(link)}" style="color:{_TURQUOISE} !important;'
+            f'<a href="{_html_escape(link)}" class="brand-turquoise" style="color:{_TURQUOISE} !important;'
             f'text-decoration:none;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:19px;font-weight:bold;">{title}</a>'
         )
     else:
         title_html = (
-            f'<span style="color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,'
+            f'<span class="brand-turquoise" style="color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,'
             f'sans-serif;font-size:19px;font-weight:bold;">{title}</span>'
         )
 
@@ -226,7 +226,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
         f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:14px;'
         f'color:#aaa;margin-top:4px;">'
         f"{source} &middot; Score: "
-        f'<span style="color:{_DEEPPINK} !important;font-weight:bold;">{score:.2f}</span>'
+        f'<span class="brand-deeppink" style="color:{_DEEPPINK} !important;font-weight:bold;">{score:.2f}</span>'
         f"{length_html}"
         f"</div>"
     )
@@ -273,7 +273,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     # Tags
     if tags:
         tag_spans = " ".join(
-            f'<span style="background:#2a2a4a;color:{_GOLD} !important;padding:2px 6px;'
+            f'<span class="brand-gold" style="background:#2a2a4a;color:{_GOLD} !important;padding:2px 6px;'
             f'border-radius:3px;font-family:Geist Mono,Consolas,monospace;'
             f'font-size:12px;">{_html_escape(t)}</span>'
             for t in tags
@@ -333,7 +333,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
         first_run_html = (
             f'<div style="margin-bottom:24px;padding:14px 16px;'
             f'border:1px dashed {_GOLD};background:#1a1a2e;border-radius:6px;">'
-            f'<div style="color:{_GOLD} !important;font-family:Geist,Helvetica,Arial,sans-serif;'
+            f'<div class="brand-gold" style="color:{_GOLD} !important;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:16px;font-weight:bold;margin-bottom:4px;">'
             f'Welcome to autofeeder!</div>'
             f'<div style="color:#ccc;font-family:Geist,Helvetica,Arial,sans-serif;'
@@ -374,8 +374,34 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
 <style>
   :root {{ color-scheme: only dark; }}
   body, table, td {{ background:#0d0d1a !important; color:#eee !important; }}
-  /* Lock dark canvas — Gmail iOS / Outlook often try to invert it. */
-  .ae-dark, .ae-dark * {{ background-color: #0d0d1a !important; }}
+
+  /* === Gmail iOS / Android anti-inversion overrides ===
+     Gmail apps add data-ogsb (Original Gmail Style Background) and data-ogsc
+     (Original Gmail Style Color) attributes to elements they auto-recolor.
+     Targeting those attributes lets us re-override back to our palette
+     AFTER Gmail's inversion pass. This is the documented workaround for
+     Gmail's color-stripping behavior. */
+  [data-ogsb] {{ background-color: #0d0d1a !important; }}
+  [data-ogsc] {{ color: #eee !important; }}
+
+  /* Re-pin brand accents specifically after Gmail's auto-darken touches them.
+     Class-based selectors survive Gmail's style-attribute rewriting (Gmail
+     rewrites inline 'style' values during auto-darken but leaves 'class'
+     attributes intact). Every brand-colored element in _build_*_html carries
+     a matching class. The [data-ogsc] / [data-ogsb] prefix ensures these
+     override Gmail's darkened version specifically. */
+  .brand-turquoise, [data-ogsc].brand-turquoise {{ color: {_TURQUOISE} !important; }}
+  .brand-deeppink, [data-ogsc].brand-deeppink {{ color: {_DEEPPINK} !important; }}
+  .brand-gold, [data-ogsc].brand-gold {{ color: {_GOLD} !important; }}
+  .brand-blueviolet, [data-ogsc].brand-blueviolet {{ color: {_BLUEVIOLET} !important; }}
+  .bg-brand-gold, [data-ogsb].bg-brand-gold {{ background: {_GOLD} !important; }}
+  .bg-brand-blueviolet, [data-ogsb].bg-brand-blueviolet {{ background: {_BLUEVIOLET} !important; }}
+
+  /* @media (prefers-color-scheme: dark) — explicit dark reassertion.
+     Apple Mail + Gmail iOS (when in system-following theme) respect this. */
+  @media (prefers-color-scheme: dark) {{
+    body, table, td {{ background:#0d0d1a !important; color:#eee !important; }}
+  }}
 </style>
 </head>
 <body bgcolor="#0d0d1a" style="margin:0;padding:0;background:#0d0d1a;color:#eee;font-family:Geist,Helvetica,Arial,sans-serif;">
@@ -388,7 +414,7 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
 <tr><td bgcolor="#0d0d1a" style="background:#0d0d1a;padding:24px;color:#eee;">
 
 <div style="text-align:center;margin-bottom:32px;">
-  <h1 style="margin:0;font-size:29px;color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,sans-serif;">
+  <h1 class="brand-turquoise" style="margin:0;font-size:29px;color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,sans-serif;">
     autofeeder
   </h1>
   <p style="margin:8px 0 0 0;color:#999;font-family:Geist Mono,Consolas,monospace;font-size:14px;">
@@ -397,7 +423,7 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
 </div>
 
 <div style="text-align:center;margin-bottom:24px;padding:12px;background:#16162b;border-radius:6px;">
-  <span style="color:{_DEEPPINK} !important;font-weight:bold;font-size:21px;">{total_items}</span>
+  <span class="brand-deeppink" style="color:{_DEEPPINK} !important;font-weight:bold;font-size:21px;">{total_items}</span>
   <span style="color:#ccc;font-size:15px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
 </div>
 
