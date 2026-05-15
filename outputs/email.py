@@ -510,65 +510,89 @@ def _translate_digest_data(
         sys.path.insert(0, str(_af_root))
     from backends.anthropic_backend import make_client  # type: ignore[import-not-found]
 
-    payload: dict[str, str] = {}
-    if digest_data.get("tldr"):
-        payload["__tldr"] = digest_data["tldr"]
-    if digest_data.get("profile_description"):
-        payload["__desc"] = digest_data["profile_description"]
-    # Translate every field that actually renders in _build_item_html:
-    # title / headline / relevance (strings) + key_takeaways / tags (lists).
-    # Lists are flattened with distinct separators so reinjection can split cleanly.
-    for i, item in enumerate(digest_data.get("items", [])):
-        for field in ("title", "headline", "relevance"):
-            v = item.get(field)
-            if isinstance(v, str) and v.strip():
-                payload[f"i{i}.{field}"] = v
-        tags = item.get("tags")
-        if isinstance(tags, list) and tags:
-            payload[f"i{i}.tags"] = " | ".join(str(t) for t in tags)
-        kt = item.get("key_takeaways")
-        if isinstance(kt, list) and kt:
-            payload[f"i{i}.kt"] = " ||| ".join(str(s) for s in kt)
+    def _build_batch_payload(item_range, include_top_level: bool) -> dict[str, str]:
+        p: dict[str, str] = {}
+        if include_top_level:
+            if digest_data.get("tldr"):
+                p["__tldr"] = digest_data["tldr"]
+            if digest_data.get("profile_description"):
+                p["__desc"] = digest_data["profile_description"]
+        for i in item_range:
+            item = digest_data["items"][i]
+            for field in ("title", "headline", "relevance"):
+                v = item.get(field)
+                if isinstance(v, str) and v.strip():
+                    p[f"i{i}.{field}"] = v
+            tags = item.get("tags")
+            if isinstance(tags, list) and tags:
+                p[f"i{i}.tags"] = " | ".join(str(t) for t in tags)
+            kt = item.get("key_takeaways")
+            if isinstance(kt, list) and kt:
+                p[f"i{i}.kt"] = " ||| ".join(str(s) for s in kt)
+        return p
 
-    if not payload:
+    def _call_translate_llm(batch_payload: dict[str, str]) -> dict[str, str]:
+        prompt = (
+            f"Translate the VALUES of the following JSON object to {target_lang}.\n\n"
+            f"Rules:\n"
+            f"- Return a JSON object with the SAME keys; only values change.\n"
+            f"- Preserve URLs, scores, dates, well-known acronyms (US, CCP, NPC, BRI, AUKUS, etc.)\n"
+            f"  and proper nouns that have no standard translation.\n"
+            f"- For commonly-translated names (Xi Jinping → 習近平, Taiwan → 台灣, etc.) use the\n"
+            f"  standard {target_lang} form.\n"
+            f"- Preserve markdown (**, *, `, [text](url)) in values that contain it.\n"
+            f"- For keys ending in '.tags', values are pipe-separated ('a | b | c'); translate each\n"
+            f"  tag, keep the ' | ' separators.\n"
+            f"- For keys ending in '.kt' (key takeaways), values are triple-pipe-separated\n"
+            f"  ('point1 ||| point2 ||| point3'); translate each point, keep ' ||| ' separators.\n"
+            f"- Tone: formal news / analyst, professional.\n"
+            f"- Output ONLY a valid JSON object. No prose, no markdown fences.\n\n"
+            f"Input:\n{_json.dumps(batch_payload, ensure_ascii=False)}\n\n"
+            f"Output:"
+        )
+        resp = client.messages.create(
+            model=model,
+            max_tokens=8192,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        t = resp.content[0].text.strip()
+        if t.startswith("```"):
+            nl_idx = t.find("\n")
+            if nl_idx != -1:
+                t = t[nl_idx + 1 :]
+            if t.endswith("```"):
+                t = t[:-3]
+            t = t.strip()
+        return _json.loads(t)
+
+    items = digest_data.get("items", [])
+    n_items = len(items)
+
+    if n_items == 0 and not digest_data.get("tldr") and not digest_data.get("profile_description"):
         return copy.deepcopy(digest_data)
-
-    prompt = (
-        f"Translate the VALUES of the following JSON object to {target_lang}.\n\n"
-        f"Rules:\n"
-        f"- Return a JSON object with the SAME keys; only values change.\n"
-        f"- Preserve URLs, scores, dates, well-known acronyms (US, CCP, NPC, BRI, AUKUS, etc.)\n"
-        f"  and proper nouns that have no standard translation.\n"
-        f"- For commonly-translated names (Xi Jinping → 習近平, Taiwan → 台灣, etc.) use the\n"
-        f"  standard {target_lang} form.\n"
-        f"- Preserve markdown (**, *, `, [text](url)) in values that contain it.\n"
-        f"- For keys ending in '.tags', values are pipe-separated ('a | b | c'); translate each\n"
-        f"  tag, keep the ' | ' separators.\n"
-        f"- For keys ending in '.kt' (key takeaways), values are triple-pipe-separated\n"
-        f"  ('point1 ||| point2 ||| point3'); translate each point, keep ' ||| ' separators.\n"
-        f"- Tone: formal news / analyst, professional.\n"
-        f"- Output ONLY a valid JSON object. No prose, no markdown fences.\n\n"
-        f"Input:\n{_json.dumps(payload, ensure_ascii=False)}\n\n"
-        f"Output:"
-    )
 
     client = make_client(config)
     model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-6-v1")
-    resp = client.messages.create(
-        model=model,
-        max_tokens=8192,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = resp.content[0].text.strip()
-    # Strip code fences if model added them despite instructions
-    if text.startswith("```"):
-        nl = text.find("\n")
-        if nl != -1:
-            text = text[nl + 1 :]
-        if text.endswith("```"):
-            text = text[:-3]
-        text = text.strip()
-    translated = _json.loads(text)
+
+    # Split items into batches of BATCH_SIZE to keep each LLM request small
+    # enough to clear UCSF Versa's 504 timeout window. Empirically: payloads of
+    # ~5-6 items succeed reliably while 12 items consistently 504 on the
+    # china-geopolitics profile (larger per-item summaries).
+    BATCH_SIZE = 6
+    translated: dict[str, str] = {}
+    if n_items == 0:
+        # Top-level fields only — single tiny call
+        translated.update(_call_translate_llm(_build_batch_payload(range(0), True)))
+    else:
+        for batch_start in range(0, n_items, BATCH_SIZE):
+            batch_end = min(batch_start + BATCH_SIZE, n_items)
+            payload = _build_batch_payload(
+                range(batch_start, batch_end),
+                include_top_level=(batch_start == 0),
+            )
+            if not payload:
+                continue
+            translated.update(_call_translate_llm(payload))
 
     result = copy.deepcopy(digest_data)
     if "__tldr" in translated:
