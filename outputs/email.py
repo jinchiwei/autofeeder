@@ -184,32 +184,32 @@ def _build_item_html(item: dict[str, Any]) -> str:
     badges = ""
     if is_new:
         badges += (
-            f'<span style="background:{_GOLD};color:#000;padding:2px 6px;'
+            f'<span style="background:{_GOLD} !important;color:#000;padding:2px 6px;'
             f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"NEW</span>"
         )
     if cites:
         badges += (
-            f'<span style="background:{_BLUEVIOLET};color:#fff;padding:2px 6px;'
+            f'<span style="background:{_BLUEVIOLET} !important;color:#fff;padding:2px 6px;'
             f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"Cites your work</span>"
         )
 
     if link:
         title_html = (
-            f'<a href="{_html_escape(link)}" style="color:{_TURQUOISE};'
+            f'<a href="{_html_escape(link)}" style="color:{_TURQUOISE} !important;'
             f'text-decoration:none;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:19px;font-weight:bold;">{title}</a>'
         )
     else:
         title_html = (
-            f'<span style="color:{_TURQUOISE};font-family:Geist,Helvetica,Arial,'
+            f'<span style="color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,'
             f'sans-serif;font-size:19px;font-weight:bold;">{title}</span>'
         )
 
     parts.append(
-        f'<div style="margin-bottom:24px;padding:16px;border:1px solid #e5e5ea;'
-        f'border-radius:8px;background:#ffffff;">'
+        f'<div style="margin-bottom:24px;padding:16px;border:1px solid #333;'
+        f'border-radius:8px;background:#1a1a2e;">'
     )
     parts.append(f"<div>{badges}{title_html}</div>")
     # Reading-time estimate (~250 words/min, 5 chars/word average).
@@ -220,13 +220,13 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if content_chars > 0:
         words = max(1, content_chars // 5)
         minutes = max(1, round(words / 250))
-        length_html = f' &middot; <span style="color:#7c7c84;">~{minutes} min read</span>'
+        length_html = f' &middot; <span style="color:#999;">~{minutes} min read</span>'
 
     parts.append(
         f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:14px;'
-        f'color:#6a6a72;margin-top:4px;">'
+        f'color:#aaa;margin-top:4px;">'
         f"{source} &middot; Score: "
-        f'<span style="color:{_DEEPPINK};font-weight:bold;">{score:.2f}</span>'
+        f'<span style="color:{_DEEPPINK} !important;font-weight:bold;">{score:.2f}</span>'
         f"{length_html}"
         f"</div>"
     )
@@ -235,7 +235,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if content_source_label:
         parts.append(
             f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:12px;'
-            f'color:#90909a;margin-top:2px;">'
+            f'color:#888;margin-top:2px;">'
             f"{_html_escape(content_source_label)}</div>"
         )
 
@@ -243,7 +243,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if headline:
         parts.append(
             f'<div style="margin-top:12px;padding:8px 12px;border-left:3px solid '
-            f'{_TURQUOISE};color:#333344;font-family:Geist,Helvetica,Arial,sans-serif;'
+            f'{_TURQUOISE};color:#ddd;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:15px;font-style:italic;">'
             f"{_html_escape(headline)}</div>"
         )
@@ -251,11 +251,11 @@ def _build_item_html(item: dict[str, Any]) -> str:
     # Key takeaways
     if key_takeaways:
         parts.append(
-            f'<div style="margin-top:10px;color:#48484f;font-family:Geist,Helvetica,'
+            f'<div style="margin-top:10px;color:#ccc;font-family:Geist,Helvetica,'
             f'Arial,sans-serif;font-size:15px;"><strong>Key takeaways:</strong></div>'
         )
         parts.append(
-            '<ul style="margin:4px 0 0 0;padding-left:20px;color:#48484f;'
+            '<ul style="margin:4px 0 0 0;padding-left:20px;color:#ccc;'
             'font-family:Geist,Helvetica,Arial,sans-serif;font-size:14px;">'
         )
         for t in key_takeaways:
@@ -265,7 +265,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     # Relevance
     if relevance:
         parts.append(
-            f'<div style="margin-top:10px;color:#555560;font-family:Geist,Helvetica,'
+            f'<div style="margin-top:10px;color:#bbb;font-family:Geist,Helvetica,'
             f'Arial,sans-serif;font-size:14px;">'
             f"<strong>Why this matters:</strong> {_html_escape(relevance)}</div>"
         )
@@ -273,7 +273,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     # Tags
     if tags:
         tag_spans = " ".join(
-            f'<span style="background:#fef3c7;color:{_GOLD};padding:2px 6px;'
+            f'<span style="background:#2a2a4a;color:{_GOLD} !important;padding:2px 6px;'
             f'border-radius:3px;font-family:Geist Mono,Consolas,monospace;'
             f'font-size:12px;">{_html_escape(t)}</span>'
             for t in tags
@@ -313,15 +313,15 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
                 if chunk:
                     paragraphs.append(chunk)
         tldr_body = "".join(
-            f'<p style="margin:0 0 12px 0;color:#333344;font-family:Geist,Helvetica,Arial,'
+            f'<p style="margin:0 0 12px 0;color:#ddd;font-family:Geist,Helvetica,Arial,'
             f'sans-serif;font-size:15px;line-height:1.6;">{_html_escape(p)}</p>'
             for p in paragraphs
         )
         tldr_html = (
             f'<div style="margin-bottom:24px;padding:14px 16px;'
-            f'border-left:4px solid {_TURQUOISE};background:#f0f0f5;'
+            f'border-left:4px solid {_TURQUOISE};background:#16162b;'
             f'border-radius:0 6px 6px 0;">'
-            f'<div style="color:#7c7c84;font-family:Geist Mono,Consolas,monospace;'
+            f'<div style="color:#999;font-family:Geist Mono,Consolas,monospace;'
             f'font-size:12px;text-transform:uppercase;margin-bottom:6px;">TL;DR</div>'
             f'{tldr_body}'
             f"</div>"
@@ -332,11 +332,11 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
     if is_first_run:
         first_run_html = (
             f'<div style="margin-bottom:24px;padding:14px 16px;'
-            f'border:1px dashed {_GOLD};background:#ffffff;border-radius:6px;">'
-            f'<div style="color:{_GOLD};font-family:Geist,Helvetica,Arial,sans-serif;'
+            f'border:1px dashed {_GOLD};background:#1a1a2e;border-radius:6px;">'
+            f'<div style="color:{_GOLD} !important;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:16px;font-weight:bold;margin-bottom:4px;">'
             f'Welcome to autofeeder!</div>'
-            f'<div style="color:#48484f;font-family:Geist,Helvetica,Arial,sans-serif;'
+            f'<div style="color:#ccc;font-family:Geist,Helvetica,Arial,sans-serif;'
             f'font-size:14px;line-height:1.5;">'
             f'This is your first digest. Scores and rankings will improve as the '
             f'system learns your preferences over time.</div>'
@@ -348,7 +348,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
     if total_items > len(items):
         footer_note = (
             f'<div style="text-align:center;margin-top:16px;margin-bottom:8px;'
-            f'color:#7c7c84;font-family:Geist,Helvetica,Arial,sans-serif;font-size:14px;">'
+            f'color:#999;font-family:Geist,Helvetica,Arial,sans-serif;font-size:14px;">'
             f"See all {total_items} papers in your full digest</div>"
         )
 
@@ -369,40 +369,42 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
+<meta name="color-scheme" content="only dark">
+<meta name="supported-color-schemes" content="only dark">
 <style>
-  :root {{ color-scheme: light dark; }}
-  body, table, td {{ background:#fafafa !important; color:#14141C !important; }}
+  :root {{ color-scheme: only dark; }}
+  body, table, td {{ background:#0d0d1a !important; color:#eee !important; }}
+  /* Lock dark canvas — Gmail iOS / Outlook often try to invert it. */
+  .ae-dark, .ae-dark * {{ background-color: #0d0d1a !important; }}
 </style>
 </head>
-<body bgcolor="#fafafa" style="margin:0;padding:0;background:#fafafa;color:#14141C;font-family:Geist,Helvetica,Arial,sans-serif;">
+<body bgcolor="#0d0d1a" style="margin:0;padding:0;background:#0d0d1a;color:#eee;font-family:Geist,Helvetica,Arial,sans-serif;">
 <!-- Outer table = full-width dark canvas. bgcolor attribute is universally
      respected by Gmail / Outlook / Apple Mail; inline-style on divs alone is
      not enough (Gmail web in particular overrides div backgrounds). -->
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fafafa" style="background:#fafafa;">
-<tr><td align="center" bgcolor="#fafafa" style="background:#fafafa;padding:24px 0;">
-<table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" bgcolor="#fafafa" style="max-width:680px;width:100%;background:#fafafa;">
-<tr><td bgcolor="#fafafa" style="background:#fafafa;padding:24px;color:#14141C;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0d0d1a" style="background:#0d0d1a;">
+<tr><td align="center" bgcolor="#0d0d1a" style="background:#0d0d1a;padding:24px 0;">
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" bgcolor="#0d0d1a" style="max-width:680px;width:100%;background:#0d0d1a;">
+<tr><td bgcolor="#0d0d1a" style="background:#0d0d1a;padding:24px;color:#eee;">
 
 <div style="text-align:center;margin-bottom:32px;">
-  <h1 style="margin:0;font-size:29px;color:{_TURQUOISE};font-family:Geist,Helvetica,Arial,sans-serif;">
+  <h1 style="margin:0;font-size:29px;color:{_TURQUOISE} !important;font-family:Geist,Helvetica,Arial,sans-serif;">
     autofeeder
   </h1>
-  <p style="margin:8px 0 0 0;color:#7c7c84;font-family:Geist Mono,Consolas,monospace;font-size:14px;">
+  <p style="margin:8px 0 0 0;color:#999;font-family:Geist Mono,Consolas,monospace;font-size:14px;">
     {profile_name} &middot; {date}
   </p>
 </div>
 
-<div style="text-align:center;margin-bottom:24px;padding:12px;background:#f0f0f5;border-radius:6px;">
-  <span style="color:{_DEEPPINK};font-weight:bold;font-size:21px;">{total_items}</span>
-  <span style="color:#48484f;font-size:15px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
+<div style="text-align:center;margin-bottom:24px;padding:12px;background:#16162b;border-radius:6px;">
+  <span style="color:{_DEEPPINK} !important;font-weight:bold;font-size:21px;">{total_items}</span>
+  <span style="color:#ccc;font-size:15px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
 </div>
 
 {inner_html}
 
-<div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #e5e5ea;
-     color:#a8a8b0;font-size:12px;font-family:Geist Mono,Consolas,monospace;">
+<div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #333;
+     color:#666;font-size:12px;font-family:Geist Mono,Consolas,monospace;">
   Generated by autofeeder
 </div>
 
@@ -430,7 +432,7 @@ def _build_html_bilingual(
     divider = (
         f'<div style="margin:48px 0 32px;padding:12px 0 8px;'
         f'border-top:2px solid {_TURQUOISE};text-align:center;'
-        f'color:{_TURQUOISE};font-family:Geist Mono,Consolas,monospace;'
+        f'color:{_TURQUOISE} !important;font-family:Geist Mono,Consolas,monospace;'
         f'font-size:13px;text-transform:uppercase;letter-spacing:2px;">'
         f"English version below &middot; {_html_escape(lang_label_native)} above"
         f"</div>"
@@ -476,14 +478,20 @@ def _translate_digest_data(
         payload["__tldr"] = digest_data["tldr"]
     if digest_data.get("profile_description"):
         payload["__desc"] = digest_data["profile_description"]
+    # Translate every field that actually renders in _build_item_html:
+    # title / headline / relevance (strings) + key_takeaways / tags (lists).
+    # Lists are flattened with distinct separators so reinjection can split cleanly.
     for i, item in enumerate(digest_data.get("items", [])):
-        for field in ("title", "summary", "why_relevant"):
+        for field in ("title", "headline", "relevance"):
             v = item.get(field)
             if isinstance(v, str) and v.strip():
                 payload[f"i{i}.{field}"] = v
         tags = item.get("tags")
         if isinstance(tags, list) and tags:
             payload[f"i{i}.tags"] = " | ".join(str(t) for t in tags)
+        kt = item.get("key_takeaways")
+        if isinstance(kt, list) and kt:
+            payload[f"i{i}.kt"] = " ||| ".join(str(s) for s in kt)
 
     if not payload:
         return copy.deepcopy(digest_data)
@@ -499,6 +507,8 @@ def _translate_digest_data(
         f"- Preserve markdown (**, *, `, [text](url)) in values that contain it.\n"
         f"- For keys ending in '.tags', values are pipe-separated ('a | b | c'); translate each\n"
         f"  tag, keep the ' | ' separators.\n"
+        f"- For keys ending in '.kt' (key takeaways), values are triple-pipe-separated\n"
+        f"  ('point1 ||| point2 ||| point3'); translate each point, keep ' ||| ' separators.\n"
         f"- Tone: formal news / analyst, professional.\n"
         f"- Output ONLY a valid JSON object. No prose, no markdown fences.\n\n"
         f"Input:\n{_json.dumps(payload, ensure_ascii=False)}\n\n"
@@ -529,13 +539,16 @@ def _translate_digest_data(
     if "__desc" in translated:
         result["profile_description"] = translated["__desc"]
     for i, item in enumerate(result.get("items", [])):
-        for field in ("title", "summary", "why_relevant"):
+        for field in ("title", "headline", "relevance"):
             k = f"i{i}.{field}"
             if k in translated:
                 item[field] = translated[k]
         tag_k = f"i{i}.tags"
         if tag_k in translated:
             item["tags"] = [t.strip() for t in translated[tag_k].split("|") if t.strip()]
+        kt_k = f"i{i}.kt"
+        if kt_k in translated:
+            item["key_takeaways"] = [s.strip() for s in translated[kt_k].split("|||") if s.strip()]
     return result
 
 
