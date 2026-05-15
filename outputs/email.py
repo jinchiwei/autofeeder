@@ -185,13 +185,13 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if is_new:
         badges += (
             f'<span style="background:{_GOLD};color:#000;padding:2px 6px;'
-            f'border-radius:3px;font-size:12px;font-weight:bold;margin-right:4px;">'
+            f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"NEW</span>"
         )
     if cites:
         badges += (
             f'<span style="background:{_BLUEVIOLET};color:#fff;padding:2px 6px;'
-            f'border-radius:3px;font-size:12px;font-weight:bold;margin-right:4px;">'
+            f'border-radius:3px;font-size:13px;font-weight:bold;margin-right:4px;">'
             f"Cites your work</span>"
         )
 
@@ -199,12 +199,12 @@ def _build_item_html(item: dict[str, Any]) -> str:
         title_html = (
             f'<a href="{_html_escape(link)}" style="color:{_TURQUOISE};'
             f'text-decoration:none;font-family:Geist,Helvetica,Arial,sans-serif;'
-            f'font-size:18px;font-weight:bold;">{title}</a>'
+            f'font-size:19px;font-weight:bold;">{title}</a>'
         )
     else:
         title_html = (
             f'<span style="color:{_TURQUOISE};font-family:Geist,Helvetica,Arial,'
-            f'sans-serif;font-size:18px;font-weight:bold;">{title}</span>'
+            f'sans-serif;font-size:19px;font-weight:bold;">{title}</span>'
         )
 
     parts.append(
@@ -212,18 +212,29 @@ def _build_item_html(item: dict[str, Any]) -> str:
         f'border-radius:8px;background:#ffffff;">'
     )
     parts.append(f"<div>{badges}{title_html}</div>")
+    # Reading-time estimate (~250 words/min, 5 chars/word average).
+    # content_chars may reflect summary-only or full text depending on
+    # what was extracted — the content_source_label below makes which-is-which clear.
+    content_chars = item.get("content_chars", 0)
+    length_html = ""
+    if content_chars > 0:
+        words = max(1, content_chars // 5)
+        minutes = max(1, round(words / 250))
+        length_html = f' &middot; <span style="color:#7c7c84;">~{minutes} min read</span>'
+
     parts.append(
-        f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:13px;'
+        f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:14px;'
         f'color:#6a6a72;margin-top:4px;">'
         f"{source} &middot; Score: "
         f'<span style="color:{_DEEPPINK};font-weight:bold;">{score:.2f}</span>'
+        f"{length_html}"
         f"</div>"
     )
 
     # Content source label
     if content_source_label:
         parts.append(
-            f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:11px;'
+            f'<div style="font-family:Geist Mono,Consolas,monospace;font-size:12px;'
             f'color:#90909a;margin-top:2px;">'
             f"{_html_escape(content_source_label)}</div>"
         )
@@ -233,7 +244,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
         parts.append(
             f'<div style="margin-top:12px;padding:8px 12px;border-left:3px solid '
             f'{_TURQUOISE};color:#333344;font-family:Geist,Helvetica,Arial,sans-serif;'
-            f'font-size:14px;font-style:italic;">'
+            f'font-size:15px;font-style:italic;">'
             f"{_html_escape(headline)}</div>"
         )
 
@@ -241,11 +252,11 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if key_takeaways:
         parts.append(
             f'<div style="margin-top:10px;color:#48484f;font-family:Geist,Helvetica,'
-            f'Arial,sans-serif;font-size:14px;"><strong>Key takeaways:</strong></div>'
+            f'Arial,sans-serif;font-size:15px;"><strong>Key takeaways:</strong></div>'
         )
         parts.append(
             '<ul style="margin:4px 0 0 0;padding-left:20px;color:#48484f;'
-            'font-family:Geist,Helvetica,Arial,sans-serif;font-size:13px;">'
+            'font-family:Geist,Helvetica,Arial,sans-serif;font-size:14px;">'
         )
         for t in key_takeaways:
             parts.append(f"<li>{_html_escape(t)}</li>")
@@ -255,7 +266,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
     if relevance:
         parts.append(
             f'<div style="margin-top:10px;color:#555560;font-family:Geist,Helvetica,'
-            f'Arial,sans-serif;font-size:13px;">'
+            f'Arial,sans-serif;font-size:14px;">'
             f"<strong>Why this matters:</strong> {_html_escape(relevance)}</div>"
         )
 
@@ -264,7 +275,7 @@ def _build_item_html(item: dict[str, Any]) -> str:
         tag_spans = " ".join(
             f'<span style="background:#fef3c7;color:{_GOLD};padding:2px 6px;'
             f'border-radius:3px;font-family:Geist Mono,Consolas,monospace;'
-            f'font-size:11px;">{_html_escape(t)}</span>'
+            f'font-size:12px;">{_html_escape(t)}</span>'
             for t in tags
         )
         parts.append(f'<div style="margin-top:10px;">{tag_spans}</div>')
@@ -303,7 +314,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
                     paragraphs.append(chunk)
         tldr_body = "".join(
             f'<p style="margin:0 0 12px 0;color:#333344;font-family:Geist,Helvetica,Arial,'
-            f'sans-serif;font-size:14px;line-height:1.6;">{_html_escape(p)}</p>'
+            f'sans-serif;font-size:15px;line-height:1.6;">{_html_escape(p)}</p>'
             for p in paragraphs
         )
         tldr_html = (
@@ -311,7 +322,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
             f'border-left:4px solid {_TURQUOISE};background:#f0f0f5;'
             f'border-radius:0 6px 6px 0;">'
             f'<div style="color:#7c7c84;font-family:Geist Mono,Consolas,monospace;'
-            f'font-size:11px;text-transform:uppercase;margin-bottom:6px;">TL;DR</div>'
+            f'font-size:12px;text-transform:uppercase;margin-bottom:6px;">TL;DR</div>'
             f'{tldr_body}'
             f"</div>"
         )
@@ -323,10 +334,10 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
             f'<div style="margin-bottom:24px;padding:14px 16px;'
             f'border:1px dashed {_GOLD};background:#ffffff;border-radius:6px;">'
             f'<div style="color:{_GOLD};font-family:Geist,Helvetica,Arial,sans-serif;'
-            f'font-size:15px;font-weight:bold;margin-bottom:4px;">'
+            f'font-size:16px;font-weight:bold;margin-bottom:4px;">'
             f'Welcome to autofeeder!</div>'
             f'<div style="color:#48484f;font-family:Geist,Helvetica,Arial,sans-serif;'
-            f'font-size:13px;line-height:1.5;">'
+            f'font-size:14px;line-height:1.5;">'
             f'This is your first digest. Scores and rankings will improve as the '
             f'system learns your preferences over time.</div>'
             f"</div>"
@@ -337,7 +348,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
     if total_items > len(items):
         footer_note = (
             f'<div style="text-align:center;margin-top:16px;margin-bottom:8px;'
-            f'color:#7c7c84;font-family:Geist,Helvetica,Arial,sans-serif;font-size:13px;">'
+            f'color:#7c7c84;font-family:Geist,Helvetica,Arial,sans-serif;font-size:14px;">'
             f"See all {total_items} papers in your full digest</div>"
         )
 
@@ -375,23 +386,23 @@ def _build_html_shell(digest_data: dict[str, Any], inner_html: str) -> str:
 <tr><td bgcolor="#fafafa" style="background:#fafafa;padding:24px;color:#14141C;">
 
 <div style="text-align:center;margin-bottom:32px;">
-  <h1 style="margin:0;font-size:28px;color:{_TURQUOISE};font-family:Geist,Helvetica,Arial,sans-serif;">
+  <h1 style="margin:0;font-size:29px;color:{_TURQUOISE};font-family:Geist,Helvetica,Arial,sans-serif;">
     autofeeder
   </h1>
-  <p style="margin:8px 0 0 0;color:#7c7c84;font-family:Geist Mono,Consolas,monospace;font-size:13px;">
+  <p style="margin:8px 0 0 0;color:#7c7c84;font-family:Geist Mono,Consolas,monospace;font-size:14px;">
     {profile_name} &middot; {date}
   </p>
 </div>
 
 <div style="text-align:center;margin-bottom:24px;padding:12px;background:#f0f0f5;border-radius:6px;">
-  <span style="color:{_DEEPPINK};font-weight:bold;font-size:20px;">{total_items}</span>
-  <span style="color:#48484f;font-size:14px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
+  <span style="color:{_DEEPPINK};font-weight:bold;font-size:21px;">{total_items}</span>
+  <span style="color:#48484f;font-size:15px;"> items from {description} &middot; score &ge; {min_score:.2f}</span>
 </div>
 
 {inner_html}
 
 <div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #e5e5ea;
-     color:#a8a8b0;font-size:11px;font-family:Geist Mono,Consolas,monospace;">
+     color:#a8a8b0;font-size:12px;font-family:Geist Mono,Consolas,monospace;">
   Generated by autofeeder
 </div>
 
@@ -420,7 +431,7 @@ def _build_html_bilingual(
         f'<div style="margin:48px 0 32px;padding:12px 0 8px;'
         f'border-top:2px solid {_TURQUOISE};text-align:center;'
         f'color:{_TURQUOISE};font-family:Geist Mono,Consolas,monospace;'
-        f'font-size:12px;text-transform:uppercase;letter-spacing:2px;">'
+        f'font-size:13px;text-transform:uppercase;letter-spacing:2px;">'
         f"English version below &middot; {_html_escape(lang_label_native)} above"
         f"</div>"
     )
