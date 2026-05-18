@@ -337,7 +337,7 @@ def _build_html_inner(digest_data: dict[str, Any]) -> str:
                     paragraphs.append(chunk)
         tldr_body = "".join(
             f'<p style="margin:0 0 12px 0;color:#ddd;font-family:Geist,Helvetica,Arial,'
-            f'sans-serif;font-size:15px;line-height:1.6;">{_html_escape(p)}</p>'
+            f'sans-serif;font-size:15px;line-height:1.6;">{_markdown_inline(p)}</p>'
             for p in paragraphs
         )
         tldr_html = (
