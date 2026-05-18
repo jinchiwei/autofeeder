@@ -170,6 +170,23 @@ def _html_escape(text: str) -> str:
     )
 
 
+def _markdown_inline(text: str) -> str:
+    """HTML-escape + minimal markdown→HTML for **bold** and *italic*.
+
+    Safe because we escape FIRST, so any HTML in ``text`` is neutralized
+    before regex substitution. Used for fields like TL;DR where the
+    upstream LLM (or our weekly collator) emits markdown-style emphasis
+    that would otherwise render as literal ``**date**`` in the email.
+    """
+    import re as _re
+    out = _html_escape(text)
+    # **bold** first so single-asterisk italic doesn't eat the inner pair
+    out = _re.sub(r"\*\*([^*]+?)\*\*", r"<strong>\1</strong>", out)
+    # *italic* — single * not adjacent to another *
+    out = _re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<em>\1</em>", out)
+    return out
+
+
 def _build_item_html(item: dict[str, Any]) -> str:
     """Render a single digest item as an HTML block with inline styles."""
     title = _html_escape(item.get("title", "Untitled"))
