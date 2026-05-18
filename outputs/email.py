@@ -683,26 +683,32 @@ def publish(
     elif daily_cohort and not items:
         logger.info("Daily cohort skipped — no items in today's digest")
 
-    # --- Weekly cohort: past-week collated digest, only on weekly_day ---
-    if not weekly_cohort:
-        return
+    # --- Weekly past-week collated digest on weekly_day ---
+    # Goes to daily_cohort AND weekly_cohort, deduplicated. Daily-cohort
+    # addresses see it so they know what the weekly-cohort recipients receive
+    # (e.g. Jin gets the same Monday retrospective that goes out to the lab).
     if not is_weekly_day:
-        logger.info(
-            "Weekly cohort (%d recipient(s)) skipped — not weekly_day yet",
-            len(weekly_cohort),
-        )
+        if weekly_cohort:
+            logger.info(
+                "Weekly cohort (%d recipient(s)) skipped — not weekly_day yet",
+                len(weekly_cohort),
+            )
         return
     output_dir = Path(config.get("output", {}).get("dir", "output"))
     weekly = _collate_week_digest(profile_name, dt.date.today(), output_dir, days=7)
     if not weekly or not weekly["items"]:
         logger.info(
-            "Weekly cohort skipped — no items found in past 7 daily sidecars for %s",
+            "Weekly send skipped — no items found in past 7 daily sidecars for %s",
             profile_name,
         )
+        return
+    # Deduplicate while preserving order. dict.fromkeys is idiomatic for this.
+    weekly_recipients = list(dict.fromkeys(daily_cohort + weekly_cohort))
+    if not weekly_recipients:
         return
     subj_base = f"autofeeder: {profile_name} weekly — {weekly['date']}"
     subject, html_body = _render(weekly, subj_base)
     _send_one(
-        api_key=api_key, from_addr=from_addr, recipients=weekly_cohort,
+        api_key=api_key, from_addr=from_addr, recipients=weekly_recipients,
         subject=subject, html_body=html_body,
     )
