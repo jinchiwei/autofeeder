@@ -66,6 +66,7 @@ def _collate_week_digest(
     merged_items: list[dict[str, Any]] = []
     daily_tldrs: list[tuple[str, str]] = []
     source_dates: list[str] = []
+    min_score_from_sidecar: float | None = None
 
     for offset in range(days):
         d = today - dt.timedelta(days=offset)
@@ -78,6 +79,11 @@ def _collate_week_digest(
             logger.warning("Skipping unreadable sidecar %s: %s", sidecar, exc)
             continue
         source_dates.append(d.isoformat())
+        # Inherit the profile's min_score from the first valid sidecar so the
+        # weekly email's count chip displays the actual filter threshold rather
+        # than 0.00 (which was the previous behavior and looked like no filter).
+        if min_score_from_sidecar is None and "min_score" in data:
+            min_score_from_sidecar = float(data["min_score"])
         if data.get("tldr"):
             daily_tldrs.append((d.isoformat(), data["tldr"]))
         for item in data.get("items", []):
@@ -108,7 +114,7 @@ def _collate_week_digest(
         "date": week_label,
         "items": merged_items,
         "tldr": weekly_tldr,
-        "min_score": 0.0,
+        "min_score": min_score_from_sidecar if min_score_from_sidecar is not None else 0.0,
         "is_first_run": False,
     }
 
