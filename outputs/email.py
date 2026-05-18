@@ -575,10 +575,14 @@ def _translate_digest_data(
     model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-6-v1")
 
     # Split items into batches of BATCH_SIZE to keep each LLM request small
-    # enough to clear UCSF Versa's 504 timeout window. Empirically: payloads of
-    # ~5-6 items succeed reliably while 12 items consistently 504 on the
-    # china-geopolitics profile (larger per-item summaries).
-    BATCH_SIZE = 6
+    # enough to clear UCSF Versa's 504 timeout window.
+    # Empirical sizing:
+    #   batch=12: china-geopolitics + abc-news both 504 reliably
+    #   batch=6:  abc-news clears; china-geopolitics still 504s (policy items
+    #             carry heavier 'relevance' + 'key_takeaways' text)
+    #   batch=3:  both clear with margin; ~4 sequential LLM calls for a
+    #             12-item digest, ~2-4 min total
+    BATCH_SIZE = 3
     translated: dict[str, str] = {}
     if n_items == 0:
         # Top-level fields only — single tiny call
