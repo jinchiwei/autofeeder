@@ -1,0 +1,158 @@
+# Profile: venus
+# Scope: science / research / medicine that BRIDGES Western biomedicine and
+# Eastern / traditional medicine — rigorous evidence applied to acupuncture,
+# TCM, herbal medicine, mind-body practice; anatomical & mechanistic
+# discoveries that illuminate traditional concepts; integrative care models.
+# The lens is evidence-first: validating OR refuting traditional claims with
+# real science, not credulous wellness content.
+
+name = "venus"
+description = "East-meets-West medicine: evidence-based integrative & traditional medicine, ethnopharmacology, mind-body science, the biology behind acupuncture / TCM / fascia."
+
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "nytimes.com",
+    "nationalgeographic.com",
+    "thelancet.com",
+    "jamanetwork.com",
+    "nejm.org",
+    "cell.com",
+    "sciencedirect.com",
+    "academic.oup.com",
+    "theatlantic.com",
+]
+
+[feeds]
+list = [
+    # === Integrative / complementary medicine journals ===
+    "Journal of Integrative & Complementary Medicine | https://www.liebertpub.com/action/showFeed?type=etoc&feed=rss&jc=jicm",
+    "BMC Complementary Medicine and Therapies | https://bmccomplementmedtherapies.biomedcentral.com/articles/most-recent/rss.xml",
+    "Chinese Medicine (BMC) | https://cmjournal.biomedcentral.com/articles/most-recent/rss.xml",
+    "Complementary Therapies in Medicine | https://rss.sciencedirect.com/publication/science/09652299",
+    "Journal of Ethnopharmacology | https://rss.sciencedirect.com/publication/science/03788741",
+    "Integrative Medicine Research | https://rss.sciencedirect.com/publication/science/22134220",
+    "Acupuncture in Medicine (BMJ) | https://aim.bmj.com/rss/current.xml",
+    "Frontiers in Pharmacology | https://www.frontiersin.org/journals/pharmacology/rss",
+
+    # === High-impact medicine / science (occasional integrative coverage) ===
+    "Nature Medicine | https://www.nature.com/nm.rss",
+    "The Lancet | https://www.thelancet.com/rssfeed/lancet_current.xml",
+    "Cell | https://www.cell.com/cell/rss",
+    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
+
+    # === Mind-body / fascia / anatomy ===
+    "Journal of Psychosomatic Research | https://rss.sciencedirect.com/publication/science/00223999",
+    "Frontiers in Neuroscience | https://www.frontiersin.org/journals/neuroscience/rss",
+
+    # === Science journalism (synthesizes the bridge well) ===
+    "National Geographic - Science | https://www.nationalgeographic.com/pages/topic/latest-stories/rss",
+    "NYT - Health | https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
+    "NYT - Science | https://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
+    "The Atlantic - Health | https://www.theatlantic.com/feed/channel/health/",
+    "STAT News | https://www.statnews.com/feed/",
+    "Scientific American - Health | https://www.scientificamerican.com/platform/syndication/rss/",
+    "Nautilus | https://nautil.us/feed/",
+
+    # === Policy / institutional ===
+    "NIH NCCIH (complementary & integrative health) | https://www.nccih.nih.gov/news/rss",
+
+    # === Preprints ===
+    "medRxiv - complementary & alternative medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=complementary_and_alternative_medicine",
+    "bioRxiv - physiology | http://connect.biorxiv.org/biorxiv_xml.php?subject=physiology",
+
+    # === PubMed topical ===
+    "PubMed: integrative medicine RCT | https://pubmed.ncbi.nlm.nih.gov/rss/search/integrative+medicine+randomized/?limit=60",
+]
+
+[interests]
+# Concept-only keywords for the prefilter (no specific brand/product names).
+keywords = [
+    # Integrative / traditional medicine
+    "integrative medicine",
+    "complementary medicine",
+    "traditional Chinese medicine",
+    "TCM",
+    "traditional medicine",
+    "Eastern medicine",
+    "holistic medicine",
+    "Ayurveda",
+    "ethnopharmacology",
+    "pharmacognosy",
+
+    # Modalities
+    "acupuncture",
+    "moxibustion",
+    "cupping",
+    "herbal medicine",
+    "botanical medicine",
+    "qigong",
+    "tai chi",
+    "meditation",
+    "mindfulness",
+    "breathwork",
+
+    # Mechanistic / anatomical bridge
+    "fascia",
+    "interstitium",
+    "meridian",
+    "connective tissue",
+    "vagus nerve",
+    "mind-body",
+    "placebo",
+    "neuroimmune",
+    "gut microbiome",
+
+    # Research framing
+    "randomized controlled trial",
+    "systematic review",
+    "mechanism of action",
+    "clinical evidence",
+    "East-West medicine",
+    "evidence-based complementary",
+    "whole-person care",
+    "integrative oncology",
+]
+
+narrative = """
+Venus is about the BRIDGE between Western biomedical science and Eastern / traditional medicine. The lens is evidence-first: rigorous science applied to traditional practices, biological mechanisms that illuminate (or refute) traditional concepts, and integrative care models. The two exemplar stories that define this feed: (1) rigorous evidence reviews on acupuncture for pain, (2) the interstitium / fascia as a possible anatomical substrate for acupuncture-meridian concepts.
+
+NOT a wellness / supplement-marketing feed. The goal is real science — including science that DEBUNKS a traditional claim. Credulous "ancient wisdom heals all" content scores low; so does pure pharma biomedicine with no traditional / integrative angle.
+
+SURFACE HIGH (score ≥ 0.70):
+- Rigorous studies (RCTs, large cohorts, mechanistic work, strong meta-analyses) of acupuncture, TCM, herbal medicine, mind-body practices (meditation / qigong / tai chi / breathwork) — ESPECIALLY when they identify a biological mechanism or a clear efficacy (or null) signal.
+- Anatomical / physiological discoveries that connect to traditional concepts: interstitium and fascia research, vagus-nerve / neuroimmune findings that explain mind-body effects, connective-tissue signaling, gut-brain axis tied to traditional diet.
+- Ethnopharmacology wins: a traditional remedy yielding a validated compound or mechanism (the artemisinin / Tu Youyou archetype — traditional sweet-wormwood → antimalarial Nobel). New natural-product drug leads sourced from traditional pharmacopeias.
+- Integrative oncology / integrative pain / integrative mental health: studies or programs combining conventional + complementary care with measured outcomes.
+- Placebo and mind-body mechanism research — the neuroscience of expectation, ritual, and healing.
+- Microbiome research linking traditional diets / fermented foods / herbal preparations to measurable health outcomes.
+- WHO / NIH-NCCIH policy, funding, or guideline news on traditional & complementary medicine.
+- Top-tier science journalism (NatGeo, NYT Magazine, Atlantic, STAT, Sci-Am, Nautilus) that synthesizes the East-West evidence HONESTLY — neither dismissive nor credulous.
+
+ALSO TRACK (score 0.5-0.7):
+- Systematic reviews / meta-analyses of complementary modalities, even with mixed or negative findings (honest negative results are signal).
+- Regulatory news on botanical / herbal products, supplement safety, adulteration.
+- Cross-cultural and global-health perspectives on medical pluralism.
+- History-of-medicine pieces that illuminate how a traditional practice maps (or fails to map) onto modern biology.
+- Fascia / bodywork / movement science with a research backbone.
+
+SCORE DOWN (≤ 0.4) OR EXCLUDE:
+- Wellness-influencer content, supplement marketing, product promotion, "detox" / "cleanse" hype.
+- Anti-vaccine, conspiracy, or science-denial health content.
+- Modalities with strong negative evidence (homeopathy, crystal healing, reiki energy claims) UNLESS the article is a rigorous debunking or mechanism study.
+- Pure conventional biomedicine with no integrative / traditional dimension — that's just regular medicine, belongs elsewhere.
+- Pure traditional-medicine advocacy that asserts efficacy without scientific evaluation.
+- Generic "mindfulness improves wellbeing" lifestyle pieces with no study or mechanism.
+
+DEFAULTS:
+- When uncertain whether a study is rigorous enough, lean on study design: RCT / mechanistic / large cohort = surface; anecdote / single-arm / uncontrolled = score down.
+- An honest null or negative result for a popular traditional practice is HIGH signal — surface it.
+- Score by the quality of evidence and the genuineness of the East-West bridge, not by whether the conclusion is pro- or anti-traditional.
+"""
+
+[overrides]
+min_score = 0.58
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]
