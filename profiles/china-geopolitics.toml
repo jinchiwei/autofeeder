@@ -131,7 +131,7 @@ min_score = 0.50
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
-recipients = ["mrjinch@gmail.com", "wenchi.wei@gmail.com", "mc.manchi.wong@gmail.com", "wkkwei@hotmail.com"]
+recipients = ["mrjinch@gmail.com", "wenchi.wei@gmail.com", "mc.manchi.wong@gmail.com", "wkkwei@hotmail.com", "13810239681@163.com"]
 # Bilingual: translate every email; trad-zh on top, English below.
 translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
 translate_label = "繁體中文"

@@ -155,8 +155,8 @@ min_score = 0.58
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
-# mrjinch + wkkwei are in cadence.daily_only -> daily; wenchi.wei is not -> weekly Monday only.
-recipients = ["mrjinch@gmail.com", "wkkwei@hotmail.com", "wenchi.wei@gmail.com"]
+# mrjinch + wkkwei are in cadence.daily_only -> daily; wenchi.wei + 13810239681@163.com are not -> weekly Monday only.
+recipients = ["mrjinch@gmail.com", "wkkwei@hotmail.com", "wenchi.wei@gmail.com", "13810239681@163.com"]
 # Bilingual: translate every email; trad-zh on top, English below.
 translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
 translate_label = "繁體中文"
