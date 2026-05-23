@@ -42,6 +42,9 @@ list = [
     "Latent Space | https://www.latent.space/feed",
     "Pragmatic Engineer | https://newsletter.pragmaticengineer.com/feed",
 
+    # === Tech-press coverage of the agentic-tooling space ===
+    "The New Stack | https://thenewstack.io/feed/",
+
     # === Hacker News — focused queries, high-points threshold to filter noise ===
     "HN — AI coding tools | https://hnrss.org/newest?q=ai+coding+tool+OR+coding+agent+OR+ai+ide&points=100",
     "HN — MCP & agent infra | https://hnrss.org/newest?q=mcp+server+OR+model+context+protocol+OR+agent+framework&points=75",
@@ -146,7 +149,7 @@ DEFAULTS:
 """
 
 [overrides]
-min_score = 0.55
+min_score = 0.50
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
