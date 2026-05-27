@@ -525,6 +525,7 @@ def _translate_digest_data(
     import copy
     import json as _json
     import sys
+    import time
     from pathlib import Path as _Path
 
     # Lazy import — avoids hard dep at module load time
@@ -573,20 +574,39 @@ def _translate_digest_data(
             f"Input:\n{_json.dumps(batch_payload, ensure_ascii=False)}\n\n"
             f"Output:"
         )
-        resp = client.messages.create(
-            model=model,
-            max_tokens=8192,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        t = resp.content[0].text.strip()
-        if t.startswith("```"):
-            nl_idx = t.find("\n")
-            if nl_idx != -1:
-                t = t[nl_idx + 1 :]
-            if t.endswith("```"):
-                t = t[:-3]
-            t = t.strip()
-        return _json.loads(t)
+        # Retry up to MAX_ATTEMPTS times: Versa 504s and the occasional
+        # malformed-JSON response are transient. One failed call must NOT
+        # discard the whole digest's translation, so we keep trying with
+        # exponential backoff before giving up on this single batch.
+        MAX_ATTEMPTS = 10
+        last_exc: Exception | None = None
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                resp = client.messages.create(
+                    model=model,
+                    max_tokens=8192,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                t = resp.content[0].text.strip()
+                if t.startswith("```"):
+                    nl_idx = t.find("\n")
+                    if nl_idx != -1:
+                        t = t[nl_idx + 1 :]
+                    if t.endswith("```"):
+                        t = t[:-3]
+                    t = t.strip()
+                return _json.loads(t)
+            except Exception as exc:  # noqa: BLE001 — retry on any transient error (504, JSON parse, etc.)
+                last_exc = exc
+                if attempt < MAX_ATTEMPTS:
+                    logger.warning(
+                        "translate batch attempt %d/%d failed (%s); retrying",
+                        attempt, MAX_ATTEMPTS, type(exc).__name__,
+                    )
+                    time.sleep(min(2 ** (attempt - 1), 30))
+        # All attempts exhausted — propagate so the caller falls back to English.
+        assert last_exc is not None
+        raise last_exc
 
     items = digest_data.get("items", [])
     n_items = len(items)
@@ -597,15 +617,11 @@ def _translate_digest_data(
     client = make_client(config)
     model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-6-v1")
 
-    # Split items into batches of BATCH_SIZE to keep each LLM request small
-    # enough to clear UCSF Versa's 504 timeout window.
-    # Empirical sizing:
-    #   batch=12: china-geopolitics + abc-news both 504 reliably
-    #   batch=6:  abc-news clears; china-geopolitics still 504s (policy items
-    #             carry heavier 'relevance' + 'key_takeaways' text)
-    #   batch=3:  both clear with margin; ~4 sequential LLM calls for a
-    #             12-item digest, ~2-4 min total
-    BATCH_SIZE = 3
+    # One item per LLM request — the smallest possible payload, so each call
+    # clears UCSF Versa's 504 timeout window with maximum margin. Combined with
+    # the per-batch retry (up to 10 attempts) in _call_translate_llm, a single
+    # transient 504 no longer discards the whole digest's translation.
+    BATCH_SIZE = 1
     translated: dict[str, str] = {}
     if n_items == 0:
         # Top-level fields only — single tiny call
