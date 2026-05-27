@@ -623,19 +623,44 @@ def _translate_digest_data(
     # transient 504 no longer discards the whole digest's translation.
     BATCH_SIZE = 1
     translated: dict[str, str] = {}
-    if n_items == 0:
-        # Top-level fields only — single tiny call
-        translated.update(_call_translate_llm(_build_batch_payload(range(0), True)))
-    else:
-        for batch_start in range(0, n_items, BATCH_SIZE):
-            batch_end = min(batch_start + BATCH_SIZE, n_items)
-            payload = _build_batch_payload(
-                range(batch_start, batch_end),
-                include_top_level=(batch_start == 0),
-            )
-            if not payload:
-                continue
-            translated.update(_call_translate_llm(payload))
+
+    # --- Top-level fields, translated on their own (NOT bundled with item 0) ---
+    # The weekly tldr is 7 daily tldrs joined by "\n\n" and can run to ~17k
+    # chars. Translating that in one call generates ~17k chars of output and
+    # blows past Versa's gateway timeout (deterministic 504, even alone). So we
+    # split the tldr on its paragraph boundaries into <=CHUNK_CHARS pieces and
+    # translate each piece in its own retryable call, then rejoin with "\n\n".
+    if digest_data.get("profile_description"):
+        translated.update(_call_translate_llm({"__desc": digest_data["profile_description"]}))
+    tldr = digest_data.get("tldr")
+    if tldr:
+        CHUNK_CHARS = 2000
+        paras = tldr.split("\n\n")
+        groups: list[str] = []
+        cur: list[str] = []
+        cur_len = 0
+        for para in paras:
+            if cur and cur_len + len(para) > CHUNK_CHARS:
+                groups.append("\n\n".join(cur))
+                cur, cur_len = [], 0
+            cur.append(para)
+            cur_len += len(para)
+        if cur:
+            groups.append("\n\n".join(cur))
+        out_chunks: list[str] = []
+        for gi, g in enumerate(groups):
+            key = f"__tldrchunk{gi}"
+            r = _call_translate_llm({key: g})
+            out_chunks.append(r.get(key, g))
+        translated["__tldr"] = "\n\n".join(out_chunks)
+
+    # --- Items, one per LLM call ---
+    for batch_start in range(0, n_items, BATCH_SIZE):
+        batch_end = min(batch_start + BATCH_SIZE, n_items)
+        payload = _build_batch_payload(range(batch_start, batch_end), include_top_level=False)
+        if not payload:
+            continue
+        translated.update(_call_translate_llm(payload))
 
     result = copy.deepcopy(digest_data)
     if "__tldr" in translated:
