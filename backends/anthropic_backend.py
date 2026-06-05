@@ -76,11 +76,15 @@ def _repair_triage_json(text: str) -> dict[str, Any]:
     raise ValueError(f"Could not repair JSON: {text[:300]}...")
 
 
-# Exceptions worth retrying
+# Exceptions worth retrying. InternalServerError covers any 5xx — notably
+# UCSF Versa's 504 gateway timeouts, which are transient and were previously
+# NOT retried (they'd silently drop the TL;DR / a summary). See 2026-06-05
+# alzheimers digest: TL;DR vanished because a single Versa 504 wasn't retried.
 _RETRY_EXCEPTIONS = (
     anthropic.RateLimitError,
     anthropic.APITimeoutError,
     anthropic.APIConnectionError,
+    anthropic.InternalServerError,
 )
 
 
