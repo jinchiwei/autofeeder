@@ -1,0 +1,137 @@
+# Profile: nanomedicine-tcm (纳米中药 / nano traditional Chinese medicine)
+# Scope: the intersection of NANOTECHNOLOGY and TRADITIONAL CHINESE / herbal
+# MEDICINE — nano drug-delivery of herbal actives and TCM formulas, nano-
+# phytomedicine, nanonization of poorly-soluble natural compounds, nano-
+# carriers (liposomes, polymeric / lipid NPs, micelles, exosomes) for botanical
+# therapeutics, and the pharmacology / safety behind them. Evidence-first lens.
+# Bilingual digest: Traditional Chinese on top, English below.
+
+name = "nanomedicine-tcm"
+description = "Latest advances in nano traditional-Chinese-medicine research: nanocarrier delivery of herbal actives and TCM formulas, nano-phytomedicine, nanonization of natural compounds, and the pharmacology / safety behind them."
+
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "sciencedirect.com",
+    "pubs.acs.org",
+    "pubs.rsc.org",
+    "tandfonline.com",
+    "wiley.com",
+    "academic.oup.com",
+]
+
+[feeds]
+list = [
+    # === Nanomedicine / drug delivery ===
+    "Journal of Nanobiotechnology (BMC) | https://jnanobiotechnology.biomedcentral.com/articles/most-recent/rss.xml",
+    "Journal of Controlled Release | https://rss.sciencedirect.com/publication/science/01683659",
+    "ACS Nano | https://pubs.acs.org/action/showFeed?type=etoc&feed=rss&jc=ancac3",
+    "Nanoscale (RSC) | http://feeds.rsc.org/rss/nr",
+    "Nature Nanotechnology | https://www.nature.com/nnano.rss",
+    "Drug Delivery (T&F) | https://www.tandfonline.com/feed/rss/idrd20",
+    "Pharmaceutics (MDPI) | https://www.mdpi.com/rss/journal/pharmaceutics",
+
+    # === Ethnopharmacology / TCM / phytomedicine ===
+    "Journal of Ethnopharmacology | https://rss.sciencedirect.com/publication/science/03788741",
+    "Chinese Medicine (BMC) | https://cmjournal.biomedcentral.com/articles/most-recent/rss.xml",
+    "Phytomedicine | https://rss.sciencedirect.com/publication/science/09447113",
+    "Acta Pharmaceutica Sinica B | https://rss.sciencedirect.com/publication/science/22113835",
+    "Frontiers in Pharmacology | https://www.frontiersin.org/journals/pharmacology/rss",
+    "Molecules (MDPI) | https://www.mdpi.com/rss/journal/molecules",
+
+    # === PubMed topical (the precise intersection) ===
+    "PubMed: nano traditional Chinese medicine | https://pubmed.ncbi.nlm.nih.gov/rss/search/nano+traditional+chinese+medicine/?limit=60",
+    "PubMed: nanoparticle herbal drug delivery | https://pubmed.ncbi.nlm.nih.gov/rss/search/nanoparticle+herbal+drug+delivery/?limit=40",
+    "PubMed: nanoparticle natural product delivery | https://pubmed.ncbi.nlm.nih.gov/rss/search/nanoparticle+natural+product+delivery/?limit=40",
+]
+
+[interests]
+keywords = [
+    # The intersection
+    "nano traditional Chinese medicine",
+    "nano herbal medicine",
+    "nano phytomedicine",
+    "herbal nanoparticle",
+    "TCM nanoparticle",
+    "nanonization natural product",
+    "nano formulation herbal",
+    "phytochemical nanocarrier",
+
+    # Natural actives commonly nano-delivered
+    "curcumin nanoparticle",
+    "resveratrol nanoparticle",
+    "berberine nanoparticle",
+    "paclitaxel natural",
+    "artemisinin delivery",
+    "ginsenoside delivery",
+    "quercetin nanoparticle",
+    "baicalein",
+    "tanshinone",
+
+    # Nanocarrier / delivery
+    "drug delivery",
+    "nanoparticle",
+    "liposome",
+    "polymeric nanoparticle",
+    "lipid nanoparticle",
+    "nanomicelle",
+    "exosome delivery",
+    "nanoemulsion",
+    "self-assembly carrier",
+    "targeted delivery",
+    "bioavailability enhancement",
+    "poorly soluble drug",
+
+    # Pharmacology / framing
+    "ethnopharmacology",
+    "pharmacokinetics",
+    "tumor targeting",
+    "controlled release",
+    "nanotoxicity",
+]
+
+narrative = """
+This feed tracks the LATEST ADVANCES IN NANO TRADITIONAL-CHINESE-MEDICINE RESEARCH — where nanotechnology meets TCM / herbal therapeutics. The core idea: using nanocarriers and nanonization to solve the classic problems of natural / herbal actives (poor solubility, low bioavailability, fast clearance, off-target toxicity), and to deliver TCM compounds or whole formulas more effectively. Evidence-first: real pharmacology and mechanism, not wellness marketing.
+
+SURFACE HIGH (score >= 0.70):
+- Nano drug-delivery systems for herbal / TCM actives: liposomes, polymeric or lipid nanoparticles, micelles, nanoemulsions, exosomes, self-assembling carriers loaded with curcumin, resveratrol, berberine, artemisinin, ginsenosides, tanshinone, baicalein, quercetin, paclitaxel-class natural compounds, etc. — with pharmacokinetic / efficacy / targeting data.
+- Nanonization / formulation that improves bioavailability, controlled release, or tumor / tissue targeting of poorly-soluble natural products.
+- Nano-formulation of whole TCM formulas or multi-component herbal extracts; "nano-TCM" / herbal-nanomedicine engineering.
+- Mechanistic pharmacology of nano-delivered natural compounds (PK/PD, biodistribution, target engagement) and rigorous in-vivo efficacy.
+- Nanotoxicity / safety / quality-control work specific to nano-herbal products.
+- Reviews or methods that genuinely advance the nano-phytomedicine field.
+
+ALSO TRACK (score 0.5-0.7):
+- General nanomedicine / drug-delivery advances clearly transferable to natural-product or herbal payloads.
+- Ethnopharmacology / phytochemistry isolating or validating a natural active that is a strong nano-delivery candidate (poor solubility, promising bioactivity).
+- Tumor-targeting, oral-delivery, or blood-brain-barrier nanocarrier advances relevant to herbal actives.
+- Standardization, characterization, and regulatory discussion of nano-herbal products.
+
+SCORE DOWN (<= 0.4) OR EXCLUDE:
+- Pure synthetic-drug nanomedicine with no natural-product / herbal angle (just regular pharma nanoparticles).
+- Pure phytochemistry / TCM pharmacology with NO nano / delivery dimension — that's a venus-style story, not this feed.
+- Materials-science nanotech with no biomedical / delivery application.
+- Wellness / supplement marketing, "nano detox", colloidal-silver-style pseudoscience, unvalidated product promotion.
+- Credulous "ancient herb cures cancer" content with no rigorous nano-pharmacology.
+
+DEFAULTS:
+- The sweet spot is the GENUINE INTERSECTION: a nanocarrier OR nanonization applied to a natural / herbal / TCM active, with real pharmacology. Score that highest.
+- If a paper is only-nano or only-herbal (not both), score in the 0.4-0.6 band unless it's a strong delivery candidate or method.
+- Honest negative results (a nano-herbal formulation that did not improve outcomes) are still signal.
+"""
+
+[overrides]
+min_score = 0.50
+
+# Per-profile cadence: both recipients get DAILY + weekly (overrides global daily_only
+# for THIS profile only; does not affect venus / china-geopolitics).
+[overrides.cadence]
+daily_only = ["mrjinch@gmail.com", "13810239681@163.com"]
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "13810239681@163.com"]
+# Bilingual: translate every email; trad-zh on top, English below.
+translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
+translate_label = "繁體中文"

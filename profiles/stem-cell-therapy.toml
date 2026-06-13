@@ -1,0 +1,142 @@
+# Profile: stem-cell-therapy (干细胞临床治疗 / clinical stem-cell therapy)
+# Scope: clinical translation of stem-cell & regenerative medicine — cell
+# therapies in trials and the clinic (iPSC, ESC, MSC / mesenchymal stromal,
+# HSC), organoid- and tissue-engineering therapeutics, regenerative repair,
+# plus the manufacturing / regulatory / safety story behind getting cells into
+# patients. Bilingual digest: Traditional Chinese on top, English below.
+
+name = "stem-cell-therapy"
+description = "Latest advances in clinical stem-cell therapy & regenerative medicine: cell-therapy trials (iPSC/ESC/MSC/HSC), organoids and tissue engineering, manufacturing, safety, and regulatory milestones."
+
+paywalled_domains = [
+    "cell.com",
+    "nature.com",
+    "science.org",
+    "thelancet.com",
+    "nejm.org",
+    "jamanetwork.com",
+    "sciencedirect.com",
+    "academic.oup.com",
+    "wiley.com",
+]
+
+[feeds]
+list = [
+    # === Core stem-cell / regenerative journals ===
+    "Cell Stem Cell | https://www.cell.com/cell-stem-cell/rss",
+    "Stem Cell Reports | https://www.cell.com/stem-cell-reports/rss",
+    "Stem Cell Research & Therapy (BMC) | https://stemcellres.biomedcentral.com/articles/most-recent/rss.xml",
+    "npj Regenerative Medicine | https://www.nature.com/npjregenmed.rss",
+    "Cytotherapy | https://rss.sciencedirect.com/publication/science/14653249",
+
+    # === High-impact medicine / biotech ===
+    "Nature Medicine | https://www.nature.com/nm.rss",
+    "Nature Biotechnology | https://www.nature.com/nbt.rss",
+    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
+    "Cell | https://www.cell.com/cell/rss",
+
+    # === News / community ===
+    "The Niche (Knoepfler stem-cell blog) | https://ipscell.com/feed/",
+    "STAT News | https://www.statnews.com/feed/",
+    "ScienceDaily - Stem Cells | https://www.sciencedaily.com/rss/health_medicine/stem_cells.xml",
+
+    # === Preprints ===
+    "bioRxiv - cell biology | http://connect.biorxiv.org/biorxiv_xml.php?subject=cell_biology",
+
+    # === PubMed topical ===
+    "PubMed: stem cell therapy clinical trial | https://pubmed.ncbi.nlm.nih.gov/rss/search/stem+cell+therapy+clinical+trial/?limit=60",
+    "PubMed: iPSC cell therapy | https://pubmed.ncbi.nlm.nih.gov/rss/search/induced+pluripotent+stem+cell+therapy/?limit=40",
+    "PubMed: mesenchymal stromal cell trial | https://pubmed.ncbi.nlm.nih.gov/rss/search/mesenchymal+stromal+cell+clinical+trial/?limit=40",
+]
+
+[interests]
+keywords = [
+    # Cell types / sources
+    "stem cell therapy",
+    "regenerative medicine",
+    "cell therapy",
+    "induced pluripotent stem cell",
+    "iPSC",
+    "embryonic stem cell",
+    "mesenchymal stem cell",
+    "mesenchymal stromal cell",
+    "hematopoietic stem cell",
+    "neural stem cell",
+    "organoid",
+    "tissue engineering",
+
+    # Clinical translation
+    "clinical trial",
+    "first-in-human",
+    "cell transplantation",
+    "autologous",
+    "allogeneic",
+    "regenerative repair",
+    "stem cell transplant",
+    "advanced therapy medicinal product",
+    "cell manufacturing",
+    "GMP cell",
+    "off-the-shelf cell",
+
+    # Therapeutic areas
+    "spinal cord injury repair",
+    "Parkinson cell therapy",
+    "macular degeneration cell",
+    "type 1 diabetes islet",
+    "cartilage repair",
+    "heart regeneration",
+    "graft versus host",
+    "bone marrow transplant",
+
+    # Safety / regulatory
+    "teratoma",
+    "tumorigenicity",
+    "cell therapy safety",
+    "FDA cell therapy",
+    "stem cell tourism",
+]
+
+narrative = """
+This feed tracks the LATEST ADVANCES IN CLINICAL STEM-CELL THERAPY AND REGENERATIVE MEDICINE — moving cells from bench to patient. Emphasis on clinical translation: trials, first-in-human results, manufacturing, safety, and regulation, plus the foundational science that enables them.
+
+SURFACE HIGH (score >= 0.70):
+- Clinical trials of stem-cell / regenerative therapies: first-in-human, phase I-III results, new INDs, regulatory approvals (FDA / EMA / PMDA). iPSC-, ESC-, MSC/stromal-, HSC-, and neural-stem-cell-based therapies.
+- Landmark therapeutic-area progress: iPSC-derived dopaminergic neurons for Parkinson's, RPE cells for macular degeneration, islet / beta-cell therapy for type 1 diabetes, cell therapy for spinal cord injury, cartilage / bone / cardiac regeneration, HSC transplant advances, GvHD.
+- Organoid- and tissue-engineering therapeutics with a translational path (transplantable tissues, bioprinted constructs going toward the clinic).
+- Cell-manufacturing and delivery advances that unlock therapies: GMP scale-up, off-the-shelf / allogeneic "universal" cells, hypoimmunogenic engineering, potency assays, cryopreservation, in-vivo reprogramming.
+- Safety & rigor: tumorigenicity / teratoma risk, long-term follow-up, and HONEST negative or null trial results.
+- Mechanistic stem-cell biology that directly enables therapy (reprogramming, differentiation protocols, stemness, niche control).
+
+ALSO TRACK (score 0.5-0.7):
+- Preclinical / animal-model regenerative results with a clear clinical rationale.
+- Policy, funding, and ethics news on stem-cell / regenerative medicine (ISSCR guidelines, reimbursement, right-to-try).
+- Biotech / company milestones (financing tied to a specific clinical program, partnerships) when there's real scientific substance.
+- Adjacent engineered-cell therapies (CAR-based) ONLY when the angle is stem-cell-derived or regenerative, not pure oncology immunotherapy.
+
+SCORE DOWN (<= 0.4) OR EXCLUDE:
+- Unproven "stem cell clinic" / stem-cell-tourism marketing, supplement or cosmetic "stem cell" products — UNLESS the article is a rigorous expose / regulatory crackdown.
+- Pure cancer immunotherapy (CAR-T for lymphoma) with no regenerative / stem-cell dimension.
+- Basic developmental biology with no therapeutic line of sight.
+- Hype press releases with no data, vague "breakthrough" claims.
+- General gene-therapy news unless it intersects stem / regenerative cells.
+
+DEFAULTS:
+- Weight clinical-stage evidence and manufacturing/safety substance over early preclinical buzz.
+- An honest failed or null trial is HIGH signal — surface it.
+- When unsure if a CAR / gene therapy belongs here, ask: is the therapeutic a stem / progenitor / regenerative cell? If no, score down.
+"""
+
+[overrides]
+min_score = 0.50
+
+# Per-profile cadence: both recipients get DAILY + weekly (overrides global daily_only
+# for THIS profile only; does not affect venus / china-geopolitics).
+[overrides.cadence]
+daily_only = ["mrjinch@gmail.com", "13810239681@163.com"]
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "13810239681@163.com"]
+# Bilingual: translate every email; trad-zh on top, English below.
+translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
+translate_label = "繁體中文"

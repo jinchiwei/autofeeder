@@ -1,0 +1,145 @@
+# Profile: homecare-robotics (家庭医生机器人 / home "family-doctor" robots)
+# Scope: robots and embodied AI that deliver healthcare in the HOME and primary-
+# care setting — home-care & eldercare robots, AI health assistants / triage
+# agents, telepresence & telehealth robots, socially-assistive & companion
+# robots, rehabilitation & mobility assistance, remote patient monitoring.
+# Bilingual digest: Traditional Chinese on top, English below.
+
+name = "homecare-robotics"
+description = "Latest advances in home healthcare / family-doctor robots: eldercare & companion robots, AI health assistants and triage, telepresence/telehealth robots, assistive & rehab robotics, remote monitoring."
+
+paywalled_domains = [
+    "science.org",
+    "nature.com",
+    "cell.com",
+    "thelancet.com",
+    "jamanetwork.com",
+    "nejm.org",
+    "sciencedirect.com",
+    "ieee.org",
+    "wsj.com",
+    "technologyreview.com",
+]
+
+[feeds]
+list = [
+    # === Robotics journals & trade press ===
+    "Science Robotics | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=scirobotics",
+    "IEEE Spectrum - Robotics | https://spectrum.ieee.org/feeds/topic/robotics.rss",
+    "The Robot Report | https://www.therobotreport.com/feed/",
+    "Frontiers in Robotics and AI | https://www.frontiersin.org/journals/robotics-and-ai/rss",
+    "ScienceDaily - Robotics | https://www.sciencedaily.com/rss/computers_math/robotics.xml",
+
+    # === AI + digital health ===
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "npj Digital Medicine | https://www.nature.com/npjdigitalmed.rss",
+    "MIT Technology Review | https://www.technologyreview.com/feed/",
+    "MobiHealthNews | https://www.mobihealthnews.com/feed",
+    "MedCity News | https://medcitynews.com/feed/",
+    "Fierce Healthcare | https://www.fiercehealthcare.com/rss/xml",
+    "STAT News | https://www.statnews.com/feed/",
+
+    # === Assistive / rehab engineering ===
+    "J NeuroEngineering & Rehabilitation (BMC) | https://jneuroengrehab.biomedcentral.com/articles/most-recent/rss.xml",
+
+    # === Preprints ===
+    "arXiv Robotics (cs.RO) | https://rss.arxiv.org/rss/cs.RO",
+    "arXiv Human-Computer Interaction (cs.HC) | https://rss.arxiv.org/rss/cs.HC",
+
+    # === PubMed topical ===
+    "PubMed: socially assistive robot | https://pubmed.ncbi.nlm.nih.gov/rss/search/socially+assistive+robot/?limit=50",
+    "PubMed: care robot older adults | https://pubmed.ncbi.nlm.nih.gov/rss/search/care+robot+older+adults/?limit=50",
+
+    # === Hacker News — focused query ===
+    "HN - healthcare / eldercare robots | https://hnrss.org/newest?q=health+robot+OR+eldercare+robot+OR+care+robot+OR+nursing+robot&points=50",
+]
+
+[interests]
+keywords = [
+    # Home / primary-care robots
+    "home healthcare robot",
+    "family doctor robot",
+    "care robot",
+    "eldercare robot",
+    "nursing robot",
+    "companion robot",
+    "socially assistive robot",
+    "service robot healthcare",
+    "domestic robot",
+
+    # AI health agent / triage
+    "AI health assistant",
+    "AI triage",
+    "clinical decision support",
+    "conversational health agent",
+    "virtual nurse",
+    "symptom checker",
+    "remote patient monitoring",
+    "telehealth",
+    "telepresence robot",
+    "ambient assisted living",
+    "aging in place",
+
+    # Assistance / rehab
+    "assistive robot",
+    "rehabilitation robot",
+    "exoskeleton",
+    "mobility assistance",
+    "fall detection",
+    "wearable health monitor",
+    "human-robot interaction",
+    "physical assistance robot",
+
+    # Adjacent clinical robotics
+    "medical robot",
+    "autonomous health monitoring",
+    "robot-assisted care",
+    "embodied AI healthcare",
+]
+
+narrative = """
+This feed tracks the LATEST ADVANCES IN HOME / PRIMARY-CARE ROBOTS AND EMBODIED HEALTH AI — the broad idea of a "family doctor robot": systems that monitor, triage, assist, and care for people in the home or primary-care setting. The frame is real engineering + clinical evidence, not consumer-gadget hype.
+
+SURFACE HIGH (score >= 0.70):
+- New home-care, eldercare, nursing, or companion / socially-assistive robots with real capability or clinical evaluation (pilot studies, RCTs, deployments in homes / care facilities).
+- AI health assistants and triage agents that act like a primary-care first contact: symptom assessment, clinical decision support, virtual nursing, conversational diagnosis — especially with validation data or regulatory milestones.
+- Telepresence / telehealth robots and remote patient monitoring systems that bring clinician care into the home.
+- Assistive & rehabilitation robotics for daily living: mobility assistance, exoskeletons, fall detection/prevention, physical-assistance robots, robots supporting aging-in-place and ambient assisted living.
+- Foundation-model / embodied-AI advances applied to healthcare robots (vision-language-action models for care tasks, manipulation for ADLs).
+- Human-robot interaction research specific to vulnerable populations (older adults, dementia care, pediatric, disability).
+- Regulatory / reimbursement / health-system news that materially enables home-care robots (FDA clearances, CE marks, CMS coverage of remote monitoring).
+
+ALSO TRACK (score 0.5-0.7):
+- General medical / surgical robotics advances with plausible transfer to home or primary care.
+- Wearables and home sensors feeding AI health monitoring.
+- Component advances (soft robotics, tactile sensing, safe physical HRI, on-device LLM agents) clearly aimed at care robots.
+- Market / deployment news from credible robotics trade press.
+- Aging-society policy and workforce-shortage analyses that drive care-robot demand.
+
+SCORE DOWN (<= 0.4) OR EXCLUDE:
+- Pure industrial / warehouse / manufacturing robotics with no health angle.
+- Generic LLM / chatbot news with no embodied or clinical-care dimension.
+- Wellness-gadget marketing, crowdfunding hype, vaporware demos with no evaluation.
+- Military / defense robotics.
+- Self-driving cars and drones unless explicitly medical-delivery / home-care.
+- Surgical-robot business news (e.g. routine da Vinci procedure counts) with no advance.
+
+DEFAULTS:
+- Favor work with evaluation data, deployment, or a clear path into the home / primary care over flashy lab demos.
+- A rigorous null result (a care robot that did NOT help) is still signal — surface it.
+"""
+
+[overrides]
+min_score = 0.50
+
+# Per-profile cadence: both recipients get DAILY + weekly (overrides global daily_only
+# for THIS profile only; does not affect venus / china-geopolitics).
+[overrides.cadence]
+daily_only = ["mrjinch@gmail.com", "13810239681@163.com"]
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "13810239681@163.com"]
+# Bilingual: translate every email; trad-zh on top, English below.
+translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
+translate_label = "繁體中文"
