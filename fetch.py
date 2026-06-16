@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import socket
 from datetime import datetime, timezone, timedelta
 from typing import Any
 
@@ -122,6 +123,14 @@ def fetch_items(
     lookback_days: int = fetch_cfg.get("lookback_days", 7)
     max_per_feed: int = fetch_cfg.get("max_items_per_feed", 50)
     max_total: int = fetch_cfg.get("max_total_items", 400)
+
+    # Bound every feedparser.parse() with a socket timeout. feedparser.parse(url)
+    # does a blocking fetch with NO timeout by default, so a single stalled feed
+    # server hangs the whole synchronous fetch loop — and because fetch runs
+    # inside the async profile coroutines, that froze the entire `--all` run for
+    # ~15h on 2026-06-15 (a FeedBurner/Google feed stalled mid-connection).
+    feed_timeout: float = fetch_cfg.get("feed_timeout", 30)
+    socket.setdefaulttimeout(feed_timeout)
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=lookback_days)
     cutoff_iso = cutoff.isoformat()
