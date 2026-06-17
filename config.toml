@@ -2,6 +2,11 @@
 backend = "anthropic"
 frequency = "weekly"
 log_level = "INFO"
+# Max profiles to run concurrently under `--all`. Each profile fans out its own
+# triage/translate LLM calls, so unbounded parallelism (all profiles at once)
+# can thunder the Versa gateway into a 429/504 storm. Keep `--all` parallel but
+# bounded. Raise when Versa is healthy; lower if you see 504 storms.
+max_concurrent_profiles = 3
 
 [fetch]
 max_items_per_feed = 50

@@ -484,16 +484,28 @@ async def run_all_profiles_async(profile_paths: list[str], config: dict) -> list
         return []
 
     profile_paths = active_paths
-    logger.info("Running %d profiles in parallel", len(profile_paths))
+
+    # Cap how many profiles run concurrently. Each profile fans out its own
+    # triage/summarize/translate LLM calls, so running ALL profiles at once
+    # (e.g. 10 × ~4 = ~40 concurrent Versa calls) thunders the gateway and, on a
+    # degraded-Versa night, self-amplifies into a 429/504 storm. A semaphore
+    # keeps `--all` parallel but bounded, so it throttles gracefully instead.
+    max_concurrent = int(config.get("general", {}).get("max_concurrent_profiles", 3))
+    max_concurrent = max(1, min(max_concurrent, len(profile_paths)))
+    sem = asyncio.Semaphore(max_concurrent)
+    logger.info(
+        "Running %d profiles (max %d concurrent)", len(profile_paths), max_concurrent,
+    )
 
     async def _safe_run(path: str) -> tuple[str, dict | None]:
         name = Path(path).stem
-        try:
-            result = await run_profile_async(path, config)
-            return (name, result)
-        except Exception:
-            logger.exception("Profile %s failed", name)
-            return (name, None)
+        async with sem:
+            try:
+                result = await run_profile_async(path, config)
+                return (name, result)
+            except Exception:
+                logger.exception("Profile %s failed", name)
+                return (name, None)
 
     results = await asyncio.gather(*[_safe_run(p) for p in profile_paths])
     return [(name, result) for name, result in results if result is not None]
