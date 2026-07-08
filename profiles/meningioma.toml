@@ -153,6 +153,13 @@ paywalled_domains = [
 [overrides]
 min_score = 0.55
 
+# Weekly-only for ALL recipients (including Jin): no address listed here is a
+# recipient of this profile, so everyone falls into the weekly (Monday) cohort.
+# Must be non-empty — an empty daily_only means "everyone daily" (see
+# outputs/email.py _split_cohorts).
+[overrides.cadence]
+daily_only = ["none@weekly-only.invalid"]
+
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
 recipients = [
