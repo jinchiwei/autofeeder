@@ -28,7 +28,7 @@ async def _call_anthropic(prompt: str, config: dict[str, Any]) -> str:
     import anthropic
 
     timeout = config.get("anthropic", {}).get("timeout", 300)
-    model = config.get("anthropic", {}).get("model", "claude-opus-4-6")
+    model = config.get("anthropic", {}).get("model", "claude-opus-4-8")
 
     aws_key = os.environ.get("AWS_ACCESS_KEY_ID", "")
     if aws_key:

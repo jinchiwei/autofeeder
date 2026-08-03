@@ -229,7 +229,7 @@ async def call_summarize(
     prompt = build_summary_prompt(interests, item)
 
     anthropic_cfg = config.get("anthropic", {})
-    model = anthropic_cfg.get("model", "claude-opus-4-6")
+    model = anthropic_cfg.get("model", "claude-opus-4-8")
 
     logger.info(
         "Anthropic summarize: model=%s, title=%s",
@@ -273,7 +273,7 @@ async def call_tldr(
     prompt = build_tldr_prompt(interests, top_items)
 
     anthropic_cfg = config.get("anthropic", {})
-    model = anthropic_cfg.get("model", "claude-opus-4-6")
+    model = anthropic_cfg.get("model", "claude-opus-4-8")
 
     logger.info("Anthropic TL;DR: model=%s, items=%d", model, len(top_items))
 

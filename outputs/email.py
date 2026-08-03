@@ -615,7 +615,7 @@ def _translate_digest_data(
         return copy.deepcopy(digest_data)
 
     client = make_client(config)
-    model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-6-v1")
+    model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-4-8")
 
     # One item per LLM request — the smallest possible payload, so each call
     # clears UCSF Versa's 504 timeout window with maximum margin. Combined with

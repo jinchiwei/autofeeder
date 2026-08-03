@@ -208,7 +208,7 @@ def run_setup() -> None:
     if backend_idx == 0:
         # Direct API -- use standard model names
         _update_config_models(
-            model="claude-opus-4-6",
+            model="claude-opus-4-8",
             triage_model="claude-sonnet-4-6",
         )
     elif backend_idx == 2:

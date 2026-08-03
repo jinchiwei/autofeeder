@@ -50,7 +50,7 @@ DEFAULTS: dict[str, Any] = {
         "max_returned": 40,
     },
     "anthropic": {
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-8",
         "triage_model": "claude-sonnet-4-6",
         "timeout": 300,
     },
