@@ -1,0 +1,125 @@
+# Profile: agi  (Alzheimer's - Genetics - Imaging)
+# Scope: the imaging x genetics intersection in Alzheimer's disease, kept at a
+# deliberate 50/50 balance between the two. Alzheimer's/dementia only.
+# For general AD advances across all subfields, see the `alzheimers` profile.
+#
+# Feed list is intentionally symmetric: for every imaging source there is a
+# genetics counterpart, so neither side can dominate by volume alone.
+
+name = "agi"
+description = "Alzheimer's Genetics + Imaging (AGI) — imaging-genetics in Alzheimer's disease, balanced 50/50 between neuroimaging and genetics."
+
+# Top-level key — MUST sit above the first [section] header (TOML scoping rule).
+paywalled_domains = [
+    "jamanetwork.com",
+    "thelancet.com",
+    "cell.com",
+    "nature.com",
+    "science.org",
+    "academic.oup.com",
+    "pubs.rsna.org",
+    "onlinelibrary.wiley.com",
+    "neurology.org",
+    "ajnr.org",
+    "sciencedirect.com",
+]
+
+[feeds]
+list = [
+    # === Imaging (6) ===
+    "NeuroImage | https://rss.sciencedirect.com/publication/science/10538119",
+    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
+    "Human Brain Mapping | https://onlinelibrary.wiley.com/feed/10970193/most-recent",
+    "Radiology (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0401260/?limit=60&name=Radiology&utm_campaign=journals",
+    "AJNR (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/8003708/?limit=100&name=AJNR%20Am%20J%20Neuroradiol&utm_campaign=journals",
+    "medRxiv Radiology & Imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
+
+    # === Genetics (6) ===
+    "Nature Genetics | https://www.nature.com/ng.rss",
+    "American Journal of Human Genetics | https://rss.sciencedirect.com/publication/science/00029297",
+    "Human Molecular Genetics (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/9208958/?limit=60&name=Hum%20Mol%20Genet&utm_campaign=journals",
+    "PLOS Genetics | https://journals.plos.org/plosgenetics/feed/atom",
+    "medRxiv Genetic & Genomic Medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=genetic_and_genomic_medicine",
+    "Nature Reviews Genetics | https://www.nature.com/nrg.rss",
+
+    # === Both / dementia-anchored (shared ground) ===
+    "Alzheimer's & Dementia | https://alz-journals.onlinelibrary.wiley.com/feed/15525279/most-recent",
+    "Brain (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0372537/?limit=100&name=Brain&utm_campaign=journals",
+    "Neurobiology of Aging | https://rss.sciencedirect.com/publication/science/01974580",
+    "Alzheimer's Research & Therapy | https://link.springer.com/search.rss?facet-journal-id=13195&channel-name=Alzheimer%27s+Research+%26+Therapy",
+    "medRxiv Neurology | http://connect.medrxiv.org/medrxiv_xml.php?subject=neurology",
+    "bioRxiv Neuroscience | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
+    "Alzforum News | http://feeds.feedburner.com/alzforum/PpcR",
+]
+
+[interests]
+# Deliberately symmetric: ~equal counts of imaging and genetics terms, plus the
+# intersection terms that define this profile.
+keywords = [
+    # --- imaging ---
+    "amyloid PET",
+    "tau PET",
+    "structural MRI",
+    "hippocampal volume",
+    "cortical thickness",
+    "brain atrophy",
+    "white matter hyperintensities",
+    "functional connectivity",
+    "diffusion MRI",
+    "brain age",
+    "neuroimaging",
+    "imaging biomarker",
+    # --- genetics ---
+    "GWAS",
+    "APOE",
+    "polygenic risk score",
+    "rare variant",
+    "TREM2",
+    "MAPT",
+    "APP PSEN1 PSEN2",
+    "heritability",
+    "expression quantitative trait loci",
+    "Mendelian randomization",
+    "single-cell transcriptomics",
+    "genetic risk",
+    # --- the intersection ---
+    "imaging genetics",
+    "imaging-derived phenotype",
+    "endophenotype",
+    "genotype-phenotype",
+    "ADNI",
+    "UK Biobank",
+    "multi-omics imaging",
+    "radiogenomics",
+]
+
+narrative = """
+This digest covers the intersection of neuroimaging and genetics in Alzheimer's disease, for a group that works on exactly that intersection (neuroradiology and AD genetics).
+
+**Two hard constraints:**
+
+1. **Alzheimer's only.** Every item must be about Alzheimer's disease, dementia, MCI, or directly relevant neurodegeneration. Reject general neuroimaging methods, general radiology, general statistical genetics, and general machine learning unless the paper is substantively about AD/dementia. A method paper validated on ADNI or UK Biobank counts only if the AD finding is the point.
+
+2. **50/50 balance between imaging and genetics.** Aim for roughly equal representation. Do not let either side dominate. If a day is heavy on one, prefer the strongest items from the lighter side even at a somewhat lower score, and return fewer total items rather than an unbalanced digest.
+
+Score highest of all: work that genuinely **joins** the two — imaging-genetics association studies, imaging-derived phenotypes as endophenotypes, genetic risk (APOE, PRS, rare variants) predicting imaging change, eQTL or single-cell work anchored to imaging phenotypes, radiogenomics, and multi-omics integrated with imaging. These belong at the top even when a single-modality paper scores similarly.
+
+Then, in equal measure:
+
+- **Imaging**: amyloid and tau PET, structural and diffusion MRI, functional connectivity, cortical thinning and atrophy trajectories, white matter disease, and quantitative imaging biomarkers of progression.
+- **Genetics**: risk loci and GWAS, APOE biology, polygenic risk scores, rare and familial variants (APP, PSEN1, PSEN2, TREM2, MAPT), heritability, transcriptomics and single-cell work, and functional follow-up explaining mechanism.
+
+Large cohorts (ADNI, UK Biobank, A4, DIAN, ADSP) are of particular interest, as are methods for integrating genetic and imaging data. Prefer work with clear methodological rigour: appropriate correction for multiple comparisons, replication or external validation, and honest handling of population structure and ancestry.
+"""
+
+[overrides]
+min_score = 0.55
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = [
+    "mrjinch@gmail.com",
+    "Andreas.Rauschecker@ucsf.edu",
+    "Jennifer.Yokoyama@ucsf.edu",
+    "Luke.Bonham@ucsf.edu",
+]

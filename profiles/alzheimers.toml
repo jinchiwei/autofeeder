@@ -1,9 +1,11 @@
-# Auto-generated profile for: Alzheimer's disease imaging MRI biomarkers genomics
-# Review and edit before using!
-# Some RSS URLs may need verification.
+# Profile: alzheimers
+# Scope: the most important advances in Alzheimer's disease research, broadly.
+# Deliberately NOT specialised. Imaging and genetics are welcome but must not
+# dominate — see the narrative. For the imaging x genetics intersection
+# specifically, use the `agi` profile instead.
 
 name = "alzheimers"
-description = "Auto-discovered feeds for: Alzheimer's disease imaging MRI biomarkers genomics"
+description = "The most important advances in Alzheimer's disease research, across all subfields — biology, therapeutics, trials, biomarkers, epidemiology, care."
 
 # Top-level key — MUST sit above the first [section] header (TOML scoping rule).
 paywalled_domains = [
@@ -24,119 +26,128 @@ paywalled_domains = [
 list = [
     # === Core Neurology & Dementia Journals ===
     "Alzheimer's & Dementia | https://alz-journals.onlinelibrary.wiley.com/feed/15525279/most-recent",
-    "Neurology | https://www.neurology.org/rss/current.xml",
+    "Neurology (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0401060/?limit=60&name=Neurology&utm_campaign=journals",
     "Brain (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0372537/?limit=100&name=Brain&utm_campaign=journals",
     "Annals of Neurology | https://onlinelibrary.wiley.com/feed/15318249/most-recent",
-    "JAMA Neurology | https://jamanetwork.com/rss/site_12/68.xml",
-    "Lancet Neurology | http://www.thelancet.com/rssfeed/laneur_current.xml",
+    "JAMA Neurology (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/101589536/?limit=60&name=JAMA%20Neurol&utm_campaign=journals",
+    "Lancet Neurology (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/101139309/?limit=60&name=Lancet%20Neurol&utm_campaign=journals",
     "Neurobiology of Aging | https://rss.sciencedirect.com/publication/science/01974580",
     "Alzheimer's Research & Therapy | https://link.springer.com/search.rss?facet-journal-id=13195&channel-name=Alzheimer%27s+Research+%26+Therapy",
-    
-    # === Neuroimaging Journals ===
-    "NeuroImage | https://rss.sciencedirect.com/publication/science/10538119",
-    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
-    "Human Brain Mapping | https://onlinelibrary.wiley.com/feed/10970193/most-recent",
-    "Radiology | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=radiology",
-    "AJNR (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/8003708/?limit=100&name=AJNR%20Am%20J%20Neuroradiol&utm_campaign=journals",
-    
+    "Nature Reviews Neurology | https://www.nature.com/nrneurol.rss",
+
+    # === Disease Biology & Mechanism ===
+    "Neuron | https://rss.sciencedirect.com/publication/science/08966273",
+    "Nature Aging | https://www.nature.com/nataging.rss",
+
+    # === Therapeutics & Clinical Trials ===
+    "NEJM (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0255562/?limit=60&name=N%20Engl%20J%20Med&utm_campaign=journals",
+    "JAMA (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/7501160/?limit=60&name=JAMA&utm_campaign=journals",
+    "Nature Medicine | https://www.nature.com/nm.rss",
+    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
+
     # === Genetics & Genomics ===
     "Nature Genetics | https://www.nature.com/ng.rss",
     "American Journal of Human Genetics | https://rss.sciencedirect.com/publication/science/00029297",
-    "Genome Research | https://genome.cshlp.org/rss/current.xml",
     "PLOS Genetics | https://journals.plos.org/plosgenetics/feed/atom",
-    
+
+    # === Imaging ===
+    "NeuroImage: Clinical | https://rss.sciencedirect.com/publication/science/22131582",
+    "Radiology (PubMed) | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0401260/?limit=60&name=Radiology&utm_campaign=journals",
+
     # === High-Impact General Science ===
     "Nature Neuroscience | https://www.nature.com/neuro.rss",
-    "Nature Medicine | https://www.nature.com/nm.rss",
-    "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
     "Cell | https://rss.sciencedirect.com/publication/science/00928674",
-    
+    "Science Advances | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv",
+
     # === Preprints ===
     "bioRxiv Neuroscience | http://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience",
     "medRxiv Neurology | http://connect.medrxiv.org/medrxiv_xml.php?subject=neurology",
-    "medRxiv Radiology & Imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
     "medRxiv Genetic & Genomic Medicine | http://connect.medrxiv.org/medrxiv_xml.php?subject=genetic_and_genomic_medicine",
-    
+
     # === News & Commentary ===
     "Alzforum News | http://feeds.feedburner.com/alzforum/PpcR",
     "STAT News | https://www.statnews.com/feed/",
-    
-    # === Wildcard / Cross-Disciplinary ===
-    "Nature Aging | https://www.nature.com/nataging.rss",
-    "Science Advances | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv",
-    "arXiv Quantitative Biology - Neurons & Cognition | https://rss.arxiv.org/rss/q-bio.NC",
 
-    # === AI / ML in Medicine ===
-    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
-    "Radiology: AI | https://pubs.rsna.org/action/showFeed?type=etoc&feed=rss&jc=ai",
-    "Medical Image Analysis | https://rss.sciencedirect.com/publication/science/13618415",
-    "arXiv Image & Video Processing | https://rss.arxiv.org/rss/eess.IV",
-    "arXiv Machine Learning | https://rss.arxiv.org/rss/cs.LG",
+    # === Cross-Disciplinary ===
     "Frontiers in Aging Neuroscience | https://www.frontiersin.org/journals/aging-neuroscience/rss",
 ]
 
 [interests]
+# Kept deliberately subfield-neutral. Modality-specific terms (amyloid PET,
+# hippocampal volume, GWAS, ...) live in the `agi` profile; putting them here
+# is what previously made this digest ~80% imaging.
 keywords = [
     "Alzheimer's disease",
-    "amyloid PET",
-    "tau PET",
-    "MRI biomarkers",
-    "hippocampal volume",
-    "brain atrophy",
-    "neuroimaging",
-    "APOE",
-    "GWAS",
-    "polygenic risk score",
-    "mild cognitive impairment",
     "dementia",
-    "beta-amyloid",
-    "neurofibrillary tangles",
-    "white matter hyperintensities",
-    "CSF biomarkers",
-    "plasma biomarkers",
-    "structural MRI",
-    "functional connectivity",
-    "ADNI",
+    "mild cognitive impairment",
+    "neurodegeneration",
+    "amyloid",
+    "tau",
+    "neuroinflammation",
+    "microglia",
+    "APOE",
+    "lecanemab",
+    "donanemab",
+    "anti-amyloid",
+    "disease-modifying therapy",
+    "clinical trial",
+    "phase 3",
+    "biomarker",
+    "blood-based biomarker",
     "early detection",
     "preclinical Alzheimer's",
-    "genetic risk factors",
-    "neurodegeneration",
-    "deep learning Alzheimer",
-    "machine learning dementia",
-    "brain age prediction",
-    "AI diagnosis",
-    "convolutional neural network brain",
-    "transformer medical imaging",
-    "graph neural network brain",
-    "classification MCI",
-    "image segmentation brain",
-    "explainable AI neuroimaging",
-    "radiomics",
-    "drug discovery Alzheimer",
-    "clinical trial AI",
+    "cognitive decline",
+    "risk factor",
+    "prevention",
+    "epidemiology",
+    "prevalence",
+    "caregiving",
+    "health disparities",
+    "drug discovery",
+    "target identification",
+    "tauopathy",
+    "synaptic loss",
+    "vascular contributions",
+    "sleep and dementia",
+    "ADNI",
+    "UK Biobank",
 ]
 
 narrative = """
-I am researching the intersection of neuroimaging and genomics in Alzheimer's disease. My primary interests include:
+I want a general briefing on the most important advances in Alzheimer's disease research. Treat this as "what would a well-informed AD researcher need to know this week", across the whole field — not any one subfield.
 
-1. **MRI biomarkers**: Structural and functional MRI findings that can serve as early indicators or progression markers for Alzheimer's, including hippocampal atrophy, cortical thinning, white matter changes, and resting-state connectivity alterations.
+Score highly:
 
-2. **Molecular imaging**: PET imaging with amyloid and tau tracers, and how these relate to MRI-detectable changes and genetic risk.
+1. **Therapeutics and trials**: results from anti-amyloid and anti-tau agents (lecanemab, donanemab, and successors), novel mechanisms, phase 2/3 readouts, failures and safety signals (including ARIA), regulatory decisions, and trial-design innovations.
 
-3. **Genomics and genetics**: GWAS findings, polygenic risk scores, APOE variants, and rare genetic mutations (APP, PSEN1, PSEN2) — particularly how genetic factors influence imaging phenotypes (imaging-genetics).
+2. **Disease biology**: amyloid and tau biology, neuroinflammation and microglia, synaptic and neuronal loss, proteostasis, vascular and metabolic contributions, lipid biology, and work that changes how the field thinks about causation rather than correlation.
 
-4. **Fluid biomarkers**: CSF and blood-based biomarkers (Aβ42/40 ratio, p-tau, NfL) and their correlation with imaging findings.
+3. **Biomarkers and early detection**: blood-based and CSF markers, digital and cognitive markers, and screening strategies — with an emphasis on clinical usability and validation in diverse cohorts.
 
-5. **Translational research**: Studies bridging basic science discoveries to clinical applications, including early detection strategies, clinical trial design using imaging endpoints, and precision medicine approaches.
+4. **Genetics**: risk loci, APOE biology, rare variants, and functional follow-up that explains mechanism.
 
-6. **AI and computational methods**: Deep learning, machine learning, and other AI approaches applied to Alzheimer's research — automated classification (AD vs MCI vs healthy), brain age prediction, radiomics, explainable AI for neuroimaging, graph neural networks for brain connectivity, and AI-driven drug discovery or clinical trial optimization.
+5. **Imaging**: PET and MRI findings that change clinical understanding or practice.
 
-I want to stay current on both cutting-edge research and clinical developments, from large cohort studies (ADNI, UK Biobank) to novel computational methods for image analysis and genetic data integration. Papers applying novel AI/ML methods to AD data should be scored highly even if the primary contribution is methodological rather than clinical.
+6. **Epidemiology, prevention, and care**: modifiable risk factors, prevention trials, prevalence trends, disparities, and care delivery.
+
+7. **Methods and AI**: computational or AI methods only when the *finding* about Alzheimer's matters, not when the contribution is purely methodological.
+
+**Balance is a hard requirement.** This digest was previously dominated by neuroimaging, and that is exactly what I am trying to fix. Do not let any single subfield — imaging especially, but also genetics or AI methods — take more than roughly a quarter of the selected items when other strong work is available. An imaging or methods paper must clear a higher bar than a therapeutics, biology, or trial paper of equal quality. If a day's candidates are overwhelmingly imaging, prefer returning fewer items over filling the digest with them.
+
+Every item must be genuinely about Alzheimer's disease, dementia, or directly relevant neurodegeneration. Skip general neuroscience, general radiology, and general machine-learning papers that merely mention dementia as one application among many.
 """
 
 [overrides]
-min_score = 0.52
+min_score = 0.55
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
-recipients = ["mrjinch@gmail.com", "jake.oxendine@ucsf.edu", "Andreas.Rauschecker@ucsf.edu", "Luke.Bonham@ucsf.edu", "Jennifer.Yokoyama@ucsf.edu", "evan.bloch2@ucsf.edu"]
+recipients = [
+    "mrjinch@gmail.com",
+    "jake.oxendine@ucsf.edu",
+    "Andreas.Rauschecker@ucsf.edu",
+    "Luke.Bonham@ucsf.edu",
+    "Jennifer.Yokoyama@ucsf.edu",
+    "evan.bloch2@ucsf.edu",
+    "jared.khan@ucsf.edu",
+]
