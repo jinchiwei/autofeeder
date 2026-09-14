@@ -10,7 +10,7 @@ import pytest
 from outputs.markdown import publish as md_publish
 from outputs.obsidian import publish as obsidian_publish, _build_frontmatter, _slugify
 from outputs.slack import _build_blocks
-from outputs.email import _build_html
+from outputs.email import _build_html, _split_cohorts
 
 
 def _make_digest_data(
@@ -296,3 +296,28 @@ class TestEmailBuildHtml:
 
         assert "&lt;b&gt;" in html
         assert "&amp;" in html
+
+
+class TestEmailCadence:
+    """Test recipient cohort splitting from config[cadence]."""
+
+    RECIPS = ["a@x.org", "B@y.org", "c@z.org"]
+
+    def test_no_cadence_everyone_daily(self):
+        daily, weekly, _ = _split_cohorts(self.RECIPS, {})
+        assert daily == self.RECIPS and weekly == []
+
+    def test_daily_only_splits_case_insensitively(self):
+        cfg = {"cadence": {"daily_only": ["b@y.org"], "weekly_day": "monday"}}
+        daily, weekly, _ = _split_cohorts(self.RECIPS, cfg)
+        assert daily == ["B@y.org"]
+        assert weekly == ["a@x.org", "c@z.org"]
+
+    def test_weekly_only_sends_nothing_daily(self):
+        cfg = {"cadence": {"weekly_only": True, "daily_only": ["a@x.org"], "weekly_day": "monday"}}
+        import datetime as dt
+        monday, tuesday = dt.date(2026, 9, 14), dt.date(2026, 9, 15)
+        daily, weekly, is_wd = _split_cohorts(self.RECIPS, cfg, today=monday)
+        assert daily == [] and weekly == self.RECIPS and is_wd
+        daily, weekly, is_wd = _split_cohorts(self.RECIPS, cfg, today=tuesday)
+        assert daily == [] and weekly == self.RECIPS and not is_wd

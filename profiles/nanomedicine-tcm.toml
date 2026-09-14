@@ -124,11 +124,6 @@ DEFAULTS:
 [overrides]
 min_score = 0.50
 
-# Per-profile cadence: both recipients get DAILY + weekly (overrides global daily_only
-# for THIS profile only; does not affect venus / china-geopolitics).
-[overrides.cadence]
-daily_only = ["mrjinch@gmail.com", "13810239681@163.com"]
-
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
 recipients = ["mrjinch@gmail.com", "13810239681@163.com"]

@@ -32,6 +32,10 @@ def _split_cohorts(
 
     When [cadence] is absent or daily_only is empty, everyone is treated as
     daily_cohort (backward-compatible: every recipient gets every email).
+
+    When cadence.weekly_only is true, nobody gets per-run digests: every
+    recipient is weekly_cohort and mail goes out only on weekly_day (as the
+    past-week collated digest). daily_only is ignored in that mode.
     """
     cadence = config.get("cadence", {})
     daily_only_raw = cadence.get("daily_only", [])
@@ -39,6 +43,8 @@ def _split_cohorts(
     weekly_day_str = str(cadence.get("weekly_day", "monday")).lower().strip()
     weekly_day = _WEEKDAY_NAMES.get(weekly_day_str, 0)
     is_weekly_day = today.weekday() == weekly_day
+    if cadence.get("weekly_only", False):
+        return [], list(recipients), is_weekly_day
     if not daily_only_raw:
         return recipients, [], is_weekly_day
     daily_only = {a.lower().strip() for a in daily_only_raw}

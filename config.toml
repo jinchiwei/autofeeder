@@ -62,7 +62,7 @@ prune_after_days = 90
 [sync]
 # Mirror output/ into an Obsidian vault subfolder after every run.
 # Leave vault_path empty to disable.
-vault_path = "~/arcadia/jkw_dm"
+vault_path = "~/arcadia/jkw_obs-brain"
 subfolder = "臥龍/Autofeeder"
 
 [cadence]
@@ -71,5 +71,10 @@ subfolder = "臥龍/Autofeeder"
 # profile's outputs.email.recipients only receives mail when today's weekday
 # matches `weekly_day`. Case-insensitive match.
 # weekly_day accepts: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+# weekly_only = true: NO per-run digest emails at all. Every run still fetches,
+# scores, writes output/ + the vault, and updates the ledger; the only email is
+# the past-week collated digest sent to ALL recipients on weekly_day.
+# daily_only is ignored while weekly_only is true (kept for easy revert).
+weekly_only = true
 daily_only = ["mrjinch@gmail.com", "wkkwei@hotmail.com"]
 weekly_day = "monday"
