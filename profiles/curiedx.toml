@@ -1,0 +1,213 @@
+# Profile: curiedx
+# Scope: state-of-the-art multimodal / vision-language / foundation-model ML, read
+# specifically for transfer into CurieDx's smartphone-photo + symptom diagnostic stack
+# (StrepNet / tabcat2). Deliberately NOT a pharyngitis feed: the throat-image
+# literature is close to empty, so the useful signal arrives from the methods world
+# and from adjacent photographic clinical imaging.
+
+name = "curiedx"
+description = "SOTA multimodal / vision-language / foundation-model ML, filtered for what could transfer to smartphone-photo + symptom clinical diagnosis: frozen encoders, label scarcity, site shift, fusion, calibration."
+
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "thelancet.com",
+    "jamanetwork.com",
+    "academic.oup.com",
+    "onlinelibrary.wiley.com",
+    "link.springer.com",
+    "ieee.org",
+    "ieeexplore.ieee.org",
+    "sciencedirect.com",
+    "journals.sagepub.com",
+    "ai.nejm.org",
+    "pubs.rsna.org",
+]
+
+[feeds]
+list = [
+    # === arXiv targeted queries (the API endpoint; far less noise than the raw
+    #     category firehose, and it is where encoder / FM work actually lands) ===
+    "arXiv - foundation models (vision) | http://export.arxiv.org/api/query?search_query=cat:cs.CV+AND+abs:%22foundation+model%22&sortBy=submittedDate&sortOrder=descending&max_results=60",
+    "arXiv - vision-language models | http://export.arxiv.org/api/query?search_query=abs:%22vision-language%22+AND+cat:cs.CV&sortBy=submittedDate&sortOrder=descending&max_results=60",
+    "arXiv - medical image foundation models | http://export.arxiv.org/api/query?search_query=abs:%22medical+image%22+AND+abs:%22foundation+model%22&sortBy=submittedDate&sortOrder=descending&max_results=50",
+    "arXiv - frozen encoders & linear probing | http://export.arxiv.org/api/query?search_query=abs:%22linear+probe%22+OR+abs:%22frozen+encoder%22+OR+abs:%22frozen+features%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - parameter-efficient transfer | http://export.arxiv.org/api/query?search_query=abs:%22parameter-efficient%22+AND+%28cat:cs.CV+OR+cat:eess.IV%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - domain generalization | http://export.arxiv.org/api/query?search_query=abs:%22domain+generalization%22+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - distribution shift in medical imaging | http://export.arxiv.org/api/query?search_query=abs:%22distribution+shift%22+AND+%28abs:%22medical%22+OR+cat:eess.IV%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - shortcut learning & spurious features | http://export.arxiv.org/api/query?search_query=abs:%22shortcut+learning%22+OR+abs:%22spurious+correlation%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - multimodal fusion (imaging) | http://export.arxiv.org/api/query?search_query=abs:%22multimodal+fusion%22+AND+cat:eess.IV&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - missing modality robustness | http://export.arxiv.org/api/query?search_query=abs:%22missing+modality%22&sortBy=submittedDate&sortOrder=descending&max_results=30",
+    "arXiv - tabular foundation models | http://export.arxiv.org/api/query?search_query=abs:%22tabular%22+AND+%28abs:%22foundation+model%22+OR+abs:%22in-context+learning%22%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - label-efficient / few-shot medical | http://export.arxiv.org/api/query?search_query=abs:%22label-efficient%22+OR+%28abs:%22few-shot%22+AND+abs:%22medical+imaging%22%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - calibration & uncertainty in clinical ML | http://export.arxiv.org/api/query?search_query=abs:%22calibration%22+AND+%28abs:%22clinical%22+OR+abs:%22diagnosis%22%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - self-supervised pretraining for imaging | http://export.arxiv.org/api/query?search_query=abs:%22self-supervised%22+AND+%28cat:eess.IV+OR+abs:%22medical+imaging%22%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
+
+    # === arXiv category firehose (weekdays only; empty on weekends by design) ===
+    "arXiv - cs.CV (computer vision) | https://rss.arxiv.org/rss/cs.CV",
+    "arXiv - cs.LG (machine learning) | https://rss.arxiv.org/rss/cs.LG",
+    "arXiv - eess.IV (image & video processing) | https://rss.arxiv.org/rss/eess.IV",
+
+    # === Preprints (clinical) ===
+    "medRxiv - radiology & imaging | http://connect.medrxiv.org/medrxiv_xml.php?subject=radiology_and_imaging",
+    "medRxiv - infectious diseases | http://connect.medrxiv.org/medrxiv_xml.php?subject=infectious_diseases",
+    "medRxiv - pediatrics | http://connect.medrxiv.org/medrxiv_xml.php?subject=pediatrics",
+    "medRxiv - primary care research | http://connect.medrxiv.org/medrxiv_xml.php?subject=primary_care_research",
+
+    # === Methods journals ===
+    "Medical Image Analysis | https://rss.sciencedirect.com/publication/science/13618415",
+    "Artificial Intelligence in Medicine | https://rss.sciencedirect.com/publication/science/09333657",
+    "Computers in Biology and Medicine | https://rss.sciencedirect.com/publication/science/00104825",
+    "Computer Methods and Programs in Biomedicine | https://rss.sciencedirect.com/publication/science/01692607",
+    "IEEE Trans. Medical Imaging | https://ieeexplore.ieee.org/rss/TOC42.XML",
+    "Patterns (Cell) | https://www.cell.com/patterns/inpress.rss",
+
+    # === Clinical-AI journals (the publication targets) ===
+    "npj Digital Medicine | https://www.nature.com/npjdigitalmed.rss",
+    "NEJM AI | https://ai.nejm.org/action/showFeed?type=etoc&feed=rss&jc=ai",
+    "Lancet Digital Health | https://www.thelancet.com/rssfeed/landig_current.xml",
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "Nature Biomedical Engineering | https://www.nature.com/natbiomedeng.rss",
+    "Nature Methods | https://www.nature.com/nmeth.rss",
+    "Nature Communications | https://www.nature.com/ncomms.rss",
+    "Communications Medicine | https://www.nature.com/commsmed.rss",
+    "Cell Reports Medicine | https://www.cell.com/cell-reports-medicine/inpress.rss",
+    "Frontiers in Digital Health | https://www.frontiersin.org/journals/digital-health/rss",
+    "JMIR | https://www.jmir.org/feed/atom",
+
+    # === ENT + the clinical problem itself (thin literature, but catch it when it lands) ===
+    "The Laryngoscope | https://onlinelibrary.wiley.com/feed/15314995/most-recent",
+    "Otolaryngology-Head and Neck Surgery | https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=ohn&type=etoc&feed=rss",
+    "Pediatrics | https://pubmed.ncbi.nlm.nih.gov/rss/journals/0376422/?limit=60&name=Pediatrics",
+    "Clinical Infectious Diseases | https://pubmed.ncbi.nlm.nih.gov/rss/journals/9203213/?limit=60&name=Clin+Infect+Dis",
+
+    # === Model releases and lab blogs (where new encoders actually appear) ===
+    "Hugging Face Blog | https://huggingface.co/blog/feed.xml",
+    "Google Research | https://research.google/blog/rss/",
+    "Google Health AI | https://blog.google/technology/health/rss/",
+    "Microsoft Research | https://www.microsoft.com/en-us/research/feed/",
+    "Berkeley AI Research | https://bair.berkeley.edu/blog/feed.xml",
+    "Synced | https://syncedreview.com/feed/",
+]
+
+[interests]
+keywords = [
+    # encoders / pretraining
+    "foundation model", "vision-language model", "image encoder", "frozen encoder",
+    "linear probe", "linear probing", "partial fine-tuning", "parameter-efficient", "LoRA",
+    "self-supervised", "contrastive learning", "CLIP", "SigLIP", "DINOv2", "DINOv3",
+    "MedSigLIP", "BiomedCLIP", "open weights", "model license", "commercial use",
+    "pretraining data", "scaling law",
+    # the transfer question
+    "transfer learning", "domain match", "domain-specific pretraining", "natural images",
+    "photographic imaging", "smartphone image", "consumer camera", "point-of-care",
+    "dermatology", "dermoscopy", "fundus", "endoscopy", "otoscopy", "laryngoscopy",
+    "intraoral", "oral cavity", "pharynx", "tonsil", "wound imaging",
+    # robustness / deployment
+    "domain generalization", "domain adaptation", "domain adversarial", "gradient reversal",
+    "distribution shift", "site effect", "center effect", "scanner effect", "batch effect",
+    "shortcut learning", "spurious correlation", "confounder", "leave-one-site-out",
+    "external validation", "out-of-distribution", "robustness", "Jacobian regularization",
+    # multimodal / fusion
+    "multimodal", "late fusion", "early fusion", "gating", "modality dropout",
+    "missing modality", "modality collapse", "tabular", "structured data", "clinical features",
+    "TabPFN", "in-context learning", "audio classification", "cough audio",
+    # evaluation / clinical translation
+    "calibration", "threshold", "prevalence shift", "decision curve", "net benefit",
+    "AUROC", "sensitivity", "specificity", "positive predictive value",
+    "TRIPOD", "CLAIM", "reporting guideline", "prospective validation",
+    "clinical decision support", "FDA clearance", "regulatory",
+    # the clinical problem
+    "pharyngitis", "sore throat", "streptococcus", "group A strep", "rapid antigen test",
+    "antimicrobial stewardship", "antibiotic prescribing", "respiratory infection",
+    "influenza", "triage", "diagnostic accuracy",
+    # useful adjacent method families
+    "segmentation auxiliary task", "SAM", "MedSAM", "interpretability", "saliency",
+    "ensemble", "model soup", "concatenated embeddings",
+]
+
+narrative = """
+I am Jinchi Wei. I build the diagnostic ML at CurieDx. Our system (StrepNet /
+tabcat2) predicts culture-confirmed Group A strep from a SMARTPHONE THROAT PHOTO
+plus a symptom questionnaire, with a late-fusion architecture: a tabular
+in-context learner on symptoms, a fine-tuned image CNN, and a frozen
+vision-language image encoder. We also have a flu arm using CDC surveillance
+features, and an audio (cough) branch that has never worked.
+
+READ THIS FEED FOR TRANSFER, NOT FOR TOPIC MATCH. Almost nothing is published on
+throat or pharynx imaging - I verified that the field is empty: no throat, otoscopy
+or laryngoscopy foundation model exists, and the largest public throat dataset is
+742 images. So do NOT wait for strep papers. Score a paper on whether its METHOD
+could change what we build, even if the organ, modality or disease is unrelated.
+
+The questions I am actively trying to answer, in priority order:
+
+1. WHICH FROZEN IMAGE ENCODER should carry our image branch. I am running a
+   bake-off of general vs medical encoders (DINOv2/v3, SigLIP/SigLIP2, MedSigLIP,
+   BiomedCLIP, derm and pathology encoders). Anything that benchmarks encoders
+   against each other on PHOTOGRAPHIC clinical images, reports frozen-vs-fine-tuned,
+   varies label fraction, or holds the probe head fixed across encoder arms, is
+   high value. Resolution as its own axis matters to me: our findings (exudate) are
+   small and low contrast.
+
+2. THE DISTANCE-FROM-NATURAL-IMAGES THESIS. My working claim is that
+   domain-specific pretraining helps in proportion to how far the modality sits
+   from natural photographs - it wins on histopathology and MRI, and general
+   encoders like DINOv2 start winning on fundus, dermoscopy, endoscopy. Smartphone
+   throat photos are the nearest-to-natural case there is. Any paper that tests
+   domain-matched vs general pretraining on photographic medical imaging either
+   supports or breaks this, and I want both.
+
+3. SITE SHIFT AND SHORTCUT LEARNING. Our image branch scores BELOW CHANCE at some
+   held-out clinics, which means it learned a site-correlated feature that inverts.
+   I want: domain generalization evaluated leave-one-site-out (NOT unsupervised
+   domain adaptation with target data available - that is a different, easier
+   problem, and I want that distinction called out), domain-adversarial training,
+   Jacobian or gradient regularization, methods needing no shortcut labels,
+   evidence that foundation-model embeddings encode device or centre signature,
+   and colour constancy / white balance / sensor variation as a confounder.
+
+4. FUSION WHEN ONE MODALITY DOMINATES. Symptoms carry nearly all of our signal, so
+   the image branch is never forced to learn disease features. Work on modality
+   dominance, independent per-branch supervision, missing-modality robustness,
+   gating, and ensembling frozen branches rather than picking one, is directly
+   actionable.
+
+5. TABULAR FOUNDATION MODELS AND IN-CONTEXT LEARNING. TabPFN is our strongest
+   single branch. Successors, scaling, calibration behaviour and tabular+image
+   joint models all matter.
+
+6. CALIBRATION AND THRESHOLDS FOR DEPLOYMENT. A single global cutoff versus
+   per-site recalibration, how few positives a new site needs, prevalence shift,
+   threshold transfer without labels, and honest reporting of leave-site-out
+   ranges rather than pooled cross-validation. Also reporting standards and
+   regulatory paths for AI diagnostics and clinical decision support.
+
+7. LICENSING AND WEIGHT AVAILABILITY. I need commercially usable weights. Note
+   when a release is genuinely open (Apache/MIT) versus non-commercial or
+   research-only, and flag new medical encoder releases and the datasets behind
+   them.
+
+Adjacent domains I treat as PROXIES for our problem, and want covered: dermatology
+and dermoscopy, external-eye and fundus photography, endoscopy and capsule
+imaging, otoscopy, laryngoscopy, oral and intraoral photography, wound imaging,
+and anything captured by patients on their own phones.
+
+DOWNRANK: LLM chatbots and medical question answering, radiology report
+generation, clinical note summarization, drug discovery and protein structure,
+pure NLP benchmarks, agent frameworks, general leaderboard chasing with no
+transfer story, and consumer AI product news. Also downrank small-public-dataset
+imaging papers reporting AUC above 0.95 without patient-level splits - in this
+space that is leakage, not a result.
+
+I would rather see five papers that change an experiment than forty that are
+merely on-topic.
+"""
+
+[overrides]
+min_score = 0.60
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com"]
