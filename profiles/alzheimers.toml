@@ -1,8 +1,10 @@
 # Profile: alzheimers
 # Scope: the most important advances in Alzheimer's disease research, broadly.
-# Deliberately NOT specialised. Imaging and genetics are welcome but must not
-# dominate — see the narrative. For the imaging x genetics intersection
-# specifically, use the `agi` profile instead.
+# Deliberately NOT specialised, but NOT imaging-averse either: imaging is a
+# first-class subfield here, judged on the same bar as therapeutics or biology
+# (relaxed 2026-09-20 — the previous rules suppressed it too hard). Only a soft
+# guard remains so no single subfield swallows the whole digest. For the imaging
+# x genetics intersection specifically, the `agi` profile goes deeper.
 
 name = "alzheimers"
 description = "The most important advances in Alzheimer's disease research, across all subfields — biology, therapeutics, trials, biomarkers, epidemiology, care."
@@ -73,11 +75,32 @@ list = [
 ]
 
 [interests]
-# Kept deliberately subfield-neutral. Modality-specific terms (amyloid PET,
-# hippocampal volume, GWAS, ...) live in the `agi` profile; putting them here
-# is what previously made this digest ~80% imaging.
+# Subfield-neutral terms first, then a modality vocabulary so imaging papers can
+# actually surface. These had been stripped entirely; without them the scorer
+# could not see imaging work at all. The balance is now handled in the narrative
+# rather than by hiding the words.
 keywords = [
     "Alzheimer's disease",
+    "amyloid PET",
+    "tau PET",
+    "FDG-PET",
+    "centiloid",
+    "structural MRI",
+    "brain atrophy",
+    "hippocampal volume",
+    "cortical thickness",
+    "white matter hyperintensities",
+    "cerebral small vessel disease",
+    "diffusion MRI",
+    "free water",
+    "arterial spin labeling",
+    "quantitative susceptibility mapping",
+    "functional connectivity",
+    "neuroimaging biomarker",
+    "imaging endpoint",
+    "imaging genetics",
+    "cerebral amyloid angiopathy",
+    "ARIA",
     "dementia",
     "mild cognitive impairment",
     "neurodegeneration",
@@ -126,15 +149,15 @@ Score highly:
 
 4. **Genetics**: risk loci, APOE biology, rare variants, and functional follow-up that explains mechanism.
 
-5. **Imaging**: PET and MRI findings that change clinical understanding or practice.
+5. **Imaging**: a first-class part of this briefing. Amyloid and tau PET, FDG-PET, structural MRI and atrophy, diffusion MRI including free water, white matter hyperintensities and small-vessel disease, ASL perfusion, QSM, functional and connectivity work, imaging-genetics, and imaging used as a trial endpoint or a stratification tool. Score it on the same bar as therapeutics or biology: does the finding change what the field believes or does.
 
 6. **Epidemiology, prevention, and care**: modifiable risk factors, prevention trials, prevalence trends, disparities, and care delivery.
 
 7. **Methods and AI**: computational or AI methods only when the *finding* about Alzheimer's matters, not when the contribution is purely methodological.
 
-**Balance is a hard requirement.** This digest was previously dominated by neuroimaging, and that is exactly what I am trying to fix. Do not let any single subfield — imaging especially, but also genetics or AI methods — take more than roughly a quarter of the selected items when other strong work is available. An imaging or methods paper must clear a higher bar than a therapeutics, biology, or trial paper of equal quality. If a day's candidates are overwhelmingly imaging, prefer returning fewer items over filling the digest with them.
+**Balance, but lightly.** No subfield gets a handicap any more: imaging, genetics and AI methods are judged on exactly the same bar as therapeutics, biology and trials. The only guard is against a monoculture — if one subfield would take more than about half the selected items and there is strong work elsewhere, prefer the spread. Never drop a genuinely important paper to hit a quota, and never pad the digest to fill one.
 
-Every item must be genuinely about Alzheimer's disease, dementia, or directly relevant neurodegeneration. Skip general neuroscience, general radiology, and general machine-learning papers that merely mention dementia as one application among many.
+Every item must be genuinely about Alzheimer's disease, dementia, or directly relevant neurodegeneration. Skip general neuroscience, general radiology, and general machine-learning papers that merely mention dementia as one application among many — a method paper needs an Alzheimer's finding, not an Alzheimer's dataset.
 """
 
 [overrides]
