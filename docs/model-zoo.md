@@ -6,9 +6,11 @@ Available models via UCSF Versa unified API.
 
 | Model ID | $/1k prompt | $/1k completion | Notes |
 |----------|-------------|-----------------|-------|
-| `us.anthropic.claude-opus-4-8` | — | — | **Default summarize and triage.** Latest Opus. Note: no `-v1` suffix |
+| `us.anthropic.claude-opus-5-5` | $0.0044 | $0.022 | **Default summarize and triage.** Latest Opus. Added 2026-10-22 |
+| `us.anthropic.claude-sonnet-5-5` | $0.0022 | $0.011 | Latest Sonnet, half the Opus price. Not currently wired in |
+| `us.anthropic.claude-opus-4-8` | — | — | Previous Opus. Retired as the default 2026-10-22. Note: no `-v1` suffix |
 | `us.anthropic.claude-opus-4-6-v1` | $0.0055 | $0.0275 | Previous Opus. Retired as the default 2026-07-22 |
-| `us.anthropic.claude-sonnet-4-6` | $0.0033 | $0.0165 | Latest Sonnet, fast + cheaper. Not currently wired in |
+| `us.anthropic.claude-sonnet-4-6` | $0.0033 | $0.0165 | Previous Sonnet |
 | `us.anthropic.claude-opus-4-5-20251101-v1:0` | — | — | Older Opus |
 | `us.anthropic.claude-opus-4-1-20250805-v1:0` | — | — | Older Opus |
 | `us.anthropic.claude-sonnet-4-20250514-v1:0` | — | — | Previous Sonnet |

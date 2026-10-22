@@ -33,13 +33,13 @@ max_returned = 40
 
 [anthropic]
 # Bedrock model names (UCSF Versa - requires VPN/campus IP)
-model = "us.anthropic.claude-opus-4-8"
-triage_model = "us.anthropic.claude-opus-4-8"
+model = "us.anthropic.claude-opus-5-5"
+triage_model = "us.anthropic.claude-opus-5-5"
 timeout = 300
 
 # Direct API model names (for GitHub Actions or off-campus)
-# model = "claude-opus-4-8"
-# triage_model = "claude-opus-4-8"
+# model = "claude-opus-5-5"
+# triage_model = "claude-opus-5-5"
 
 [openai]
 base_url = "https://unified-api.ucsf.edu/general"

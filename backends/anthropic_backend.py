@@ -176,7 +176,7 @@ async def call_triage(
     prompt, lean_items = build_triage_prompt(interests, items)
 
     anthropic_cfg = config.get("anthropic", {})
-    model = anthropic_cfg.get("triage_model", anthropic_cfg.get("model", "claude-sonnet-4-6"))
+    model = anthropic_cfg.get("triage_model", anthropic_cfg.get("model", "claude-sonnet-5-5"))
 
     logger.info(
         "Anthropic triage: model=%s, items=%d", model, len(lean_items)
@@ -229,7 +229,7 @@ async def call_summarize(
     prompt = build_summary_prompt(interests, item)
 
     anthropic_cfg = config.get("anthropic", {})
-    model = anthropic_cfg.get("model", "claude-opus-4-8")
+    model = anthropic_cfg.get("model", "claude-opus-5-5")
 
     logger.info(
         "Anthropic summarize: model=%s, title=%s",
@@ -273,7 +273,7 @@ async def call_tldr(
     prompt = build_tldr_prompt(interests, top_items)
 
     anthropic_cfg = config.get("anthropic", {})
-    model = anthropic_cfg.get("model", "claude-opus-4-8")
+    model = anthropic_cfg.get("model", "claude-opus-5-5")
 
     logger.info("Anthropic TL;DR: model=%s, items=%d", model, len(top_items))
 

@@ -43,7 +43,7 @@ def _validate_anthropic_direct(api_key: str) -> bool:
         import anthropic
         client = anthropic.Anthropic(api_key=api_key, timeout=30)
         resp = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-sonnet-5-5",
             max_tokens=10,
             messages=[{"role": "user", "content": "Say OK"}],
         )
@@ -208,8 +208,8 @@ def run_setup() -> None:
     if backend_idx == 0:
         # Direct API -- use standard model names
         _update_config_models(
-            model="claude-opus-4-8",
-            triage_model="claude-sonnet-4-6",
+            model="claude-opus-5-5",
+            triage_model="claude-sonnet-5-5",
         )
     elif backend_idx == 2:
         # OpenAI
