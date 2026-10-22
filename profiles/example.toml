@@ -2,6 +2,13 @@ name = "Example Profile"
 description = "Neuroscience electrophysiology research"
 enabled = false  # skipped by --all, run explicitly with --profile example
 
+paywalled_domains = [
+    "nature.com",
+    "science.org",
+    "cell.com",
+    "thelancet.com",
+]
+
 [feeds]
 list = [
     "Nature Neuroscience | https://www.nature.com/neuro.rss",
@@ -24,13 +31,6 @@ I care about methods for time-series analysis, oscillations, aperiodic
 activity, and cross-species electrophysiology. Down-weight purely
 clinical papers without neural data or computational modeling.
 """
-
-paywalled_domains = [
-    "nature.com",
-    "science.org",
-    "cell.com",
-    "thelancet.com",
-]
 
 # Your publications and tools — triggers "builds on your work" detection
 [my_work]

@@ -46,10 +46,7 @@ class TestLoadProfile:
         assert profile["feeds"][0]["url"] == "https://www.nature.com/neuro.rss"
         assert "EEG" in profile["interests"]["keywords"]
         assert "narrative" in profile["interests"]
-        assert isinstance(profile["paywalled_domains"], list)
-        # Note: in the example.toml, paywalled_domains sits under [interests]
-        # because TOML section headers scope all subsequent keys until the next header.
-        # The loader reads paywalled_domains from the top level, so it's empty here.
+        assert "nature.com" in profile["paywalled_domains"]
         assert isinstance(profile["my_work"]["tools"], list)
 
     def test_load_missing_profile_raises(self):

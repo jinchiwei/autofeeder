@@ -91,7 +91,7 @@ class TestMarkdownPublish:
         digest = _make_digest_data()
         md_publish(digest, sample_profile, config)
 
-        out_file = tmp_output_dir / "neuro.md"
+        out_file = tmp_output_dir / "neuro" / "2025-03-17.md"
         assert out_file.exists()
 
         content = out_file.read_text()
@@ -111,7 +111,7 @@ class TestMarkdownPublish:
         digest = _make_digest_data(items=[])
         md_publish(digest, sample_profile, config)
 
-        out_file = tmp_output_dir / "neuro.md"
+        out_file = tmp_output_dir / "neuro" / "2025-03-17.md"
         assert out_file.exists()
         content = out_file.read_text()
         assert "# autofeeder" in content
@@ -125,7 +125,7 @@ class TestMarkdownPublish:
         digest = _make_digest_data(is_first_run=True)
         md_publish(digest, sample_profile, config)
 
-        content = (tmp_output_dir / "neuro.md").read_text()
+        content = (tmp_output_dir / "neuro" / "2025-03-17.md").read_text()
         assert "first autofeeder run" in content.lower()
 
 
