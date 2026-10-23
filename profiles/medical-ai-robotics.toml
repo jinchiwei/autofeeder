@@ -140,6 +140,7 @@ min_score = 0.50
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+# 13810239681@163.com is Chiming Wei (Jinchi's dad). He has no other address here.
 recipients = ["mrjinch@gmail.com", "13810239681@163.com"]
 # Bilingual: translate every email; trad-zh on top, English below.
 translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"

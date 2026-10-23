@@ -1,16 +1,17 @@
 # Profile: venus
-# Scope: East-West integrative medicine and healthcare innovation — above all,
-# how Eastern medicine (especially TCM) is being brought together with modern
-# biomedicine and AI in serious, robust, peer-reviewed research. Rigorous trials
-# and systematic reviews of traditional interventions, AI applied to TCM with
-# real validation, and integration into health systems and guidelines.
+# Scope: East-West integrative medicine and healthcare innovation — how Eastern
+# medicine (especially TCM) is being brought together with modern biomedicine in
+# serious, robust, peer-reviewed research. Rigorous trials and systematic reviews
+# of traditional interventions, mechanism and safety science, and integration
+# into health systems and guidelines. AI work is welcome but not required
+# (Jinchi dropped the AI requirement 2026-10-23).
 # The lens is evidence-first: it surfaces work that would survive scrutiny and
 # says so plainly when a study is weak, rather than amplifying wellness claims.
 # Reinstated 2026-10-22 with a sharper scope than the archived version (which
 # leaned toward mind-body science and science journalism).
 
 name = "venus"
-description = "East-West integrative medicine and healthcare innovation: how TCM and other traditional medicine is being integrated with AI and modern biomedicine in rigorous, peer-reviewed studies, trials, and health systems."
+description = "East-West integrative medicine and healthcare innovation: how TCM and other traditional medicine is being integrated with modern biomedicine in rigorous, peer-reviewed studies, trials, and health systems."
 
 reader_group = "main"
 
@@ -42,10 +43,8 @@ list = [
     "Journal of Ethnopharmacology | https://rss.sciencedirect.com/publication/science/03788741",
     "Frontiers in Pharmacology | https://www.frontiersin.org/journals/pharmacology/rss",
 
-    # === AI x traditional medicine (arXiv; requests are spaced per arXiv's terms) ===
+    # === Preprints (arXiv; requests are spaced per arXiv's terms) ===
     "arXiv - traditional Chinese medicine | https://export.arxiv.org/api/query?search_query=abs:%22traditional+Chinese+medicine%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
-    "arXiv - tongue and pulse diagnosis | https://export.arxiv.org/api/query?search_query=abs:%22tongue+diagnosis%22+OR+abs:%22pulse+diagnosis%22+OR+abs:%22tongue+image%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
-    "arXiv - herbal medicine and AI | https://export.arxiv.org/api/query?search_query=abs:%22herbal%22+AND+%28abs:%22deep+learning%22+OR+abs:%22language+model%22%29&sortBy=submittedDate&sortOrder=descending&max_results=40",
 
     # === Clinical and digital-health journals where the strongest work lands ===
     "Nature Medicine | https://www.nature.com/nm.rss",
@@ -77,10 +76,6 @@ keywords = [
     "sham-controlled",
     "preregistered",
     "multicenter",
-    "artificial intelligence",
-    "machine learning",
-    "deep learning",
-    "large language model",
     "tongue diagnosis",
     "pulse diagnosis",
     "syndrome differentiation",
@@ -99,11 +94,11 @@ keywords = [
 ]
 
 narrative = """
-I want to follow how Eastern medicine, especially traditional Chinese medicine, is being integrated with modern biomedicine and with AI in work that is serious, robust, and peer-reviewed. The question behind every item: does this move traditional medicine toward evidence a skeptical Western clinician would accept, or show where it fails?
+I want to follow how Eastern medicine, especially traditional Chinese medicine, is being integrated with modern biomedicine in work that is serious, robust, and peer-reviewed. AI is one welcome angle among several, not a requirement: a rigorous trial with no AI in it belongs here as much as a validated AI study does. The question behind every item: does this move traditional medicine toward evidence a skeptical Western clinician would accept, or show where it fails?
 
 SURFACE HIGH (score >= 0.70):
 - Rigorous clinical evidence on traditional interventions: well-powered randomized trials (sham-controlled where possible), preregistered and multicenter studies, pragmatic trials, and high-quality systematic reviews and meta-analyses, especially in major journals. Acupuncture, Chinese herbal formulas, integrative oncology and supportive care, pain, and chronic disease.
-- AI applied to TCM with real validation: tongue, pulse, or face diagnosis models tested on external data; machine learning for syndrome differentiation or treatment selection; herb and formula recommendation; large language models for TCM knowledge that are properly evaluated; AI-driven drug discovery from natural products with experimental follow-up.
+- Modern methods applied to TCM with real validation, including AI: diagnosis models (tongue, pulse, face) tested on external data, machine learning for syndrome differentiation or treatment selection, properly evaluated language models for TCM knowledge, and natural-product drug discovery with experimental follow-up.
 - Integration into health systems and practice: integrative programmes in hospitals, clinical guidelines that adopt (or reject) traditional interventions on evidence, WHO and ICD-11 traditional-medicine work, and national policy on modernising and regulating TCM.
 - Mechanism and safety science that holds up: well-controlled mechanistic studies of acupuncture or herbal actives, herb-drug interactions, toxicity, quality control, and standardisation of herbal products.
 - Clear, well-designed negative or null results: a rigorous trial showing no benefit is high signal.
