@@ -56,10 +56,11 @@ async def _call_anthropic(prompt: str, config: dict[str, Any]) -> str:
     logger.info("Discover: using Anthropic model=%s", model)
     response = client.messages.create(
         model=model,
-        max_tokens=4096,
+        max_tokens=16000,  # room for thinking ahead of the profile
         messages=[{"role": "user", "content": prompt}],
     )
-    return response.content[0].text  # type: ignore[union-attr]
+    from backends.anthropic_backend import response_text
+    return response_text(response)
 
 
 async def _call_openai(prompt: str, config: dict[str, Any], backend_type: str = "openai") -> str:

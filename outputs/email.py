@@ -590,10 +590,11 @@ def _translate_digest_data(
             try:
                 resp = client.messages.create(
                     model=model,
-                    max_tokens=8192,
+                    max_tokens=16000,  # room for thinking ahead of the translation
                     messages=[{"role": "user", "content": prompt}],
                 )
-                t = resp.content[0].text.strip()
+                from backends.anthropic_backend import response_text
+                t = response_text(resp).strip()
                 if t.startswith("```"):
                     nl_idx = t.find("\n")
                     if nl_idx != -1:

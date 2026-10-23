@@ -22,6 +22,26 @@ from ._shared import (
 logger = logging.getLogger("autofeeder")
 
 
+def response_text(response: Any) -> str:
+    """Return the text of a Messages API response, ignoring thinking blocks.
+
+    Opus 5.5 always thinks: adaptive thinking is on by default and cannot be
+    disabled (``{"type": "disabled"}`` is a 400 at every effort), so a response can
+    open with a ThinkingBlock. Reading ``response.content[0].text`` therefore raised
+    ``AttributeError: 'ThinkingBlock' object has no attribute 'text'`` on 72 calls
+    in the 2026-10-23 nightly run, the first under Opus 5.5. Always select blocks by
+    type, never by position.
+    """
+    parts = [b.text for b in (getattr(response, "content", None) or [])
+             if getattr(b, "type", None) == "text"]
+    if not parts:
+        raise RuntimeError(
+            "model returned no text block "
+            f"(stop_reason={getattr(response, 'stop_reason', None)!r})"
+        )
+    return "".join(parts)
+
+
 def _repair_triage_json(text: str) -> dict[str, Any]:
     """Attempt to repair truncated triage JSON.
 
@@ -196,7 +216,7 @@ async def call_triage(
         )
         if not response.content:
             raise RuntimeError("Bedrock returned empty content array")
-        text = response.content[0].text  # type: ignore[union-attr]
+        text = response_text(response)
         logger.debug("Anthropic triage raw response (first 1000): %s", text[:1000])
         try:
             return parse_structured_response(text)
@@ -245,12 +265,12 @@ async def call_summarize(
         response = await asyncio.to_thread(
             client.messages.create,
             model=model,
-            max_tokens=4096,
+            max_tokens=16000,  # room for thinking ahead of the JSON
             messages=[{"role": "user", "content": prompt + json_instruction}],
         )
         if not response.content:
             raise RuntimeError("Bedrock returned empty content array")
-        text = response.content[0].text  # type: ignore[union-attr]
+        text = response_text(response)
         logger.debug("Anthropic summary raw response: %s", text[:500])
         return parse_summary_response(text)
 
@@ -281,10 +301,10 @@ async def call_tldr(
         response = await asyncio.to_thread(
             client.messages.create,
             model=model,
-            max_tokens=2048,
+            max_tokens=16000,  # room for thinking ahead of the briefing
             messages=[{"role": "user", "content": prompt}],
         )
-        return response.content[0].text  # type: ignore[union-attr]
+        return response_text(response)
 
     return await retry_with_backoff(
         _call, max_attempts=6, retry_exceptions=_RETRY_EXCEPTIONS
