@@ -119,6 +119,7 @@ SCORE DOWN (<= 0.4) OR EXCLUDE:
 - Wellness marketing, supplement promotion, and "cure" claims.
 - Tongue or pulse diagnosis models evaluated only on the data they were trained on, or reporting implausibly high accuracy on small private datasets.
 - Articles that mention traditional medicine in passing without studying it.
+- Letters to the editor, comments, replies, and corrigenda, unless they expose a serious flaw in a major study.
 
 DEFAULTS:
 - Weight study design over topic: a strong trial on a modest question beats a weak study on an exciting one.
@@ -127,7 +128,9 @@ DEFAULTS:
 """
 
 [overrides]
-min_score = 0.58
+# 0.65, not 0.58: the first run kept 40 items at 0.58 and its bottom eighth was
+# letters and replies. This feed is meant to be the rigorous end of the field.
+min_score = 0.65
 
 [outputs.email]
 from = "autofeeder <autofeeder@mail.jinchiwei.com>"
