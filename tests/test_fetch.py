@@ -215,3 +215,38 @@ class TestFetchItems:
 
         assert len(items) == 1
         assert items[0]["title"] == "Good Paper"
+
+
+class TestArxivThrottle:
+    """arXiv's API asks for >= 3 s between requests; back-to-back queries get 429."""
+
+    def _run(self, urls, monkeypatch):
+        import fetch
+        clock = {"t": 1000.0}
+        sleeps, requested = [], []
+        monkeypatch.setattr(fetch, "_last_arxiv_request", 0.0)
+        monkeypatch.setattr(fetch.time, "monotonic", lambda: clock["t"])
+        def fake_sleep(s):
+            sleeps.append(s); clock["t"] += s
+        monkeypatch.setattr(fetch.time, "sleep", fake_sleep)
+        def fake_parse(url):
+            requested.append((url, clock["t"]))
+            return SimpleNamespace(entries=[], bozo=False, feed={})
+        monkeypatch.setattr(fetch.feedparser, "parse", fake_parse)
+        fetch_items([{"name": f"f{i}", "url": u} for i, u in enumerate(urls)], {"fetch": {}})
+        return requested, sleeps
+
+    def test_consecutive_arxiv_api_requests_are_spaced(self, monkeypatch):
+        import fetch
+        urls = [f"http://export.arxiv.org/api/query?search_query=q{i}" for i in range(4)]
+        requested, _ = self._run(urls, monkeypatch)
+        times = [t for _, t in requested]
+        gaps = [b - a for a, b in zip(times, times[1:])]
+        assert len(gaps) == 3
+        assert all(g >= fetch.ARXIV_MIN_INTERVAL - 1e-9 for g in gaps), gaps
+
+    def test_other_feeds_are_not_slowed(self, monkeypatch):
+        urls = ["https://www.nature.com/nm.rss", "https://rss.arxiv.org/rss/cs.CV",
+                "https://rss.sciencedirect.com/publication/science/13618415"]
+        _, sleeps = self._run(urls, monkeypatch)
+        assert sleeps == [], "only the arXiv API host is throttled"

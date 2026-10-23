@@ -1,12 +1,19 @@
-# Profile: stem-cell-therapy (干细胞临床治疗 / clinical stem-cell therapy)
-# Scope: clinical translation of stem-cell & regenerative medicine — cell
-# therapies in trials and the clinic (iPSC, ESC, MSC / mesenchymal stromal,
-# HSC), organoid- and tissue-engineering therapeutics, regenerative repair,
-# plus the manufacturing / regulatory / safety story behind getting cells into
-# patients. Bilingual digest: Traditional Chinese on top, English below.
+# Profile: stem-cell-therapy (全球干细胞研究进展 / global stem-cell research progress)
+# Scope: worldwide stem-cell research from significant basic discoveries through
+# to clinical therapy — cell therapies in trials and the clinic (iPSC, ESC,
+# MSC / mesenchymal stromal, HSC), organoid- and tissue-engineering
+# therapeutics, regenerative repair, reprogramming and stem-cell biology, plus
+# the manufacturing / regulatory / safety story behind getting cells into
+# patients. Widened 2026-10-22 from clinical-only to match Chiming Wei's request
+# for global stem-cell research progress; clinical work is still weighted highest.
+# Bilingual digest: Traditional Chinese on top, English below.
 
 name = "stem-cell-therapy"
-description = "Latest advances in clinical stem-cell therapy & regenerative medicine: cell-therapy trials (iPSC/ESC/MSC/HSC), organoids and tissue engineering, manufacturing, safety, and regulatory milestones."
+description = "Global stem-cell research progress, from major basic discoveries to the clinic: cell-therapy trials (iPSC/ESC/MSC/HSC), organoids and tissue engineering, reprogramming, manufacturing, safety, and regulatory milestones worldwide."
+
+# Grouping in the reader app. "additional" keeps this feed out of the main inbox
+# and unread count; the digest is still emailed and still readable under Digests.
+reader_group = "additional"
 
 paywalled_domains = [
     "cell.com",
@@ -23,9 +30,9 @@ paywalled_domains = [
 [feeds]
 list = [
     # === Core stem-cell / regenerative journals ===
-    "Cell Stem Cell | https://www.cell.com/cell-stem-cell/rss",
-    "Stem Cell Reports | https://www.cell.com/stem-cell-reports/rss",
-    "Stem Cell Research & Therapy (BMC) | https://stemcellres.biomedcentral.com/articles/most-recent/rss.xml",
+    "Cell Stem Cell | https://www.cell.com/cell-stem-cell/inpress.rss",
+    "Stem Cell Reports | https://www.cell.com/stem-cell-reports/inpress.rss",
+    "Stem Cell Research & Therapy | https://link.springer.com/search.rss?facet-journal-id=13287",
     "npj Regenerative Medicine | https://www.nature.com/npjregenmed.rss",
     "Cytotherapy | https://rss.sciencedirect.com/publication/science/14653249",
 
@@ -33,20 +40,22 @@ list = [
     "Nature Medicine | https://www.nature.com/nm.rss",
     "Nature Biotechnology | https://www.nature.com/nbt.rss",
     "Science Translational Medicine | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=stm",
-    "Cell | https://www.cell.com/cell/rss",
+    "Cell | https://www.cell.com/cell/inpress.rss",
 
     # === News / community ===
     "The Niche (Knoepfler stem-cell blog) | https://ipscell.com/feed/",
     "STAT News | https://www.statnews.com/feed/",
     "ScienceDaily - Stem Cells | https://www.sciencedaily.com/rss/health_medicine/stem_cells.xml",
 
+    # === Basic stem-cell and developmental biology (for the global research scope) ===
+    "Nature Cell Biology | https://www.nature.com/ncb.rss",
+    "Development | https://journals.biologists.com/rss/site_1000005/1000005.xml",
+
     # === Preprints ===
     "bioRxiv - cell biology | http://connect.biorxiv.org/biorxiv_xml.php?subject=cell_biology",
+    "bioRxiv - developmental biology | http://connect.biorxiv.org/biorxiv_xml.php?subject=developmental_biology",
 
-    # === PubMed topical ===
-    "PubMed: stem cell therapy clinical trial | https://pubmed.ncbi.nlm.nih.gov/rss/search/stem+cell+therapy+clinical+trial/?limit=60",
-    "PubMed: iPSC cell therapy | https://pubmed.ncbi.nlm.nih.gov/rss/search/induced+pluripotent+stem+cell+therapy/?limit=40",
-    "PubMed: mesenchymal stromal cell trial | https://pubmed.ncbi.nlm.nih.gov/rss/search/mesenchymal+stromal+cell+clinical+trial/?limit=40",
+    # (PubMed search feeds removed: they return HTTP 404/500 and contributed nothing.)
 ]
 
 [interests]
@@ -97,7 +106,7 @@ keywords = [
 ]
 
 narrative = """
-This feed tracks the LATEST ADVANCES IN CLINICAL STEM-CELL THERAPY AND REGENERATIVE MEDICINE — moving cells from bench to patient. Emphasis on clinical translation: trials, first-in-human results, manufacturing, safety, and regulation, plus the foundational science that enables them.
+This feed tracks GLOBAL PROGRESS IN STEM-CELL RESEARCH — from significant basic discoveries through to therapies reaching patients — across the US, Europe, Japan, China, and elsewhere. Clinical translation is weighted highest (trials, first-in-human results, manufacturing, safety, regulation), but a genuinely important basic-science advance belongs here too.
 
 SURFACE HIGH (score >= 0.70):
 - Clinical trials of stem-cell / regenerative therapies: first-in-human, phase I-III results, new INDs, regulatory approvals (FDA / EMA / PMDA). iPSC-, ESC-, MSC/stromal-, HSC-, and neural-stem-cell-based therapies.
@@ -106,6 +115,8 @@ SURFACE HIGH (score >= 0.70):
 - Cell-manufacturing and delivery advances that unlock therapies: GMP scale-up, off-the-shelf / allogeneic "universal" cells, hypoimmunogenic engineering, potency assays, cryopreservation, in-vivo reprogramming.
 - Safety & rigor: tumorigenicity / teratoma risk, long-term follow-up, and HONEST negative or null trial results.
 - Mechanistic stem-cell biology that directly enables therapy (reprogramming, differentiation protocols, stemness, niche control).
+- Major basic-science discoveries in stem-cell biology even without an immediate therapy: new stem-cell types or states, reprogramming breakthroughs, embryo models and organoids that change what can be studied, and landmark findings in high-impact journals.
+- National and international milestones: first approvals in a country, large national programmes, and notable progress from Chinese, Japanese, and European groups.
 
 ALSO TRACK (score 0.5-0.7):
 - Preclinical / animal-model regenerative results with a clear clinical rationale.
@@ -116,7 +127,7 @@ ALSO TRACK (score 0.5-0.7):
 SCORE DOWN (<= 0.4) OR EXCLUDE:
 - Unproven "stem cell clinic" / stem-cell-tourism marketing, supplement or cosmetic "stem cell" products — UNLESS the article is a rigorous expose / regulatory crackdown.
 - Pure cancer immunotherapy (CAR-T for lymphoma) with no regenerative / stem-cell dimension.
-- Basic developmental biology with no therapeutic line of sight.
+- Incremental basic developmental biology with neither a therapeutic line of sight nor a major conceptual advance.
 - Hype press releases with no data, vague "breakthrough" claims.
 - General gene-therapy news unless it intersects stem / regenerative cells.
 

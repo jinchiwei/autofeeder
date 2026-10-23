@@ -9,6 +9,10 @@
 name = "nanomedicine-tcm"
 description = "Latest advances in nano traditional-Chinese-medicine research: nanocarrier delivery of herbal actives and TCM formulas, nano-phytomedicine, nanonization of natural compounds, and the pharmacology / safety behind them."
 
+# Grouping in the reader app. "additional" keeps this feed out of the main inbox
+# and unread count; the digest is still emailed and still readable under Digests.
+reader_group = "additional"
+
 paywalled_domains = [
     "nature.com",
     "science.org",
@@ -24,26 +28,23 @@ paywalled_domains = [
 [feeds]
 list = [
     # === Nanomedicine / drug delivery ===
-    "Journal of Nanobiotechnology (BMC) | https://jnanobiotechnology.biomedcentral.com/articles/most-recent/rss.xml",
+    "Journal of Nanobiotechnology | https://link.springer.com/search.rss?facet-journal-id=12951",
     "Journal of Controlled Release | https://rss.sciencedirect.com/publication/science/01683659",
-    "ACS Nano | https://pubs.acs.org/action/showFeed?type=etoc&feed=rss&jc=ancac3",
     "Nanoscale (RSC) | http://feeds.rsc.org/rss/nr",
     "Nature Nanotechnology | https://www.nature.com/nnano.rss",
     "Drug Delivery (T&F) | https://www.tandfonline.com/feed/rss/idrd20",
-    "Pharmaceutics (MDPI) | https://www.mdpi.com/rss/journal/pharmaceutics",
+    "Nano Today | https://rss.sciencedirect.com/publication/science/17480132",
 
     # === Ethnopharmacology / TCM / phytomedicine ===
     "Journal of Ethnopharmacology | https://rss.sciencedirect.com/publication/science/03788741",
-    "Chinese Medicine (BMC) | https://cmjournal.biomedcentral.com/articles/most-recent/rss.xml",
+    "Chinese Medicine | https://link.springer.com/search.rss?facet-journal-id=13020",
     "Phytomedicine | https://rss.sciencedirect.com/publication/science/09447113",
     "Acta Pharmaceutica Sinica B | https://rss.sciencedirect.com/publication/science/22113835",
     "Frontiers in Pharmacology | https://www.frontiersin.org/journals/pharmacology/rss",
-    "Molecules (MDPI) | https://www.mdpi.com/rss/journal/molecules",
+    "Chinese Herbal Medicines | https://rss.sciencedirect.com/publication/science/16746384",
 
-    # === PubMed topical (the precise intersection) ===
-    "PubMed: nano traditional Chinese medicine | https://pubmed.ncbi.nlm.nih.gov/rss/search/nano+traditional+chinese+medicine/?limit=60",
-    "PubMed: nanoparticle herbal drug delivery | https://pubmed.ncbi.nlm.nih.gov/rss/search/nanoparticle+herbal+drug+delivery/?limit=40",
-    "PubMed: nanoparticle natural product delivery | https://pubmed.ncbi.nlm.nih.gov/rss/search/nanoparticle+natural+product+delivery/?limit=40",
+    # (PubMed search feeds removed: they return HTTP 404/500 and contributed nothing.
+    #  ACS and MDPI block automated feed readers with HTTP 403.)
 ]
 
 [interests]

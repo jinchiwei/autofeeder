@@ -1,0 +1,143 @@
+# Profile: medical-ai-robotics (医学人工智能机器人进展 / medical AI robotics)
+# Scope: intelligent robots in CLINICAL medicine — surgical and interventional
+# robots, autonomy and AI guidance in the operating room, rehabilitation and
+# bionic devices, hospital and laboratory automation, micro/nano-robots for
+# diagnosis and drug delivery, and the trials and regulatory approvals that move
+# them into practice. Global, including China (NMPA) as well as FDA/CE.
+# Home, eldercare and companion robots are covered by `homecare-robotics`.
+# Requested by Chiming Wei; bilingual digest: Traditional Chinese on top, English below.
+
+name = "medical-ai-robotics"
+description = "Global progress in intelligent medical robots: surgical and interventional robotics, AI autonomy in the OR, rehabilitation and bionics, hospital automation, micro-robots, and the trials and approvals that bring them to patients."
+
+# Grouping in the reader app. "additional" keeps this feed out of the main inbox
+# and unread count; the digest is still emailed and still readable under Digests.
+reader_group = "additional"
+
+paywalled_domains = [
+    "science.org",
+    "nature.com",
+    "cell.com",
+    "thelancet.com",
+    "jamanetwork.com",
+    "nejm.org",
+    "sciencedirect.com",
+    "ieee.org",
+    "ieeexplore.ieee.org",
+    "onlinelibrary.wiley.com",
+    "link.springer.com",
+    "technologyreview.com",
+]
+
+[feeds]
+list = [
+    # === Medical / surgical robotics journals ===
+    "Int J Medical Robotics & Computer Assisted Surgery | https://onlinelibrary.wiley.com/feed/1478596x/most-recent",
+    "Journal of Robotic Surgery | https://link.springer.com/search.rss?facet-journal-id=11701",
+    "J NeuroEngineering & Rehabilitation | https://link.springer.com/search.rss?facet-journal-id=12984",
+
+    # === Robotics research ===
+    "Science Robotics | https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=scirobotics",
+    "IEEE Robotics and Automation Letters | https://ieeexplore.ieee.org/rss/TOC7083369.XML",
+    "Frontiers in Robotics and AI | https://www.frontiersin.org/journals/robotics-and-ai/rss",
+    "arXiv Robotics (cs.RO) | https://rss.arxiv.org/rss/cs.RO",
+    "arXiv - surgical robotics | https://export.arxiv.org/api/query?search_query=abs:%22surgical+robot%22+OR+abs:%22robotic+surgery%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
+    "arXiv - medical & rehabilitation robots | https://export.arxiv.org/api/query?search_query=abs:%22medical+robot%22+OR+abs:%22rehabilitation+robot%22+OR+abs:%22exoskeleton%22&sortBy=submittedDate&sortOrder=descending&max_results=40",
+
+    # === Biomedical engineering & clinical AI ===
+    "Nature Biomedical Engineering | https://www.nature.com/natbiomedeng.rss",
+    "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
+    "npj Digital Medicine | https://www.nature.com/npjdigitalmed.rss",
+
+    # === Industry and trade press (approvals, launches, deployments) ===
+    "The Robot Report | https://www.therobotreport.com/feed/",
+    "IEEE Spectrum - Robotics | https://spectrum.ieee.org/feeds/topic/robotics.rss",
+    "ScienceDaily - Robotics | https://www.sciencedaily.com/rss/computers_math/robotics.xml",
+    "Medical Design & Outsourcing | https://www.medicaldesignandoutsourcing.com/feed/",
+    "MedCity News | https://medcitynews.com/feed/",
+    "MIT Technology Review | https://www.technologyreview.com/feed/",
+]
+
+[interests]
+keywords = [
+    "surgical robot",
+    "robotic surgery",
+    "robot-assisted surgery",
+    "autonomous surgery",
+    "da Vinci",
+    "teleoperated surgery",
+    "remote surgery",
+    "telesurgery",
+    "interventional robot",
+    "endovascular robot",
+    "endoscopic robot",
+    "flexible robot",
+    "continuum robot",
+    "orthopedic robot",
+    "neurosurgical robot",
+    "needle steering",
+    "image-guided intervention",
+    "surgical AI",
+    "surgical video analysis",
+    "surgical foundation model",
+    "embodied AI",
+    "rehabilitation robot",
+    "exoskeleton",
+    "prosthesis",
+    "bionic limb",
+    "brain-computer interface",
+    "microrobot",
+    "nanorobot",
+    "magnetic microrobot",
+    "capsule robot",
+    "hospital robot",
+    "pharmacy automation",
+    "laboratory automation",
+    "disinfection robot",
+    "medical robot",
+    "NMPA approval",
+    "FDA clearance",
+    "CE mark",
+    "clinical trial",
+    "randomized controlled trial",
+    "patient outcomes",
+]
+
+narrative = """
+This feed tracks GLOBAL PROGRESS IN INTELLIGENT MEDICAL ROBOTS used in clinical care — robots that operate, intervene, rehabilitate, or automate work in hospitals and labs, and the AI that makes them more capable or autonomous. Coverage is worldwide, including China's fast-growing medical robot industry and NMPA approvals as well as FDA and CE milestones.
+
+SURFACE HIGH (score >= 0.70):
+- Surgical and interventional robots: new systems, first-in-human use, clinical trials and outcome studies comparing robotic and conventional procedures, regulatory approvals (FDA / NMPA / CE / PMDA), and large deployment milestones. Laparoscopic, orthopedic, neurosurgical, endovascular, endoscopic, dental, and needle-based robots.
+- Autonomy and AI in the operating room: autonomous or semi-autonomous surgical tasks, AI guidance and navigation, surgical video understanding, foundation or vision-language-action models trained for surgery, and remote or tele-surgery over long distances.
+- Rehabilitation and bionics with clinical evidence: exoskeletons, prosthetic and bionic limbs, robot-assisted therapy after stroke or spinal cord injury, and brain-computer interfaces that drive devices.
+- Micro- and nano-robots for targeted drug delivery, diagnosis, or minimally invasive therapy, especially with in-vivo or clinical results.
+- Hospital and laboratory automation that changes care: pharmacy, specimen handling, logistics, disinfection, and lab robotics with measured impact.
+- Safety, failure, and rigor: adverse events, recalls, learning-curve and cost-effectiveness evidence, and careful negative results.
+
+ALSO TRACK (score 0.5-0.7):
+- Strong preclinical or engineering advances with a clear path to patients (new actuation, sensing, haptics, imaging integration).
+- Industry news with substance: product launches, national programmes, and partnerships tied to a specific clinical system.
+- Policy, training, and ethics of medical robotics.
+
+SCORE DOWN (<= 0.4) OR EXCLUDE:
+- Home, eldercare, companion, and social robots, which the separate homecare-robotics digest covers.
+- Industrial or warehouse robots with no medical application.
+- General AI chatbots or medical language models with no robotic or embodied component.
+- Funding announcements and marketing with no clinical or technical substance.
+- Purely theoretical control papers with no medical setting.
+
+DEFAULTS:
+- Weight clinical evidence and regulatory milestones above prototypes.
+- When two items describe the same approval or launch, prefer the more detailed and more primary source.
+- Explain significance plainly: what the robot does, for which patients, and what is new about it.
+"""
+
+[overrides]
+min_score = 0.50
+
+[outputs.email]
+from = "autofeeder <autofeeder@mail.jinchiwei.com>"
+recipients = ["mrjinch@gmail.com", "13810239681@163.com"]
+# Bilingual: translate every email; trad-zh on top, English below.
+translate_to = "Traditional Chinese (zh-Hant, 繁體中文)"
+translate_label = "繁體中文"

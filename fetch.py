@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import socket
+import time
 from datetime import datetime, timezone, timedelta
 from typing import Any
 
@@ -20,6 +21,26 @@ logger = logging.getLogger("autofeeder")
 
 # Maximum length for the summary field (characters).
 MAX_SUMMARY_CHARS = 500
+
+# arXiv's API terms ask for no more than one request every three seconds from a
+# client. Feeds are fetched back-to-back, so a profile with many arXiv queries
+# (curiedx has 14) fired them with no gap; arXiv answered HTTP 429 after the
+# first few and every later one burned the full socket timeout. Space them out.
+# The rss.arxiv.org category feeds are a separate service and are not throttled.
+ARXIV_API_HOST = "export.arxiv.org/api/"
+ARXIV_MIN_INTERVAL = 3.1  # seconds
+_last_arxiv_request = 0.0
+
+
+def _throttle_arxiv(url: str) -> None:
+    """Sleep just long enough that arXiv API requests stay >= 3.1 s apart."""
+    global _last_arxiv_request
+    if ARXIV_API_HOST not in url:
+        return
+    wait = ARXIV_MIN_INTERVAL - (time.monotonic() - _last_arxiv_request)
+    if wait > 0:
+        time.sleep(wait)
+    _last_arxiv_request = time.monotonic()
 
 
 # ---------------------------------------------------------------------------
@@ -147,6 +168,7 @@ def fetch_items(
         url = feed_info["url"]
         profile_name = feed_info.get("name", "")
 
+        _throttle_arxiv(url)
         try:
             parsed = feedparser.parse(url)
         except Exception as exc:

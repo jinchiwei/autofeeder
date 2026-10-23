@@ -8,6 +8,10 @@
 name = "homecare-robotics"
 description = "Latest advances in home healthcare / family-doctor robots: eldercare & companion robots, AI health assistants and triage, telepresence/telehealth robots, assistive & rehab robotics, remote monitoring."
 
+# Grouping in the reader app. "additional" keeps this feed out of the main inbox
+# and unread count; the digest is still emailed and still readable under Digests.
+reader_group = "additional"
+
 paywalled_domains = [
     "science.org",
     "nature.com",
@@ -34,24 +38,22 @@ list = [
     "Nature Machine Intelligence | https://www.nature.com/natmachintell.rss",
     "npj Digital Medicine | https://www.nature.com/npjdigitalmed.rss",
     "MIT Technology Review | https://www.technologyreview.com/feed/",
-    "MobiHealthNews | https://www.mobihealthnews.com/feed",
     "MedCity News | https://medcitynews.com/feed/",
     "Fierce Healthcare | https://www.fiercehealthcare.com/rss/xml",
     "STAT News | https://www.statnews.com/feed/",
 
     # === Assistive / rehab engineering ===
-    "J NeuroEngineering & Rehabilitation (BMC) | https://jneuroengrehab.biomedcentral.com/articles/most-recent/rss.xml",
+    "J NeuroEngineering & Rehabilitation | https://link.springer.com/search.rss?facet-journal-id=12984",
 
     # === Preprints ===
     "arXiv Robotics (cs.RO) | https://rss.arxiv.org/rss/cs.RO",
     "arXiv Human-Computer Interaction (cs.HC) | https://rss.arxiv.org/rss/cs.HC",
 
-    # === PubMed topical ===
-    "PubMed: socially assistive robot | https://pubmed.ncbi.nlm.nih.gov/rss/search/socially+assistive+robot/?limit=50",
-    "PubMed: care robot older adults | https://pubmed.ncbi.nlm.nih.gov/rss/search/care+robot+older+adults/?limit=50",
+    # === Social and assistive robotics for older adults ===
+    # (replaced two PubMed search feeds, which now return HTTP 404/500)
+    "International Journal of Social Robotics | https://link.springer.com/search.rss?facet-journal-id=12369",
+    "JMIR Aging | https://aging.jmir.org/feed/atom",
 
-    # === Hacker News — focused query ===
-    "HN - healthcare / eldercare robots | https://hnrss.org/newest?q=health+robot+OR+eldercare+robot+OR+care+robot+OR+nursing+robot&points=50",
 ]
 
 [interests]
