@@ -42,6 +42,27 @@ def response_text(response: Any) -> str:
     return "".join(parts)
 
 
+def create_message(client: Any, fallback_model: str | None = None, **kwargs: Any) -> Any:
+    """``client.messages.create`` that re-runs a declined request on a fallback model.
+
+    Opus 5.5's safety classifiers include a broad ``bio`` category that declines some
+    benign requests: on 2026-10-24 it refused to summarise two published
+    cell-engineering papers (engineered receptor circuits, programmable apoptosis
+    circuits in hiPSCs) with ``stop_reason="refusal"``, ``category="bio"`` and an
+    empty content array, every time. A refused triage batch would silently drop all
+    25 of its items. Server-side ``fallbacks`` are not available on Bedrock, so the
+    retry is done here: the identical request goes to ``fallback_model`` once.
+    """
+    response = client.messages.create(**kwargs)
+    if (getattr(response, "stop_reason", None) == "refusal" and fallback_model
+            and kwargs.get("model") != fallback_model):
+        category = getattr(getattr(response, "stop_details", None), "category", None)
+        logger.warning("%s declined the request (category=%s); retrying on %s",
+                       kwargs.get("model"), category, fallback_model)
+        response = client.messages.create(**{**kwargs, "model": fallback_model})
+    return response
+
+
 def _repair_triage_json(text: str) -> dict[str, Any]:
     """Attempt to repair truncated triage JSON.
 
@@ -209,7 +230,7 @@ async def call_triage(
 
     async def _call() -> dict[str, Any]:
         response = await asyncio.to_thread(
-            client.messages.create,
+            create_message, client, anthropic_cfg.get("fallback_model"),
             model=model,
             max_tokens=16384,
             messages=[{"role": "user", "content": prompt + json_instruction}],
@@ -263,7 +284,7 @@ async def call_summarize(
 
     async def _call() -> dict[str, Any]:
         response = await asyncio.to_thread(
-            client.messages.create,
+            create_message, client, anthropic_cfg.get("fallback_model"),
             model=model,
             max_tokens=16000,  # room for thinking ahead of the JSON
             messages=[{"role": "user", "content": prompt + json_instruction}],
@@ -299,7 +320,7 @@ async def call_tldr(
 
     async def _call() -> str:
         response = await asyncio.to_thread(
-            client.messages.create,
+            create_message, client, anthropic_cfg.get("fallback_model"),
             model=model,
             max_tokens=16000,  # room for thinking ahead of the briefing
             messages=[{"role": "user", "content": prompt}],

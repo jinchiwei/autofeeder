@@ -588,7 +588,9 @@ def _translate_digest_data(
         last_exc: Exception | None = None
         for attempt in range(1, MAX_ATTEMPTS + 1):
             try:
-                resp = client.messages.create(
+                from backends.anthropic_backend import create_message
+                resp = create_message(
+                    client, fallback_model,
                     model=model,
                     max_tokens=16000,  # room for thinking ahead of the translation
                     messages=[{"role": "user", "content": prompt}],
@@ -623,6 +625,7 @@ def _translate_digest_data(
 
     client = make_client(config)
     model = config.get("anthropic", {}).get("model", "us.anthropic.claude-opus-5-5")
+    fallback_model = config.get("anthropic", {}).get("fallback_model")
 
     # One item per LLM request — the smallest possible payload, so each call
     # clears UCSF Versa's 504 timeout window with maximum margin. Combined with

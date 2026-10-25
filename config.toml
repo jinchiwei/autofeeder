@@ -35,6 +35,9 @@ max_returned = 40
 # Bedrock model names (UCSF Versa - requires VPN/campus IP)
 model = "us.anthropic.claude-opus-5-5"
 triage_model = "us.anthropic.claude-opus-5-5"
+# Opus 5.5 declines some benign biology requests (safety category "bio"); a declined
+# request is retried once on this model. Opus 4.8 was the default until 2026-10-22.
+fallback_model = "us.anthropic.claude-opus-4-8"
 timeout = 300
 
 # Direct API model names (for GitHub Actions or off-campus)

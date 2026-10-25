@@ -33,3 +33,54 @@ def test_a_thinking_only_response_is_a_clear_error_not_an_attributeerror():
 def test_empty_content_is_a_clear_error():
     with pytest.raises(RuntimeError):
         response_text(SimpleNamespace(content=[], stop_reason="refusal"))
+
+
+class FakeClient:
+    """Stands in for client.messages; returns queued responses and records models."""
+
+    def __init__(self, *responses):
+        self._queue = list(responses)
+        self.models = []
+        self.messages = self
+
+    def create(self, **kwargs):
+        self.models.append(kwargs["model"])
+        return self._queue.pop(0)
+
+
+def refused(category="bio"):
+    return SimpleNamespace(stop_reason="refusal", content=[],
+                           stop_details=SimpleNamespace(category=category))
+
+
+def ok(text="{}"):
+    return SimpleNamespace(stop_reason="end_turn", content=[block("text", text=text)])
+
+
+def test_a_declined_request_is_retried_once_on_the_fallback_model():
+    from backends.anthropic_backend import create_message
+    client = FakeClient(refused(), ok('{"headline": "x"}'))
+    r = create_message(client, "opus-4-8", model="opus-5-5", max_tokens=10, messages=[])
+    assert client.models == ["opus-5-5", "opus-4-8"]
+    assert response_text(r) == '{"headline": "x"}'
+
+
+def test_no_fallback_configured_returns_the_refusal_unchanged():
+    from backends.anthropic_backend import create_message
+    client = FakeClient(refused())
+    r = create_message(client, None, model="opus-5-5", messages=[])
+    assert client.models == ["opus-5-5"] and r.stop_reason == "refusal"
+
+
+def test_a_normal_response_makes_exactly_one_call():
+    from backends.anthropic_backend import create_message
+    client = FakeClient(ok())
+    create_message(client, "opus-4-8", model="opus-5-5", messages=[])
+    assert client.models == ["opus-5-5"]
+
+
+def test_never_falls_back_to_the_same_model():
+    from backends.anthropic_backend import create_message
+    client = FakeClient(refused())
+    create_message(client, "opus-5-5", model="opus-5-5", messages=[])
+    assert client.models == ["opus-5-5"]

@@ -54,7 +54,9 @@ async def _call_anthropic(prompt: str, config: dict[str, Any]) -> str:
         client = anthropic.Anthropic(api_key=api_key, timeout=timeout)
 
     logger.info("Discover: using Anthropic model=%s", model)
-    response = client.messages.create(
+    from backends.anthropic_backend import create_message
+    response = create_message(
+        client, config.get("anthropic", {}).get("fallback_model"),
         model=model,
         max_tokens=16000,  # room for thinking ahead of the profile
         messages=[{"role": "user", "content": prompt}],
